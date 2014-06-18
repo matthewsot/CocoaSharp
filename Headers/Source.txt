@@ -1,0 +1,1 @@
+Copied from the iOS 7 folder in this repo - https://github.com/MP0w/iOS-Headers
