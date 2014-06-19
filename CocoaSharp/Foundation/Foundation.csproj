@@ -37,11 +37,13 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CConstVoidPointer.cs" />
+    <Compile Include="CString.cs" />
     <Compile Include="ExportAttribute.cs" />
+    <Compile Include="NSCoder.cs" />
     <Compile Include="ObjectiveC\AnyClass.cs" />
     <Compile Include="ObjectiveC\AnyObject.cs" />
     <Compile Include="ObjectiveC\COpaquePointer.cs" />
-    <Compile Include="ObjectiveC\NSCoder.cs" />
     <Compile Include="ObjectiveC\NSInvocation.cs" />
     <Compile Include="ObjectiveC\NSKeyedArchiver.cs" />
     <Compile Include="ObjectiveC\NSMessageSignature.cs" />
