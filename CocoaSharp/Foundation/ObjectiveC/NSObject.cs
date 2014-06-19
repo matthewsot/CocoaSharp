@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using Foundation;
 
-namespace ObjectiveC {
+namespace ObjectiveC
+{
     //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/index.html#//apple_ref/occ/clm/NSObject/load
-    class NSObject
+    public class NSObject
     {
         [Export("initialize")]
         public static void Initialise() { }
@@ -19,7 +20,7 @@ namespace ObjectiveC {
 
         //zone is ignored
         [Export("allocWithZone")]
-        public static NSObject AllocateWithZone(/*COpaquePointer*/dynamic zone) { return new NSObject();  }
+        public static NSObject AllocateWithZone(COpaquePointer zone) { return new NSObject(); }
 
         //initializer, not sure how this should be represented
         [Export("init")]
@@ -57,7 +58,7 @@ namespace ObjectiveC {
         public static string ToString() { return ""; }
 
         [Export("autoContentAccessingProxy")]
-        public AnyObject AutoContentAccessingProxy { get; }
+        public AnyObject AutoContentAccessingProxy { get; private set; }
 
         [Export("cancelPreviousPerformRequestsWithTarget")]
         public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget) { return; }
@@ -84,13 +85,13 @@ namespace ObjectiveC {
         public AnyObject AwakeAfterUsingCoder(NSCoder aDecoder) { return null; }
 
         [Export("classForCoder")]
-        public AnyClass ClassForCoder { get; }
+        public AnyClass ClassForCoder { get; private set; }
 
         [Export("classForKeyedArchiver")]
-        public AnyClass ClassForKeyedArchiver { get;}
+        public AnyClass ClassForKeyedArchiver { get; private set; }
 
         [Export("classFallbacksForKeyedArchiver")]
-        public static Array<AnyObject> ClassFallbacksForKeyedArchiver() { return null; }
+        public static AnyObject[] ClassFallbacksForKeyedArchiver() { return null; }
 
         [Export("classForKeyedUnarchiver")]
         public static AnyClass ClassForKeyedUnarchiver() { return null; }
