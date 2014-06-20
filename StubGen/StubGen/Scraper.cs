@@ -18,7 +18,7 @@ namespace StubGen
 
         public static string ParseDeclaration(string declaration)
         {
-            declaration = declaration.Replace("&gt;", ">").Trim();
+            declaration = declaration.Replace("&gt;", ">").Replace("&lt;", "<").Trim();
             var output = "public ";
             if (declaration.StartsWith("class") || declaration.StartsWith("static") || declaration.StartsWith("func") || declaration.StartsWith("init"))
             {
@@ -39,7 +39,7 @@ namespace StubGen
                 }
 
                 string name;
-                if (declaration.Contains("init()"))
+                if (declaration.Contains("init("))
                 {
                     name = "init";
                 }

@@ -6,7 +6,8 @@ using ObjectiveC;
 
 namespace Foundation
 {
-    public class NSCoder
+    //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSCoder_Class/index.html#//apple_ref/occ/cl/NSCoder
+    public class NSCoder : NSObject
     {
         /// <summary>
         /// Returns a Boolean value that indicates whether the receiver supports keyed coding of objects.
