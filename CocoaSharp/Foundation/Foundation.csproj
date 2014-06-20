@@ -51,13 +51,13 @@
     <Compile Include="NSArray.cs" />
     <Compile Include="NSAssertionHandler.cs" />
     <Compile Include="NSAttributedString.cs" />
-    <Compile Include="NSAutoreleasePool.cs" />
     <Compile Include="NSCoder.cs" />
     <Compile Include="NSComparator.cs" />
     <Compile Include="NSData.cs" />
     <Compile Include="NSDictionary.cs" />
     <Compile Include="NSEnumerationOptions.cs" />
     <Compile Include="NSEnumerator.cs" />
+    <Compile Include="NSErrorPointer.cs" />
     <Compile Include="NSIndexSet.cs" />
     <Compile Include="NSKeyedArchiver.cs" />
     <Compile Include="NSKeyedArchiverDelegate.cs" />
