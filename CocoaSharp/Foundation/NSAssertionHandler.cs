@@ -12,7 +12,7 @@ namespace Foundation
     /// 
     /// This is extremely preliminary
     /// </summary>
-    class NSAssertionHandler : NSObject
+    public class NSAssertionHandler : NSObject
     {
         /// <summary>
         /// Returns the NSAssertionHandler object associated with the current thread.

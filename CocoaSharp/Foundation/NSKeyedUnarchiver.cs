@@ -123,18 +123,11 @@ namespace Foundation
         public void FinishDecoding() { }
 
         /// <summary>
-        /// Returns the receiver’s delegate.
+        /// Gets or sets the receiver’s delegate.
         /// </summary>
         /// <returns>The receiver’s delegate.</returns>
         [Export("delegate")]
-        public static NSKeyedUnarchiverDelegate Delegate { get; private set; }
-
-        /// <summary>
-        /// Sets the receiver’s delegate.
-        /// </summary>
-        /// <param name="delegate">The delegate for the receiver.</param>
-        [Export("delegate")]
-        public static NSKeyedUnarchiverDelegate Delegate { get; private set; }
+        public static NSKeyedUnarchiverDelegate Delegate { get; set; }
 
         /// <summary>
         /// Adds a class translation mapping to NSKeyedUnarchiver whereby objects encoded with a given class name are decoded as instances of a given class instead.
@@ -151,22 +144,6 @@ namespace Foundation
         /// <returns>The class from which NSKeyedUnarchiver instantiates an object encoded with the class name codedName. Returns nil if NSKeyedUnarchiver does not have a translation mapping for codedName.</returns>
         [Export("classForClassName")]
         public static AnyClass ClassForClassName(string codedName) { return null; }
-
-        /// <summary>
-        /// Adds a class translation mapping to the receiver whereby objects encoded with a given class name are decoded as instances of a given class instead.
-        /// </summary>
-        /// <param name="cls">The class with which to replace instances of the class named codedName.</param>
-        /// <param name="codedName">The ostensible name of a class in an archive.</param>
-        [Export("setClass")]
-        public void SetClass(AnyClass cls, string forClassName) { }
-
-        /// <summary>
-        /// Returns the class from which the receiver instantiates an encoded object with a given class name.
-        /// </summary>
-        /// <param name="codedName">The name of a class.</param>
-        /// <returns>The class from which the receiver instantiates an encoded object with the class name codedName. Returns nil if the receiver does not have a translation mapping for codedName.</returns>
-        [Export("classForClassName")]
-        public AnyClass ClassForClassName(string codedName) { return null; }
 
         /// <summary>
         /// Names of exceptions that are raised by NSKeyedUnarchiver if there is a problem extracting an archive.

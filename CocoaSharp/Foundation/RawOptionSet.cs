@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foundation
 {
-    public class RawOptionSet
+    public interface RawOptionSet
     {
     }
 }

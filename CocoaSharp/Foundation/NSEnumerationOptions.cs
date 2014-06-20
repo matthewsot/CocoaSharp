@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foundation
 {
-    class NSEnumerationOptions
+    public class NSEnumerationOptions
     {
     }
 }

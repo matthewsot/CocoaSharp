@@ -12,50 +12,48 @@ namespace Foundation
     /// </summary>
     public class NSArray : NSObject
     {
-        //TODO: redo this by hand, stuff got messed up
-        
         /// <summary>
         /// Creates and returns an array containing a given object.
         /// </summary>
-        /// <param name="anObject">An object.</param>
+        /// <param name="object">An object.</param>
         /// <returns>An array containing the single element anObject.</returns>
-        public 
+        public NSArray(AnyObject @object) { }
 
         /// <summary>
         /// Initializes a newly allocated array.
         /// </summary>
         /// <returns>An array.</returns>
-        [Export("init")]
-        public void Init() { }
+        //[Export("init")]
+        public NSArray() { }
 
         /// <summary>
         /// Initializes a newly allocated array by placing in it the objects contained in a given array.
         /// </summary>
-        /// <param name="anArray">An array.</param>
+        /// <param name="array">An array.</param>
         /// <returns>An array initialized to contain the objects in anArray. The returned object might be different than the original receiver.</returns>
-        public 
+        public NSArray(AnyObject[] array) { }
 
         /// <summary>
         /// Initializes a newly allocated array using anArray as the source of data objects for the array.
         /// </summary>
         /// <param name="array">An array containing the objects with which to initialize the new array.</param>
-        /// <param name="flag">If true, each object in array receives a copyWithZone: message to create a copy of the object—objects must conform to the NSCopying protocol. In a managed memory environment, this is instead of the retain message the object would otherwise receive. The object copy is then added to the returned array.   If false, then in a managed memory environment each object in array simply receives a retain message when it is added to the returned array.</param>
+        /// <param name="copyItems">If true, each object in array receives a copyWithZone: message to create a copy of the object—objects must conform to the NSCopying protocol. In a managed memory environment, this is instead of the retain message the object would otherwise receive. The object copy is then added to the returned array.   If false, then in a managed memory environment each object in array simply receives a retain message when it is added to the returned array.</param>
         /// <returns>An array initialized to contain the objects—or if flag is true, copies of the objects—in array. The returned object might be different than the original receiver.</returns>
-        public 
+        public NSArray(AnyObject[] array, bool copyItems) { }
 
         /// <summary>
         /// Initializes a newly allocated array with the contents of the file specified by a given path.
         /// </summary>
-        /// <param name="aPath">The path to a file containing a representation of an array produced by the writeToFile:atomically: method.</param>
+        /// <param name="contentsOfFile">The path to a file containing a representation of an array produced by the writeToFile:atomically: method.</param>
         /// <returns>An array initialized to contain the contents of the file specified by aPath or nil if the file can’t be opened or the contents of the file can’t be parsed into an array. The returned object might be different than the original receiver.</returns>
-        public 
+        public NSArray(string contentsOfFile) { }
 
         /// <summary>
         /// Initializes a newly allocated array with the contents of the location specified by a given URL.
         /// </summary>
-        /// <param name="aURL">The location of a file containing a string representation of an array produced by the writeToURL:atomically: method.</param>
+        /// <param name="contentsOfURL">The location of a file containing a string representation of an array produced by the writeToURL:atomically: method.</param>
         /// <returns>An array initialized to contain the contents specified by aURL. Returns nil if the location can’t be opened or if the contents of the location can’t be parsed into an array. The returned object might be different than the original receiver.</returns>
-        public 
+        public NSArray(NSURL contentsOfURL) { }
 
         /// <summary>
         /// Initializes a newly allocated array to include a given number of objects from a given C array.
@@ -63,8 +61,8 @@ namespace Foundation
         /// <param name="objects">A C array of objects.</param>
         /// <param name="count">The number of values from the objects C array to include in the new array. This number will be the count of the new array—it must not be negative or greater than the number of elements in objects.</param>
         /// <returns>A newly allocated array including the first count objects from objects. The returned object might be different than the original receiver.</returns>
-        [Export("init")]
-        public void Init(CConstPointer<AnyObject?> objects, int count) { }
+        //[Export("init")]
+        public NSArray(CConstPointer<AnyObject> objects, int count) { }
 
         /// <summary>
         /// Returns a Boolean value that indicates whether a given object is present in the array.
@@ -88,7 +86,7 @@ namespace Foundation
         /// <param name="aBuffer">A C array of objects of size at least the count of the array.</param>
         [Obsolete]
         [Export("getObjects")]
-        public void GetObjects(AutoreleasingUnsafePointer<AnyObject?> aBuffer) { }
+        public void GetObjects(AutoreleasingUnsafePointer<AnyObject> aBuffer) { }
 
         /// <summary>
         /// Copies the objects contained in the array that fall within the specified range to aBuffer.
@@ -96,7 +94,7 @@ namespace Foundation
         /// <param name="aBuffer">A C array of objects of size at least the length of the range specified by aRange.</param>
         /// <param name="aRange">A range within the bounds of the array.   If the location plus the length of the range is greater than the count of the array, this method raises an NSRangeException.</param>
         [Export("getObjects")]
-        public void GetObjects(AutoreleasingUnsafePointer<AnyObject?> aBuffer, NSRange range) { }
+        public void GetObjects(AutoreleasingUnsafePointer<AnyObject> aBuffer, NSRange range) { }
 
         /// <summary>
         /// Returns the first object in the array.
@@ -189,7 +187,7 @@ namespace Foundation
         /// <param name="predicate">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.        The Block returns a Boolean value that indicates whether obj passed the test. Returning true will stop further processing of the array.</param>
         /// <returns>The lowest index whose corresponding value in the array passes the test specified by predicate. If no objects in the array pass the test, returns NSNotFound.</returns>
         [Export("indexOfObjectPassingTest")]
-        public Bool)!) IndexOfObjectPassingTest( predicate) { return null; }
+        public int IndexOfObjectPassingTest(Func<AnyObject, int, CMutablePointer<ObjCBool>, bool> predicate) { return 0; }
 
         /// <summary>
         /// Returns the index of an object in the array that passes a test in a given Block for a given set of enumeration options.
@@ -198,7 +196,7 @@ namespace Foundation
         /// <param name="predicate">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.        The Block returns a Boolean value that indicates whether obj passed the test.</param>
         /// <returns>The index whose corresponding value in the array passes the test specified by predicate and opts. If the opts bit mask specifies reverse order, then the last item that matches is returned. Otherwise, the index of the first matching object is returned. If no objects in the array pass the test, returns NSNotFound.</returns>
         [Export("indexOfObjectWithOptions")]
-        public int IndexOfObjectWithOptions(NSEnumerationOptions opts, passingTest) { return null; }
+        public int IndexOfObjectWithOptions(NSEnumerationOptions opts, Func<AnyObject, int, CMutablePointer<ObjCBool>, bool> passingTest) { return 0; }
 
         /// <summary>
         /// Returns the index, from a given set of indexes, of the first object in the array that passes a test in a given Block for a given set of enumeration options.
@@ -208,7 +206,7 @@ namespace Foundation
         /// <param name="predicate">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.        The Block returns a Boolean value that indicates whether obj passed the test.</param>
         /// <returns>The lowest index whose corresponding value in the array passes the test specified by predicate. If no objects in the array pass the test, returns NSNotFound.</returns>
         [Export("indexOfObjectAtIndexes")]
-        public int IndexOfObjectAtIndexes(NSIndexSet indexSet, NSEnumerationOptions options, passingTest) { return null; }
+        public int IndexOfObjectAtIndexes(NSIndexSet indexSet, NSEnumerationOptions options, Func<AnyObject, int, CMutablePointer<ObjCBool>, bool> passingTest) { return 0; }
 
         /// <summary>
         /// Returns the indexes of objects in the array that pass a test in a given Block.
@@ -216,7 +214,7 @@ namespace Foundation
         /// <param name="predicate">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.        The Block returns a Boolean value that indicates whether obj passed the test.</param>
         /// <returns>The indexes whose corresponding values in the array pass the test specified by predicate. If no objects in the array pass the test, returns an empty index set.</returns>
         [Export("indexesOfObjectsPassingTest")]
-        public int IndexesOfObjectsPassingTest( predicate) { return null; }
+        public NSIndexSet IndexesOfObjectsPassingTest(Func<AnyObject, int, CMutablePointer<ObjCBool>, bool> predicate) { return null; }
 
         /// <summary>
         /// Returns the indexes of objects in the array that pass a test in a given Block for a given set of enumeration options.
@@ -225,7 +223,7 @@ namespace Foundation
         /// <param name="predicate">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.        The Block returns a Boolean value that indicates whether obj passed the test.</param>
         /// <returns>The indexes whose corresponding values in the array pass the test specified by predicate. If no objects in the array pass the test, returns an empty index set.</returns>
         [Export("indexesOfObjectsWithOptions")]
-        public int IndexesOfObjectsWithOptions(NSEnumerationOptions opts, passingTest) { return null; }
+        public NSIndexSet IndexesOfObjectsWithOptions(NSEnumerationOptions opts, Func<AnyObject, int, CMutablePointer<ObjCBool>, bool> passingTest) { return null; }
 
         /// <summary>
         /// Returns the indexes, from a given set of indexes, of objects in the array that pass a test in a given Block for a given set of enumeration options.
@@ -235,7 +233,7 @@ namespace Foundation
         /// <param name="predicate">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.        The Block returns a Boolean value that indicates whether obj passed the test.</param>
         /// <returns>The indexes whose corresponding values in the array pass the test specified by predicate. If no objects in the array pass the test, returns an empty index set.</returns>
         [Export("indexesOfObjectsAtIndexes")]
-        public Bool)!) IndexesOfObjectsAtIndexes(NSIndexSet indexSet, NSEnumerationOptions options, passingTest) { return null; }
+        public NSIndexSet IndexesOfObjectsAtIndexes(NSIndexSet indexSet, NSEnumerationOptions options, Func<AnyObject, int, CMutablePointer<ObjCBool>, bool> passingTest) { return null; }
 
         /// <summary>
         /// Returns the index, within a specified range, of an object compared with elements in the array using a given NSComparator block.
@@ -266,9 +264,13 @@ namespace Foundation
         /// <summary>
         /// Executes a given block using each object in the array, starting with the first object and continuing through the array to the last object.
         /// </summary>
-        /// <param name="block">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.</param>
+        /// <param name="block">The block to apply to elements in the array. The block takes three arguments:
+        /// obj: The element in the array.
+        /// idx: The index of the element in the array.
+        /// stop: A reference to a Boolean value.
+        /// The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.</param>
         [Export("enumerateObjectsUsingBlock")]
-        public Void)!) EnumerateObjectsUsingBlock( block) { return null; }
+        public void EnumerateObjectsUsingBlock(Action<AnyObject, int, CMutablePointer<ObjCBool>> block) { }
 
         /// <summary>
         /// Executes a given block using each object in the array.
@@ -276,7 +278,7 @@ namespace Foundation
         /// <param name="opts">A bit mask that specifies the options for the enumeration (whether it should be performed concurrently and whether it should be performed in reverse order).</param>
         /// <param name="block">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.</param>
         [Export("enumerateObjectsWithOptions")]
-        public Void)!) EnumerateObjectsWithOptions(NSEnumerationOptions opts, usingBlock) { return null; }
+        public void EnumerateObjectsWithOptions(NSEnumerationOptions opts, Action<AnyObject, int, CMutablePointer<ObjCBool>> usingBlock) { }
 
         /// <summary>
         /// Executes a given block using the objects in the array at the specified indexes.
@@ -285,7 +287,7 @@ namespace Foundation
         /// <param name="opts">A bit mask that specifies the options for the enumeration (whether it should be performed concurrently and whether it should be performed in reverse order).</param>
         /// <param name="block">The block to apply to elements in the array.   The block takes three arguments:           obj              The element in the array.                idx              The index of the element in the array.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the array. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.</param>
         [Export("enumerateObjectsAtIndexes")]
-        public Void)!) EnumerateObjectsAtIndexes(NSIndexSet indexSet, NSEnumerationOptions options, usingBlock) { return null; }
+        public void EnumerateObjectsAtIndexes(NSIndexSet indexSet, NSEnumerationOptions options, Action<AnyObject, int, CMutablePointer<ObjCBool>> usingBlock) { }
 
         /// <summary>
         /// Returns the first object contained in the receiving array that’s equal to an object in another given array.
@@ -503,10 +505,17 @@ namespace Foundation
         /// <returns>The value of the retrieved key.</returns>
         [Export("valueForKey")]
         public AnyObject ValueForKey(string key) { return null; }
+    }
 
-        /// <summary>
-        /// Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.
-        /// </summary>
-        public 
+    /// <summary>
+    /// Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.
+    /// </summary>
+    public struct NSBinarySearchingOptions : RawOptionSet
+    {
+        public NSBinarySearchingOptions(uint value) { this.value = value; }
+        uint value;
+        public static NSBinarySearchingOptions FirstEqual { get; private set; }
+        public static NSBinarySearchingOptions LastEqual { get; private set; }
+        public static NSBinarySearchingOptions InsertionIndex { get; private set; }
     }
 }

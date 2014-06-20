@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foundation
 {
-    class NSURL
+    public class NSURL
     {
     }
 }

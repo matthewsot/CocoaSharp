@@ -37,9 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoreleasingUnsafePointer.cs">
-      <DependentUpon>UnsafePointer.cs</DependentUpon>
-    </Compile>
+    <Compile Include="AutoreleasingUnsafePointer.cs" />
     <Compile Include="CClasses\CConstPointer.cs" />
     <Compile Include="CClasses\CConstVoidPointer.cs" />
     <Compile Include="CClasses\CDouble.cs" />
@@ -53,7 +51,6 @@
     <Compile Include="NSArray.cs" />
     <Compile Include="NSAssertionHandler.cs" />
     <Compile Include="NSAttributedString.cs" />
-    <Compile Include="NSAttributedStringEnumerationOptions.cs" />
     <Compile Include="NSAutoreleasePool.cs" />
     <Compile Include="NSCoder.cs" />
     <Compile Include="NSComparator.cs" />
@@ -66,6 +63,7 @@
     <Compile Include="NSKeyedArchiverDelegate.cs" />
     <Compile Include="NSKeyedUnarchiver.cs" />
     <Compile Include="NSKeyedUnarchiverDelegate.cs" />
+    <Compile Include="NSKeyValueObservingOptions.cs" />
     <Compile Include="NSMutableArray.cs" />
     <Compile Include="NSMutableAttributedString.cs" />
     <Compile Include="NSMutableData.cs" />
@@ -81,10 +79,9 @@
     <Compile Include="ObjectiveC\AnyClass.cs" />
     <Compile Include="ObjectiveC\AnyObject.cs" />
     <Compile Include="ObjectiveC\COpaquePointer.cs" />
-    <Compile Include="ObjectiveC\NSInvocation.cs" />
-    <Compile Include="ObjectiveC\NSKeyedArchiver.cs" />
+    <Compile Include="NSInvocation.cs" />
     <Compile Include="ObjectiveC\NSMessageSignature.cs" />
-    <Compile Include="ObjectiveC\NSMethodSignature.cs" />
+    <Compile Include="NSMethodSignature.cs" />
     <Compile Include="ObjectiveC\NSObject.cs" />
     <Compile Include="ObjectiveC\Protocol.cs" />
     <Compile Include="ObjectiveC\Selector.cs" />

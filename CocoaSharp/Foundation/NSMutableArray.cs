@@ -115,16 +115,13 @@ namespace Foundation
 
         /// <summary>
         /// Removes the specified number of objects from the array, beginning at the specified index.
-
- 
-          Deprecation Statement
-  
-         Use removeObjectsAtIndexes: instead.
+        /// Deprecation Statement: Use removeObjectsAtIndexes: instead.
         /// </summary>
         /// <param name="indices">A C array of the indices of the objects to remove from the receiving array.</param>
         /// <param name="count">The number of objects to remove from the receiving array.</param>
+        [Obsolete]
         [Export("removeObjectsFromIndices")]
-        public void RemoveObjectsFromIndices(CMutablePointer<Int> indices, int numIndices) { }
+        public void RemoveObjectsFromIndices(CMutablePointer<int> indices, int numIndices) { }
 
         /// <summary>
         /// Removes from the receiving array the objects in another given array.

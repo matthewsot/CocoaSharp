@@ -44,18 +44,11 @@ namespace Foundation
         public void FinishEncoding() { }
 
         /// <summary>
-        /// Returns the format in which the receiver encodes its data.
+        /// Gets and sets the format in which the receiver encodes its data.
         /// </summary>
         /// <returns>The format in which the receiver encodes its data. The available formats are NSPropertyListXMLFormat_v1_0 and NSPropertyListBinaryFormat_v1_0.</returns>
         [Export("outputFormat")]
-        public static NSPropertyListFormat OutputFormat { get; private set; }
-
-        /// <summary>
-        /// Sets the format in which the receiver encodes its data.
-        /// </summary>
-        /// <param name="format">The format in which the receiver encodes its data. format can be NSPropertyListXMLFormat_v1_0 or NSPropertyListBinaryFormat_v1_0.</param>
-        [Export("outputFormat")]
-        public static NSPropertyListFormat OutputFormat { get; private set; }
+        public static NSPropertyListFormat OutputFormat { get; set; }
 
         /// <summary>
         /// Indicates whether the receiver requires all archived classes to conform to NSSecureCoding.
@@ -138,18 +131,11 @@ namespace Foundation
         public void EncodeObject(AnyObject objv, string forKey) { }
 
         /// <summary>
-        /// Returns the receiver’s delegate.
-        /// </summary>
-        /// <returns>The receiver's delegate.</returns>
-        [Export("delegate")]
-        public static NSKeyedArchiverDelegate Delegate { get; private set; }
-
-        /// <summary>
-        /// Sets the delegate for the receiver.
+        /// Gets and sets the delegate for the receiver.
         /// </summary>
         /// <param name="delegate">The delegate for the receiver.</param>
         [Export("delegate")]
-        public static NSKeyedArchiverDelegate Delegate { get; private set; }
+        public static NSKeyedArchiverDelegate Delegate { get; set; }
 
         /// <summary>
         /// Adds a class translation mapping to NSKeyedArchiver whereby instances of of a given class are encoded with a given class name instead of their real class names.
@@ -166,22 +152,6 @@ namespace Foundation
         /// <returns>The class name with which NSKeyedArchiver encodes instances of cls. Returns nil if NSKeyedArchiver does not have a translation mapping for cls.</returns>
         [Export("classNameForClass")]
         public static string ClassNameForClass(AnyClass cls) { return ""; }
-
-        /// <summary>
-        /// Adds a class translation mapping to the receiver whereby instances of of a given class are encoded with a given class name instead of their real class names.
-        /// </summary>
-        /// <param name="codedName">The name of the class that the receiver uses uses in place of cls.</param>
-        /// <param name="cls">The class for which to set up a translation mapping.</param>
-        [Export("setClassName")]
-        public void SetClassName(string codedName, AnyClass forClass) { }
-
-        /// <summary>
-        /// Returns the class name with which the receiver encodes instances of a given class.
-        /// </summary>
-        /// <param name="cls">The class for which to determine the translation mapping.</param>
-        /// <returns>The class name with which the receiver encodes instances of cls. Returns nil if the receiver does not have a translation mapping for cls. The class’s separate translation map is not searched.</returns>
-        [Export("classNameForClass")]
-        public string ClassNameForClass(AnyClass cls) { return ""; }
 
         /// <summary>
         /// Names of exceptions that are raised by NSKeyedArchiver if there is a problem creating an archive.

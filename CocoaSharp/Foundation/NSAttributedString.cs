@@ -110,22 +110,34 @@ namespace Foundation
         /// <param name="attrName">The name of an attribute.</param>
         /// <param name="enumerationRange">If non-NULL, contains the maximum range over which the attributes and values are enumerated, clipped to enumerationRange.</param>
         /// <param name="opts">The options used by the enumeration. The values can be combined using C-bitwise OR. The values are described in NSAttributedStringEnumerationOptions.</param>
-        /// <param name="block">The Block to apply to ranges of the attribute in the attributed string.   The Block takes three arguments:           value              The attrName value.                range              An NSRange indicating the run of the attribute.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the set. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block.</param>
+        /// <param name="block">The Block to apply to ranges of the attribute in the attributed string. The Block takes three arguments:    
+        /// value: The attrName value. 
+        /// range: An NSRange indicating the run of the attribute.      
+        /// stop: A reference to a Boolean value. The block can set the value to true to stop further processing of the set. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block.</param>
         [Export("enumerateAttribute")]
-        public Void)!) EnumerateAttribute(string attrName, NSRange inRange, NSAttributedStringEnumerationOptions options, usingBlock) { return null; }
+        public void EnumerateAttribute(string attrName, NSRange inRange, NSAttributedStringEnumerationOptions options, Action<AnyObject, NSRange, CMutablePointer<ObjCBool>> usingBlock) { }
 
         /// <summary>
         /// Executes the Block for each attribute in the range.
         /// </summary>
         /// <param name="enumerationRange">If non-NULL, contains the maximum range over which the attributes and values are enumerated, clipped to enumerationRange.</param>
         /// <param name="opts">The options used by the enumeration. The values can be combined using C-bitwise OR. The values are described in NSAttributedStringEnumerationOptions.</param>
-        /// <param name="block">The Block to apply to ranges of the attribute in the attributed string.   The Block takes three arguments:           attrs              An NSDictionary that contains the attributes for the range.                range              An NSRange indicating the run of the attribute.                stop              A reference to a Boolean value. The block can set the value to true to stop further processing of the set. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.</param>
+        /// <param name="block">The Block to apply to ranges of the attribute in the attributed string. The Block takes three arguments:
+        /// attrs: An NSDictionary that contains the attributes for the range.
+        /// range: An NSRange indicating the run of the attribute.
+        /// stop: A reference to a Boolean value. The block can set the value to true to stop further processing of the set. The stop argument is an out-only argument. You should only ever set this Boolean to true within the Block.</param>
         [Export("enumerateAttributesInRange")]
-        public Void)!) EnumerateAttributesInRange(NSRange enumerationRange, NSAttributedStringEnumerationOptions options, usingBlock) { return null; }
+        public void EnumerateAttributesInRange(NSRange enumerationRange, NSAttributedStringEnumerationOptions options, Action<NSDictionary, NSRange, CMutablePointer<ObjCBool>> usingBlock) { }
 
         /// <summary>
         /// These constants describe the options available to the enumerateAttribute:inRange:options:usingBlock: and enumerateAttributesInRange:options:usingBlock: methods.
         /// </summary>
-        public 
+        /// should be a struct but ehhh
+        public class NSAttributedStringEnumerationOptions : RawOptionSet {
+            public NSAttributedStringEnumerationOptions(uint value) { this.value = value; }
+            public uint value = 0;
+            public static NSAttributedStringEnumerationOptions Reverse { get; private set; }
+            public static NSAttributedStringEnumerationOptions LongestEffectiveRangeNotRequired  { get; private set; }
+        }
     }
 }
