@@ -37,20 +37,68 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CConstVoidPointer.cs" />
-    <Compile Include="CString.cs" />
+    <Compile Include="AutoreleasingUnsafePointer.cs">
+      <DependentUpon>UnsafePointer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CClasses\CConstPointer.cs" />
+    <Compile Include="CClasses\CConstVoidPointer.cs" />
+    <Compile Include="CClasses\CDouble.cs" />
+    <Compile Include="CClasses\CFloat.cs" />
+    <Compile Include="CClasses\CInt.cs" />
+    <Compile Include="CClasses\CMutablePointer.cs" />
+    <Compile Include="CClasses\CMutableVoidPointer.cs" />
+    <Compile Include="CClasses\CString.cs" />
+    <Compile Include="CClasses\CUnsignedInt.cs" />
     <Compile Include="ExportAttribute.cs" />
+    <Compile Include="NSArray.cs" />
+    <Compile Include="NSAssertionHandler.cs" />
+    <Compile Include="NSAttributedString.cs" />
     <Compile Include="NSCoder.cs" />
+    <Compile Include="NSComparator.cs" />
+    <Compile Include="NSData.cs" />
+    <Compile Include="NSDictionary.cs" />
+    <Compile Include="NSEnumerator.cs" />
+    <Compile Include="NSIndexSet.cs" />
+    <Compile Include="NSKeyedArchiver.cs">
+      <DependentUpon>NSCoder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NSKeyedArchiverDelegate.cs">
+      <DependentUpon>NSKeyedArchiver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NSKeyedUnarchiver.cs">
+      <DependentUpon>NSCoder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NSKeyedUnarchiverDelegate.cs">
+      <DependentUpon>NSKeyedUnarchiver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NSMutableArray.cs">
+      <DependentUpon>NSArray.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NSMutableAttributedString.cs">
+      <DependentUpon>NSAttributedString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NSMutableData.cs" />
+    <Compile Include="NSMutableString.cs" />
+    <Compile Include="NSPredicate.cs" />
+    <Compile Include="NSPropertyListFormat.cs" />
+    <Compile Include="NSRange.cs" />
+    <Compile Include="NSSet.cs" />
+    <Compile Include="NSSortOptions.cs" />
+    <Compile Include="NSTextStorage.cs">
+      <DependentUpon>NSMutableAttributedString.cs</DependentUpon>
+    </Compile>
     <Compile Include="ObjectiveC\AnyClass.cs" />
     <Compile Include="ObjectiveC\AnyObject.cs" />
     <Compile Include="ObjectiveC\COpaquePointer.cs" />
     <Compile Include="ObjectiveC\NSInvocation.cs" />
     <Compile Include="ObjectiveC\NSKeyedArchiver.cs" />
     <Compile Include="ObjectiveC\NSMessageSignature.cs" />
+    <Compile Include="ObjectiveC\NSMethodSignature.cs" />
     <Compile Include="ObjectiveC\NSObject.cs" />
     <Compile Include="ObjectiveC\Protocol.cs" />
     <Compile Include="ObjectiveC\Selector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnsafePointer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
