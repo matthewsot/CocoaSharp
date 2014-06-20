@@ -9,13 +9,11 @@ namespace StubGen
 {
     class Program
     {
-        //TODO: this is all extremely sketch. Should re-write it w/ ANTLR & Roslyn sometime
         static void Main(string[] args)
         {
-            var output = Parser.ParseFile(@"C:\Users\Matthew\Git\CocoaSharp\Headers\Frameworks\Foundation\NSObject-NSObject.h");
-            using(StreamWriter writer = new StreamWriter("output.cs"))
+            using (StreamWriter writer = new StreamWriter("output.cs"))
             {
-                writer.Write(output);
+                writer.Write(Scraper.ScrapeToCSFile("https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/index.html#//apple_ref/occ/clm/NSObject/instanceMethodForSelector:"));
                 writer.Flush();
             }
         }

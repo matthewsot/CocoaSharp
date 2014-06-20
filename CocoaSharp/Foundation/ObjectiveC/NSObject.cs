@@ -13,67 +13,66 @@ namespace ObjectiveC
         /// Initializes the class before it receives its first message.
         /// </summary>
         [Export("initialize")]
-        public static void Initialise() { }
+        public static void Initialize() { }
 
         /// <summary>
-        /// Invoked whenever a class or category is added to the Objective-C runtime; implement this method to perform class-specific behavior upon loading. 
+        /// Invoked whenever a class or category is added to the Objective-C runtime; implement this method to perform class-specific behavior upon loading.
         /// </summary>
         [Export("load")]
-        public static void load() { }
+        public static void Load() { }
 
         /// <summary>
         /// Returns a new instance of the receiving class.
         /// </summary>
-        /// <returns>A new instance of the receiver. </returns>
+        /// <returns>A new instance of the receiver.</returns>
         [Export("alloc")]
-        public static NSObject Allocate() { return new NSObject(); }
+        public static NSObject Allocate() { return null; }
 
         /// <summary>
-        /// Returns a new instance of the receiving class. 
+        /// Returns a new instance of the receiving class.
         /// </summary>
-        /// <param name="zone">This parameter is ignored. </param>
-        /// <returns>A new instance of the receiver. </returns>
+        /// <param name="zone">This parameter is ignored.</param>
+        /// <returns>A new instance of the receiver.</returns>
         [Export("allocWithZone")]
-        public static NSObject AllocateWithZone(COpaquePointer zone) { return new NSObject(); }
+        public static NSObject AllocateWithZone(COpaquePointer zone) { return null; }
 
-        //initializer, not sure how this should be represented
         /// <summary>
-        /// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated. 
+        /// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated.
         /// </summary>
+        /// <returns>An initialized object, or nil if an object could not be created for some reason that would not result in an exception.</returns>
         [Export("init")]
-        public NSObject() { }
+        public void Init() { }
 
-        //convenience for NSCopying
         /// <summary>
-        /// Returns the object returned by copyWithZone:. 
+        /// Returns the object returned by copyWithZone:.
         /// </summary>
-        /// <returns>The object returned by the NSCopying protocol method copyWithZone:,. </returns>
+        /// <returns>The object returned by the NSCopying protocol method copyWithZone:,.</returns>
         [Export("copy")]
-        public AnyObject Copy() { return null;  }
+        public AnyObject Copy() { return null; }
 
         /// <summary>
-        /// Returns the object returned by mutableCopyWithZone: where the zone is nil. 
+        /// Returns the object returned by mutableCopyWithZone: where the zone is nil.
         /// </summary>
-        /// <returns>The object returned by the NSMutableCopying protocol method mutableCopyWithZone:, where the zone is nil. </returns>
+        /// <returns>The object returned by the NSMutableCopying protocol method mutableCopyWithZone:, where the zone is nil.</returns>
         [Export("mutableCopy")]
         public AnyObject MutableCopy() { return null; }
 
         /// <summary>
-        /// Allocates a new instance of the receiving class, sends it an init message, and returns the initialized object. 
+        /// Allocates a new instance of the receiving class, sends it an init message, and returns the initialized object.
         /// </summary>
-        /// <returns>A new instance of the receiver. </returns>
+        /// <returns>A new instance of the receiver.</returns>
         [Export("new")]
-        public static NSObject New() { return null;  }
+        public static NSObject New() { return null; }
 
         /// <summary>
-        /// Returns the class object for the receiver’s superclass. 
+        /// Returns the class object for the receiver’s superclass.
         /// </summary>
-        /// <returns>The class object for the receiver’s superclass. </returns>
+        /// <returns>The class object for the receiver’s superclass.</returns>
         [Export("superclass")]
-        public static AnyClass Superclass() { return null;  }
+        public static AnyClass Superclass() { return null; }
 
         /// <summary>
-        /// Returns a Boolean value that indicates whether the receiving class is a subclass of, or identical to, a given class. 
+        /// Returns a Boolean value that indicates whether the receiving class is a subclass of, or identical to, a given class.
         /// </summary>
         /// <param name="aClass">A class object.</param>
         /// <returns>true if the receiving class is a subclass of—or identical to—aClass, otherwise false.</returns>
@@ -81,7 +80,7 @@ namespace ObjectiveC
         public static bool IsSubclassOfClass(AnyClass aClass) { return false; }
 
         /// <summary>
-        /// Returns a Boolean value that indicates whether instances of the receiver are capable of responding to a given selector. 
+        /// Returns a Boolean value that indicates whether instances of the receiver are capable of responding to a given selector.
         /// </summary>
         /// <param name="aSelector">A selector.</param>
         /// <returns>true if instances of the receiver are capable of responding to aSelector messages, otherwise false.</returns>
@@ -89,20 +88,20 @@ namespace ObjectiveC
         public static bool InstancesRespondToSelector(Selector aSelector) { return false; }
 
         /// <summary>
-        /// Returns a Boolean value that indicates whether the receiver conforms to a given protocol. 
+        /// Returns a Boolean value that indicates whether the receiver conforms to a given protocol.
         /// </summary>
         /// <param name="aProtocol">A protocol.</param>
         /// <returns>true if the receiver conforms to aProtocol, otherwise false.</returns>
         [Export("conformsToProtocol")]
-        public static bool conformsToProtocol(Protocol aProtocol) { return false; }
+        public static bool ConformsToProtocol(Protocol aProtocol) { return false; }
 
         /// <summary>
-        /// Returns an NSMethodSignature object that contains a description of the instance method identified by a given selector. 
+        /// Returns an NSMethodSignature object that contains a description of the instance method identified by a given selector.
         /// </summary>
         /// <param name="aSelector">A selector that identifies the method for which to return the implementation address.</param>
         /// <returns>An NSMethodSignature object that contains a description of the instance method identified by aSelector, or nil if the method can’t be found.</returns>
         [Export("instanceMethodSignatureForSelector")]
-        public static NSMessageSignature InstanceMethodSignatureForSelector(Selector aSelector) { return null;  }
+        public static NSMethodSignature InstanceMethodSignatureForSelector(Selector aSelector) { return null; }
 
         /// <summary>
         /// Returns an NSMethodSignature object that contains a description of the method identified by a given selector.
@@ -110,27 +109,28 @@ namespace ObjectiveC
         /// <param name="aSelector">A selector that identifies the method for which to return the implementation address. When the receiver is an instance, aSelector should identify an instance method; when the receiver is a class, it should identify a class method.</param>
         /// <returns>An NSMethodSignature object that contains a description of the method identified by aSelector, or nil if the method can’t be found.</returns>
         [Export("methodSignatureForSelector")]
-        public static NSMessageSignature MethodSignatureForSelector(Selector aSelector) { return null; }
+        public NSMethodSignature MethodSignatureForSelector(Selector aSelector) { return null; }
 
         /// <summary>
         /// Returns a string that represents the contents of the receiving class.
         /// </summary>
         /// <returns>A string that represents the contents of the receiving class.</returns>
         [Export("description")]
-        public static string ToString() { return ""; }
+        public static string Description() { return ""; }
 
         /// <summary>
         /// Creates and returns a proxy for the receiving object
         /// </summary>
+        /// <returns>A proxy of the receiver.</returns>
         [Export("autoContentAccessingProxy")]
-        public AnyObject AutoContentAccessingProxy { get; private set; }
+        public static AnyObject AutoContentAccessingProxy { get; private set; }
 
         /// <summary>
         /// Cancels perform requests previously registered with the performSelector:withObject:afterDelay: instance method.
         /// </summary>
         /// <param name="aTarget">The target for requests previously registered with the performSelector:withObject:afterDelay: instance method.</param>
         [Export("cancelPreviousPerformRequestsWithTarget")]
-        public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget) { return; }
+        public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget) { }
 
         /// <summary>
         /// Cancels perform requests previously registered with performSelector:withObject:afterDelay:.
@@ -139,10 +139,10 @@ namespace ObjectiveC
         /// <param name="aSelector">The selector for requests previously registered with the performSelector:withObject:afterDelay: instance method.</param>
         /// <param name="anArgument">The argument for requests previously registered with the performSelector:withObject:afterDelay: instance method. Argument equality is determined using isEqual:, so the value need not be the same object that was passed originally. Pass nil to match a request for nil that was originally passed as the argument.</param>
         [Export("cancelPreviousPerformRequestsWithTarget")]
-        public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget, Selector aSelector, AnyObject anArgument) { return; }
+        public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget, Selector aSelector, AnyObject anArgument) { }
 
         /// <summary>
-        /// Returns the object to which unrecognized messages should first be directed. 
+        /// Returns the object to which unrecognized messages should first be directed.
         /// </summary>
         /// <param name="aSelector">A selector for a method that the receiver does not implement.</param>
         /// <returns>The object to which unrecognized messages should first be directed.</returns>
@@ -154,7 +154,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="anInvocation">The invocation to forward.</param>
         [Export("forwardInvocation")]
-        public void ForwardInvocation(NSInvocation anInvocation) { return; }
+        public void ForwardInvocation(NSInvocation anInvocation) { }
 
         /// <summary>
         /// Dynamically provides an implementation for a given selector for a class method.
@@ -177,7 +177,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aSelector">A selector that identifies a method not implemented or recognized by the receiver.</param>
         [Export("doesNotRecognizeSelector")]
-        public void DoesNotRecognizeSelector(Selector aSelector) { return; }
+        public void DoesNotRecognizeSelector(Selector aSelector) { }
 
         /// <summary>
         /// Overridden by subclasses to substitute another object in place of the object that was decoded and subsequently received this message.
@@ -190,14 +190,15 @@ namespace ObjectiveC
         /// <summary>
         /// Overridden by subclasses to substitute a class other than its own during coding.
         /// </summary>
+        /// <returns>The class to substitute for the receiver's own class during coding.</returns>
         [Export("classForCoder")]
-        public AnyClass ClassForCoder { get; private set; }
+        public static AnyClass ClassForCoder { get; private set; }
 
         /// <summary>
         /// Overridden by subclasses to substitute a new class for instances during keyed archiving.
         /// </summary>
         [Export("classForKeyedArchiver")]
-        public AnyClass ClassForKeyedArchiver { get; private set; }
+        public static AnyClass ClassForKeyedArchiver { get; private set; }
 
         /// <summary>
         /// Overridden to return the names of classes that can be used to decode objects if their class is unavailable.
@@ -234,7 +235,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aVersion">The version number for the receiver.</param>
         [Export("setVersion")]
-        public static void SetVersion(int aVersion) { return; }
+        public static void SetVersion(int aVersion) { }
 
         /// <summary>
         /// Returns the version number assigned to the class.
@@ -245,10 +246,10 @@ namespace ObjectiveC
 
         /// <summary>
         /// The garbage collector invokes this method on the receiver before disposing of the memory it uses.
-        /// Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting — see Transitioning to ARC Release Notes.
+        /// Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting—see Transitioning to ARC Release Notes.
         /// </summary>
         [Obsolete]
         [Export("finalize")]
-        public void Finalize() { return; }
+        public void Finalize() { }
     }
 }
