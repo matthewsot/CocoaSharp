@@ -55,7 +55,11 @@ namespace StubGen
                 {
                     if (arg.Trim() != "")
                     {
-                        var argName = arg.Split(':')[0].Split(' ').Last();
+                        var argName = arg.Split(':')[0].Trim().Split(' ').First();
+                        if (argName == "_")
+                        {
+                            argName = arg.Split(':')[0].Trim().Split(' ').Last();
+                        }
                         var argType = ParseType(arg.Split(':')[1].Trim().Trim('!'));
                         output += argType + " " + argName + ", ";
                     }
@@ -133,7 +137,7 @@ namespace StubGen
                     foreach(var param in paramsInTable)
                     {
                         var name = ParseType(RemoveHTMLTags(param.SelectNodes("./td").First().InnerHtml.Trim()).Trim());
-                        var desc = RemoveHTMLTags(param.SelectNodes("./td").Last().InnerHtml.Trim()).Trim();
+                        var desc = RemoveHTMLTags(param.SelectNodes("./td").Last().InnerHtml.Trim()).Trim().Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
                         parameters += "/// <param name=\"" + name + "\">" + desc + "</param>\r\n";
                     }
                 }

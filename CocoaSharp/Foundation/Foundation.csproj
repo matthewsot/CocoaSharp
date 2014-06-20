@@ -53,30 +53,21 @@
     <Compile Include="NSArray.cs" />
     <Compile Include="NSAssertionHandler.cs" />
     <Compile Include="NSAttributedString.cs" />
+    <Compile Include="NSAttributedStringEnumerationOptions.cs" />
+    <Compile Include="NSAutoreleasePool.cs" />
     <Compile Include="NSCoder.cs" />
     <Compile Include="NSComparator.cs" />
     <Compile Include="NSData.cs" />
     <Compile Include="NSDictionary.cs" />
+    <Compile Include="NSEnumerationOptions.cs" />
     <Compile Include="NSEnumerator.cs" />
     <Compile Include="NSIndexSet.cs" />
-    <Compile Include="NSKeyedArchiver.cs">
-      <DependentUpon>NSCoder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NSKeyedArchiverDelegate.cs">
-      <DependentUpon>NSKeyedArchiver.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NSKeyedUnarchiver.cs">
-      <DependentUpon>NSCoder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NSKeyedUnarchiverDelegate.cs">
-      <DependentUpon>NSKeyedUnarchiver.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NSMutableArray.cs">
-      <DependentUpon>NSArray.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NSMutableAttributedString.cs">
-      <DependentUpon>NSAttributedString.cs</DependentUpon>
-    </Compile>
+    <Compile Include="NSKeyedArchiver.cs" />
+    <Compile Include="NSKeyedArchiverDelegate.cs" />
+    <Compile Include="NSKeyedUnarchiver.cs" />
+    <Compile Include="NSKeyedUnarchiverDelegate.cs" />
+    <Compile Include="NSMutableArray.cs" />
+    <Compile Include="NSMutableAttributedString.cs" />
     <Compile Include="NSMutableData.cs" />
     <Compile Include="NSMutableString.cs" />
     <Compile Include="NSPredicate.cs" />
@@ -84,9 +75,9 @@
     <Compile Include="NSRange.cs" />
     <Compile Include="NSSet.cs" />
     <Compile Include="NSSortOptions.cs" />
-    <Compile Include="NSTextStorage.cs">
-      <DependentUpon>NSMutableAttributedString.cs</DependentUpon>
-    </Compile>
+    <Compile Include="NSTextStorage.cs" />
+    <Compile Include="NSURL.cs" />
+    <Compile Include="ObjCBool.cs" />
     <Compile Include="ObjectiveC\AnyClass.cs" />
     <Compile Include="ObjectiveC\AnyObject.cs" />
     <Compile Include="ObjectiveC\COpaquePointer.cs" />
@@ -98,6 +89,7 @@
     <Compile Include="ObjectiveC\Protocol.cs" />
     <Compile Include="ObjectiveC\Selector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawOptionSet.cs" />
     <Compile Include="UnsafePointer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

@@ -25,13 +25,13 @@ namespace Foundation
         /// Encodes an array of count items, whose Objective-C type is given by itemType.
         /// </summary>
         [Export("encodeArrayOfObjCType")]
-        public void EncodeArrayOfObjCType(CString type, int count, CConstVoidPointer array) { }
+        public void EncodeArrayOfObjCType(CString type, int count, CConstVoidPointer at) { }
 
         /// <summary>
         /// Encodes boolv and associates it with the string key.
         /// </summary>
         [Export("encodeBool")]
-        public void EncodeBool(bool boolv, string key) { }
+        public void EncodeBool(bool boolv, string forKey) { }
 
         /// <summary>
         /// Can be overridden by subclasses to encode object so that a copy, rather than a proxy, is created upon decoding.
@@ -55,7 +55,7 @@ namespace Foundation
         /// Encodes a buffer of data, bytesp, whose length is specified by lenv, and associates it with the string key.
         /// </summary>
         [Export("encodeBytes")]
-        public void EncodeBytes(CConstPointer<uint> bytesp, int lenv, string key) { }
+        public void EncodeBytes(CConstPointer<uint> bytesp, int length, string forKey) { }
 
         /// <summary>
         /// Can be overridden by subclasses to conditionally encode object, preserving common references to that object.
@@ -67,7 +67,7 @@ namespace Foundation
         /// Conditionally encodes a reference to objv and associates it with the string key only if objv has been unconditionally encoded with encodeObject:forKey:.
         /// </summary>
         [Export("encodeConditionalObject")]
-        public void EncodeConditionalObject(AnyObject objv, string key) { }
+        public void EncodeConditionalObject(AnyObject objv, string forKey) { }
 
         /// <summary>
         /// Encodes a given NSData object.
@@ -79,37 +79,37 @@ namespace Foundation
         /// Encodes realv and associates it with the string key.
         /// </summary>
         [Export("encodeDouble")]
-        public void EncodeDouble(CDouble realv, string key) { }
+        public void EncodeDouble(CDouble realv, string forKey) { }
 
         /// <summary>
         /// Encodes realv and associates it with the string key.
         /// </summary>
         [Export("encodeFloat")]
-        public void EncodeFloat(CFloat realv, string key) { }
+        public void EncodeFloat(CFloat realv, string forKey) { }
 
         /// <summary>
         /// Encodes intv and associates it with the string key.
         /// </summary>
         [Export("encodeInt")]
-        public void EncodeInt(CInt intv, string key) { }
+        public void EncodeInt(CInt intv, string forKey) { }
 
         /// <summary>
         /// Encodes a given NSInteger and associates it with a given key.
         /// </summary>
         [Export("encodeInteger")]
-        public void EncodeInteger(int intv, string key) { }
+        public void EncodeInteger(int intv, string forKey) { }
 
         /// <summary>
         /// Encodes the 32-bit integer intv and associates it with the string key.
         /// </summary>
         [Export("encodeInt32")]
-        public void EncodeInt32(Int32 intv, string key) { }
+        public void EncodeInt32(Int32 intv, string forKey) { }
 
         /// <summary>
         /// Encodes the 64-bit integer intv and associates it with the string key.
         /// </summary>
         [Export("encodeInt64")]
-        public void EncodeInt64(Int64 intv, string key) { }
+        public void EncodeInt64(Int64 intv, string forKey) { }
 
         /// <summary>
         /// Encodes object.
@@ -121,7 +121,7 @@ namespace Foundation
         /// Encodes the object objv and associates it with the string key.
         /// </summary>
         [Export("encodeObject")]
-        public void EncodeObject(AnyObject objv, string key) { }
+        public void EncodeObject(AnyObject objv, string forKey) { }
 
         /// <summary>
         /// Can be overridden by subclasses to encode an interconnected group of Objective-C objects, starting with rootObject.
@@ -133,13 +133,13 @@ namespace Foundation
         /// Must be overridden by subclasses to encode a single value residing at address, whose Objective-C type is given by valueType.
         /// </summary>
         [Export("encodeValueOfObjCType")]
-        public void EncodeValueOfObjCType(CString type, CConstVoidPointer addr) { }
+        public void EncodeValueOfObjCType(CString type, CConstVoidPointer at) { }
 
         /// <summary>
         /// Decodes an array of count items, whose Objective-C type is given by itemType.
         /// </summary>
         [Export("decodeArrayOfObjCType")]
-        public void DecodeArrayOfObjCType(CString itemType, int count, CMutableVoidPointer array) { }
+        public void DecodeArrayOfObjCType(CString itemType, int count, CMutableVoidPointer at) { }
 
         /// <summary>
         /// Decodes and returns a boolean value that was previously encoded with encodeBool:forKey: and associated with the string key.
@@ -151,7 +151,7 @@ namespace Foundation
         /// Decodes a buffer of data that was previously encoded with encodeBytes:length:forKey: and associated with the string key.
         /// </summary>
         [Export("decodeBytesForKey")]
-        public UnsafePointer<uint> DecodeBytesForKey(string key, CMutablePointer<int> lengthp) { return null; }
+        public UnsafePointer<uint> DecodeBytesForKey(string key, CMutablePointer<int> returnedLength) { return null; }
 
         /// <summary>
         /// Decodes a buffer of data whose types are unspecified.
@@ -217,7 +217,7 @@ namespace Foundation
         /// Decodes a single value, whose Objective-C type is given by valueType.
         /// </summary>
         [Export("decodeValueOfObjCType")]
-        public void DecodeValueOfObjCType(CString type, CMutableVoidPointer data) { }
+        public void DecodeValueOfObjCType(CString type, CMutableVoidPointer at) { }
 
         /// <summary>
         /// Decodes an object for the key, restricted to the specified class.
@@ -226,7 +226,7 @@ namespace Foundation
         /// <param name="key">The coder key.</param>
         /// <returns>The decoded object.</returns>
         [Export("decodeObjectOfClass")]
-        public AnyObject DecodeObjectOfClass(AnyClass aClass, string key) { return null; }
+        public AnyObject DecodeObjectOfClass(AnyClass aClass, string forKey) { return null; }
 
         /// <summary>
         /// Decodes an object for the key, restricted to the specified classes.
@@ -235,7 +235,7 @@ namespace Foundation
         /// <param name="key">The coder key.</param>
         /// <returns>The decoded object.</returns>
         [Export("decodeObjectOfClasses")]
-        public AnyObject DecodeObjectOfClasses(NSSet classes, string key) { return null; }
+        public AnyObject DecodeObjectOfClasses(NSSet classes, string forKey) { return null; }
 
         /// <summary>
         /// Returns a decoded property list for the specified key.

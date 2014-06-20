@@ -18,7 +18,7 @@ namespace Foundation
         /// <param name="data">The mutable-data object into which the archive is written.</param>
         /// <returns>The receiver, initialized for encoding an archive into data.</returns>
         [Export("init")]
-        public void Init(NSMutableData data) { }
+        public void Init(NSMutableData forWritingWithMutableData) { }
 
         /// <summary>
         /// Returns an NSData object containing the encoded form of the object graph whose root object is given.
@@ -35,7 +35,7 @@ namespace Foundation
         /// <param name="path">The path of the file in which to write the archive.</param>
         /// <returns>true if the operation was successful, otherwise false.</returns>
         [Export("archiveRootObject")]
-        public static bool ArchiveRootObject(AnyObject rootObject, string path) { return false; }
+        public static bool ArchiveRootObject(AnyObject rootObject, string toFile) { return false; }
 
         /// <summary>
         /// Instructs the receiver to construct the final data stream.
@@ -70,7 +70,7 @@ namespace Foundation
         /// <param name="boolv">The value to encode.</param>
         /// <param name="key">The key with which to associate boolv. This value must not be nil.</param>
         [Export("encodeBool")]
-        public void EncodeBool(bool boolv, string key) { }
+        public void EncodeBool(bool boolv, string forKey) { }
 
         /// <summary>
         /// Encodes a given number of bytes from a given C array of bytes and associates them with the a given key.
@@ -79,7 +79,7 @@ namespace Foundation
         /// <param name="lenv">The number of bytes from bytesp to encode.</param>
         /// <param name="key">The key with which to associate the encoded value. This value must not be nil.</param>
         [Export("encodeBytes")]
-        public void EncodeBytes(CConstPointer<uint> bytesp, int lenv, string key) { }
+        public void EncodeBytes(CConstPointer<uint> bytesp, int length, string forKey) { }
 
         /// <summary>
         /// Encodes a reference to a given object and associates it with a given key only if it has been unconditionally encoded elsewhere in the archive with encodeObject:forKey:.
@@ -87,7 +87,7 @@ namespace Foundation
         /// <param name="objv">The object to encode.</param>
         /// <param name="key">The key with which to associate the encoded value. This value must not be nil.</param>
         [Export("encodeConditionalObject")]
-        public void EncodeConditionalObject(AnyObject objv, string key) { }
+        public void EncodeConditionalObject(AnyObject objv, string forKey) { }
 
         /// <summary>
         /// Encodes a given double value and associates it with a given key.
@@ -95,7 +95,7 @@ namespace Foundation
         /// <param name="realv">The value to encode.</param>
         /// <param name="key">The key with which to associate realv. This value must not be nil.</param>
         [Export("encodeDouble")]
-        public void EncodeDouble(CDouble realv, string key) { }
+        public void EncodeDouble(CDouble realv, string forKey) { }
 
         /// <summary>
         /// Encodes a given float value and associates it with a given key.
@@ -103,7 +103,7 @@ namespace Foundation
         /// <param name="realv">The value to encode.</param>
         /// <param name="key">The key with which to associate realv. This value must not be nil.</param>
         [Export("encodeFloat")]
-        public void EncodeFloat(CFloat realv, string key) { }
+        public void EncodeFloat(CFloat realv, string forKey) { }
 
         /// <summary>
         /// Encodes a given int value and associates it with a given key.
@@ -111,7 +111,7 @@ namespace Foundation
         /// <param name="intv">The value to encode.</param>
         /// <param name="key">The key with which to associate intv. This value must not be nil.</param>
         [Export("encodeInt")]
-        public void EncodeInt(CInt intv, string key) { }
+        public void EncodeInt(CInt intv, string forKey) { }
 
         /// <summary>
         /// Encodes a given 32-bit integer value and associates it with a given key.
@@ -119,7 +119,7 @@ namespace Foundation
         /// <param name="intv">The value to encode.</param>
         /// <param name="key">The key with which to associate intv. This value must not be nil.</param>
         [Export("encodeInt32")]
-        public void EncodeInt32(Int32 intv, string key) { }
+        public void EncodeInt32(Int32 intv, string forKey) { }
 
         /// <summary>
         /// Encodes a given 64-bit integer value and associates it with a given key.
@@ -127,7 +127,7 @@ namespace Foundation
         /// <param name="intv">The value to encode.</param>
         /// <param name="key">The key with which to associate intv. This value must not be nil.</param>
         [Export("encodeInt64")]
-        public void EncodeInt64(Int64 intv, string key) { }
+        public void EncodeInt64(Int64 intv, string forKey) { }
 
         /// <summary>
         /// Encodes a given object and associates it with a given key.
@@ -135,7 +135,7 @@ namespace Foundation
         /// <param name="objv">The value to encode. This value may be nil.</param>
         /// <param name="key">The key with which to associate objv. This value must not be nil.</param>
         [Export("encodeObject")]
-        public void EncodeObject(AnyObject objv, string key) { }
+        public void EncodeObject(AnyObject objv, string forKey) { }
 
         /// <summary>
         /// Returns the receiver’s delegate.
@@ -157,7 +157,7 @@ namespace Foundation
         /// <param name="codedName">The name of the class that NSKeyedArchiver uses in place of cls.</param>
         /// <param name="cls">The class for which to set up a translation mapping.</param>
         [Export("setClassName")]
-        public static void SetClassName(string codedName, AnyClass cls) { }
+        public static void SetClassName(string codedName, AnyClass forClass) { }
 
         /// <summary>
         /// Returns the class name with which NSKeyedArchiver encodes instances of a given class.
@@ -173,7 +173,7 @@ namespace Foundation
         /// <param name="codedName">The name of the class that the receiver uses uses in place of cls.</param>
         /// <param name="cls">The class for which to set up a translation mapping.</param>
         [Export("setClassName")]
-        public void SetClassName(string codedName, AnyClass cls) { }
+        public void SetClassName(string codedName, AnyClass forClass) { }
 
         /// <summary>
         /// Returns the class name with which the receiver encodes instances of a given class.

@@ -18,7 +18,7 @@ namespace Foundation
         /// <param name="data">An archive previously encoded by NSKeyedArchiver.</param>
         /// <returns>An NSKeyedUnarchiver object initialized for for decoding data.</returns>
         [Export("init")]
-        public void Init(NSData data) { }
+        public void Init(NSData forReadingWithData) { }
 
         /// <summary>
         /// Decodes and returns the object graph previously encoded by NSKeyedArchiver and stored in a given NSData object.
@@ -66,7 +66,7 @@ namespace Foundation
         /// <param name="lengthp">Upon return, contains the number of bytes returned.</param>
         /// <returns>The stream of bytes associated with the key key. Returns NULL if key does not exist.</returns>
         [Export("decodeBytesForKey")]
-        public UnsafePointer<uint> DecodeBytesForKey(string key, CMutablePointer<int> lengthp) { return null; }
+        public UnsafePointer<uint> DecodeBytesForKey(string key, CMutablePointer<int> returnedLength) { return null; }
 
         /// <summary>
         /// Decodes a double-precision floating-point value associated with a given key.
@@ -142,7 +142,7 @@ namespace Foundation
         /// <param name="cls">The class with which to replace instances of the class named codedName.</param>
         /// <param name="codedName">The ostensible name of a class in an archive.</param>
         [Export("setClass")]
-        public static void SetClass(AnyClass cls, string codedName) { }
+        public static void SetClass(AnyClass cls, string forClassName) { }
 
         /// <summary>
         /// Returns the class from which NSKeyedUnarchiver instantiates an encoded object with a given class name.
@@ -158,7 +158,7 @@ namespace Foundation
         /// <param name="cls">The class with which to replace instances of the class named codedName.</param>
         /// <param name="codedName">The ostensible name of a class in an archive.</param>
         [Export("setClass")]
-        public void SetClass(AnyClass cls, string codedName) { }
+        public void SetClass(AnyClass cls, string forClassName) { }
 
         /// <summary>
         /// Returns the class from which the receiver instantiates an encoded object with a given class name.

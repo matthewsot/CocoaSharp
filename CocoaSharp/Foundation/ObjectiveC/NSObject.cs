@@ -142,7 +142,7 @@ namespace ObjectiveC
         /// <param name="aSelector">The selector for requests previously registered with the performSelector:withObject:afterDelay: instance method.</param>
         /// <param name="anArgument">The argument for requests previously registered with the performSelector:withObject:afterDelay: instance method. Argument equality is determined using isEqual:, so the value need not be the same object that was passed originally. Pass nil to match a request for nil that was originally passed as the argument.</param>
         [Export("cancelPreviousPerformRequestsWithTarget")]
-        public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget, Selector aSelector, AnyObject anArgument) { }
+        public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget, Selector selector, AnyObject @object) { }
 
         /// <summary>
         /// Returns the object to which unrecognized messages should first be directed.

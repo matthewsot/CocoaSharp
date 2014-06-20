@@ -25,7 +25,7 @@ namespace Foundation
         /// <param name="aRange">A range specifying the characters to replace.</param>
         /// <param name="aString">A string specifying the characters to replace those in aRange.</param>
         [Export("replaceCharactersInRange")]
-        public void ReplaceCharactersInRange(NSRange aRange, string aString) { }
+        public void ReplaceCharactersInRange(NSRange aRange, string withString) { }
 
         /// <summary>
         /// Deletes the characters in the given range along with their associated attributes.
@@ -40,7 +40,7 @@ namespace Foundation
         /// <param name="attributes">A dictionary containing the attributes to set. Attribute keys can be supplied by another framework or can be custom ones you define. For information about where to find the system-supplied attribute keys, see the overview section in NSAttributedString Class Reference.</param>
         /// <param name="aRange">The range of characters whose attributes are set.</param>
         [Export("setAttributes")]
-        public void SetAttributes(NSDictionary attributes, NSRange aRange) { }
+        public void SetAttributes(NSDictionary attributes, NSRange range) { }
 
         /// <summary>
         /// Adds an attribute with the given name and value to the characters in the specified range.
@@ -49,7 +49,7 @@ namespace Foundation
         /// <param name="value">The attribute value associated with name.</param>
         /// <param name="aRange">The range of characters to which the specified attribute/value pair applies.</param>
         [Export("addAttribute")]
-        public void AddAttribute(string name, AnyObject value, NSRange aRange) { }
+        public void AddAttribute(string name, AnyObject value, NSRange range) { }
 
         /// <summary>
         /// Adds the given collection of attributes to the characters in the specified range.
@@ -57,7 +57,7 @@ namespace Foundation
         /// <param name="attributes">A dictionary containing the attributes to add. Attribute keys can be supplied by another framework or can be custom ones you define. For information about where to find the system-supplied attribute keys, see the overview section in NSAttributedString Class Reference.</param>
         /// <param name="aRange">The range of characters to which the specified attributes apply.</param>
         [Export("addAttributes")]
-        public void AddAttributes(NSDictionary attributes, NSRange aRange) { }
+        public void AddAttributes(NSDictionary attributes, NSRange range) { }
 
         /// <summary>
         /// Removes the named attribute from the characters in the specified range.
@@ -65,7 +65,7 @@ namespace Foundation
         /// <param name="name">A string specifying the attribute name to remove. Attribute keys can be supplied by another framework or can be custom ones you define. For information about where to find the system-supplied attribute keys, see the overview section in NSAttributedString Class Reference.</param>
         /// <param name="aRange">The range of characters from which the specified attribute is removed.</param>
         [Export("removeAttribute")]
-        public void RemoveAttribute(string name, NSRange aRange) { }
+        public void RemoveAttribute(string name, NSRange range) { }
 
         /// <summary>
         /// Adds the characters and attributes of a given attributed string to the end of the receiver.
@@ -80,7 +80,7 @@ namespace Foundation
         /// <param name="attributedString">The string whose characters and attributes are inserted.</param>
         /// <param name="index">The index at which the characters and attributes are inserted.</param>
         [Export("insertAttributedString")]
-        public void InsertAttributedString(NSAttributedString attributedString, int index) { }
+        public void InsertAttributedString(NSAttributedString attributedString, int atIndex) { }
 
         /// <summary>
         /// Replaces the characters and attributes in a given range with the characters and attributes of the given attributed string.
@@ -88,7 +88,7 @@ namespace Foundation
         /// <param name="aRange">The range of characters and attributes replaced.</param>
         /// <param name="attributedString">The attributed string whose characters and attributes replace those in the specified range.</param>
         [Export("replaceCharactersInRange")]
-        public void ReplaceCharactersInRange(NSRange aRange, NSAttributedString attributedString) { }
+        public void ReplaceCharactersInRange(NSRange aRange, NSAttributedString withAttributedString) { }
 
         /// <summary>
         /// Replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
