@@ -120,37 +120,44 @@ namespace StubGen
             var sections = doc.DocumentNode.SelectNodes("/html/body//li[@class='item symbol']/div[@class='height-container']/section");
             foreach(var section in sections)
             {
-                var summary = "/// <summary>\r\n/// " + RemoveHTMLTags(section.ChildNodes.First(node => node.Attributes.Any(attr => attr.Name == "class" && attr.Value == "abstract")).InnerHtml.Trim()).Trim() + "\r\n/// </summary>\r\n";
-
-                var declarationPara = section.SelectSingleNode("./div[@class='declaration']/div[@class='Swift']/p[@class='para']");
-                if (declarationPara == null)
+                try
                 {
-                    continue;
-                }
-                string declaration = ParseDeclaration(RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim());
+                    var summary = "/// <summary>\r\n/// " + RemoveHTMLTags(section.ChildNodes.First(node => node.Attributes.Any(attr => attr.Name == "class" && attr.Value == "abstract")).InnerHtml.Trim()).Trim() + "\r\n/// </summary>\r\n";
 
-                var parameters = "";
-                var paramTable = section.SelectSingleNode("./div[@class='parameters']/table/tbody");
-                if (paramTable != null)
-                {
-                    var paramsInTable = paramTable.SelectNodes("./tr");
-                    foreach(var param in paramsInTable)
+                    var declarationPara = section.SelectSingleNode("./div[@class='declaration']/div[@class='Swift']/p[@class='para']");
+                    if (declarationPara == null)
                     {
-                        var name = ParseType(RemoveHTMLTags(param.SelectNodes("./td").First().InnerHtml.Trim()).Trim());
-                        var desc = RemoveHTMLTags(param.SelectNodes("./td").Last().InnerHtml.Trim()).Trim().Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
-                        parameters += "/// <param name=\"" + name + "\">" + desc + "</param>\r\n";
+                        continue;
                     }
-                }
+                    string declaration = ParseDeclaration(RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim());
 
-                var resultPara = section.SelectSingleNode("./div[@class='result-description']/p[@class='para']");
-                string result = "";
-                if (resultPara != null)
+                    var parameters = "";
+                    var paramTable = section.SelectSingleNode("./div[@class='parameters']/table/tbody");
+                    if (paramTable != null)
+                    {
+                        var paramsInTable = paramTable.SelectNodes("./tr");
+                        foreach (var param in paramsInTable)
+                        {
+                            var name = ParseType(RemoveHTMLTags(param.SelectNodes("./td").First().InnerHtml.Trim()).Trim());
+                            var desc = RemoveHTMLTags(param.SelectNodes("./td").Last().InnerHtml.Trim()).Trim().Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+                            parameters += "/// <param name=\"" + name + "\">" + desc + "</param>\r\n";
+                        }
+                    }
+
+                    var resultPara = section.SelectSingleNode("./div[@class='result-description']/p[@class='para']");
+                    string result = "";
+                    if (resultPara != null)
+                    {
+                        result = "/// <returns>" + RemoveHTMLTags(resultPara.InnerHtml).Trim() + "</returns>\r\n";
+                    }
+
+                    var thisFinal = summary + parameters + result + declaration;
+                    output += thisFinal;
+                }
+                catch
                 {
-                    result = "/// <returns>" + RemoveHTMLTags(resultPara.InnerHtml).Trim() + "</returns>\r\n";
+                    output += "\r\n\r\nWHAT\r\n\r\n";
                 }
-
-                var thisFinal = summary + parameters + result + declaration;
-                output += thisFinal;
             }
             return output;
         }
