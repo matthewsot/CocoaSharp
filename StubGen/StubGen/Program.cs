@@ -13,7 +13,7 @@ namespace StubGen
         {
             using (StreamWriter writer = new StreamWriter("output.cs"))
             {
-                writer.Write(Scraper.ScrapeToCSFile("https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/index.html#//apple_ref/occ/clm/NSObject/instanceMethodForSelector:"));
+                writer.Write(Scraper.ScrapeToCSFile(Console.ReadLine()));
                 writer.Flush();
             }
         }
