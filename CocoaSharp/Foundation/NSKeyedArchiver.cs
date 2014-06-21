@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ObjectiveC;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -10,12 +8,13 @@ namespace Foundation
     /// <summary>
     /// NSKeyedArchiver, a concrete subclass of NSCoder, provides a way to encode objects (and scalar values) into an architecture-independent format that can be stored in a file. When you archive a set of objects, the class information and instance variables for each object are written to the archive. NSKeyedArchiver’s companion class, NSKeyedUnarchiver, decodes the data in an archive and creates a set of objects equivalent to the original set.
     /// </summary>
+    [iOSVersion(2)]
     public class NSKeyedArchiver : NSCoder
     {
         /// <summary>
         /// Returns the receiver, initialized for encoding an archive into a given a mutable-data object.
         /// </summary>
-        /// <param name="data">The mutable-data object into which the archive is written.</param>
+        /// <param name="forWritingWithMutableData">The mutable-data object into which the archive is written.</param>
         /// <returns>The receiver, initialized for encoding an archive into data.</returns>
         [iOSVersion(2)]
         public NSKeyedArchiver(NSMutableData forWritingWithMutableData) { }
@@ -33,7 +32,7 @@ namespace Foundation
         /// Archives an object graph rooted at a given object by encoding it into a data object then atomically writes the resulting data object to a file at a given path, and returns a Boolean value that indicates whether the operation was successful.
         /// </summary>
         /// <param name="rootObject">The root of the object graph to archive.</param>
-        /// <param name="path">The path of the file in which to write the archive.</param>
+        /// <param name="toFile">The path of the file in which to write the archive.</param>
         /// <returns>true if the operation was successful, otherwise false.</returns>
         [iOSVersion(2)]
         [Export("archiveRootObject")]
@@ -52,7 +51,7 @@ namespace Foundation
         /// <returns>The format in which the receiver encodes its data. The available formats are NSPropertyListXMLFormat_v1_0 and NSPropertyListBinaryFormat_v1_0.</returns>
         [iOSVersion(2)]
         [Export("outputFormat")]
-        public static NSPropertyListFormat OutputFormat { get; set; }
+        public NSPropertyListFormat OutputFormat { get; set; }
 
         /// <summary>
         /// Indicates whether the receiver requires all archived classes to conform to NSSecureCoding.
@@ -66,83 +65,83 @@ namespace Foundation
         /// Encodes a given Boolean value and associates it with a given key.
         /// </summary>
         /// <param name="boolv">The value to encode.</param>
-        /// <param name="key">The key with which to associate boolv. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate boolv. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeBool")]
-        public void EncodeBool(bool boolv, string forKey) { }
+        public new void EncodeBool(bool boolv, string forKey) { }
 
         /// <summary>
         /// Encodes a given number of bytes from a given C array of bytes and associates them with the a given key.
         /// </summary>
         /// <param name="bytesp">A C array of bytes to encode.</param>
-        /// <param name="lenv">The number of bytes from bytesp to encode.</param>
-        /// <param name="key">The key with which to associate the encoded value. This value must not be nil.</param>
+        /// <param name="length">The number of bytes from bytesp to encode.</param>
+        /// <param name="forKey">The key with which to associate the encoded value. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeBytes")]
-        public void EncodeBytes(CConstPointer<uint> bytesp, int length, string forKey) { }
+        public new void EncodeBytes(CConstPointer<uint> bytesp, int length, string forKey) { }
 
         /// <summary>
         /// Encodes a reference to a given object and associates it with a given key only if it has been unconditionally encoded elsewhere in the archive with encodeObject:forKey:.
         /// </summary>
         /// <param name="objv">The object to encode.</param>
-        /// <param name="key">The key with which to associate the encoded value. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate the encoded value. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeConditionalObject")]
-        public void EncodeConditionalObject(AnyObject objv, string forKey) { }
+        public new void EncodeConditionalObject(AnyObject objv, string forKey) { }
 
         /// <summary>
         /// Encodes a given double value and associates it with a given key.
         /// </summary>
         /// <param name="realv">The value to encode.</param>
-        /// <param name="key">The key with which to associate realv. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate realv. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeDouble")]
-        public void EncodeDouble(CDouble realv, string forKey) { }
+        public new void EncodeDouble(CDouble realv, string forKey) { }
 
         /// <summary>
         /// Encodes a given float value and associates it with a given key.
         /// </summary>
         /// <param name="realv">The value to encode.</param>
-        /// <param name="key">The key with which to associate realv. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate realv. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeFloat")]
-        public void EncodeFloat(CFloat realv, string forKey) { }
+        public new void EncodeFloat(CFloat realv, string forKey) { }
 
         /// <summary>
         /// Encodes a given int value and associates it with a given key.
         /// </summary>
         /// <param name="intv">The value to encode.</param>
-        /// <param name="key">The key with which to associate intv. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate intv. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeInt")]
-        public void EncodeInt(CInt intv, string forKey) { }
+        public new void EncodeInt(CInt intv, string forKey) { }
 
         /// <summary>
         /// Encodes a given 32-bit integer value and associates it with a given key.
         /// </summary>
         /// <param name="intv">The value to encode.</param>
-        /// <param name="key">The key with which to associate intv. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate intv. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeInt32")]
-        public void EncodeInt32(Int32 intv, string forKey) { }
+        public new void EncodeInt32(Int32 intv, string forKey) { }
 
         /// <summary>
         /// Encodes a given 64-bit integer value and associates it with a given key.
         /// </summary>
         /// <param name="intv">The value to encode.</param>
-        /// <param name="key">The key with which to associate intv. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate intv. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeInt64")]
-        public void EncodeInt64(Int64 intv, string forKey) { }
+        public new void EncodeInt64(Int64 intv, string forKey) { }
 
         /// <summary>
         /// Encodes a given object and associates it with a given key.
         /// </summary>
         /// <param name="objv">The value to encode. This value may be nil.</param>
-        /// <param name="key">The key with which to associate objv. This value must not be nil.</param>
+        /// <param name="forKey">The key with which to associate objv. This value must not be nil.</param>
         [iOSVersion(2)]
         [Export("encodeObject")]
-        public void EncodeObject(AnyObject objv, string forKey) { }
+        public new void EncodeObject(AnyObject objv, string forKey) { }
 
         /// <summary>
         /// Sets or returns the receiver’s delegate.
@@ -150,13 +149,13 @@ namespace Foundation
         /// <returns>The receiver's delegate.</returns>
         [iOSVersion(2)]
         [Export("delegate")]
-        public static NSKeyedArchiverDelegate Delegate { get; set; }
+        public NSKeyedArchiverDelegate Delegate { get; set; }
 
         /// <summary>
         /// Adds a class translation mapping to NSKeyedArchiver whereby instances of of a given class are encoded with a given class name instead of their real class names.
         /// </summary>
         /// <param name="codedName">The name of the class that NSKeyedArchiver uses in place of cls.</param>
-        /// <param name="cls">The class for which to set up a translation mapping.</param>
+        /// <param name="forClass">The class for which to set up a translation mapping.</param>
         [iOSVersion(2)]
         [Export("setClassName")]
         public static void SetClassName(string codedName, AnyClass forClass) { }
@@ -175,7 +174,7 @@ namespace Foundation
         /// Adds a class translation mapping to the receiver whereby instances of of a given class are encoded with a given class name instead of their real class names.
         /// </summary>
         /// <param name="codedName">The name of the class that the receiver uses uses in place of cls.</param>
-        /// <param name="cls">The class for which to set up a translation mapping.</param>
+        /// <param name="forClass">The class for which to set up a translation mapping.</param>
         [iOSVersion(2)]
         [Export("setClassName")]
         public void SetClassNameInstance(string codedName, AnyClass forClass) { }
@@ -189,6 +188,8 @@ namespace Foundation
         [iOSVersion(2)]
         [Export("classNameForClass")]
         public string ClassNameForClassInstance(AnyClass cls) { return ""; }
+
+        //TODO: NSInvalidArchiveOperationException & NSKeyedArchiveRootObjectKey are constants
 
         /// <summary>
         /// Names of exceptions that are raised by NSKeyedArchiver if there is a problem creating an archive.

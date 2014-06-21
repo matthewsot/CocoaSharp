@@ -1,9 +1,5 @@
-﻿using Foundation;
-using ObjectiveC;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ObjectiveC;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -16,10 +12,9 @@ namespace Foundation
         /// <summary>
         /// Returns an NSMethodSignature object for the given Objective C method type string.
         /// </summary>
-        /// <param name="types">An array of characters containing the type encodings for the method arguments.   Indices begin with 0. The hidden arguments self (of type id) and _cmd (of type SEL) are at indices 0 and 1; method-specific arguments begin at index 2.</param>
+        /// <param name="objCTypes">An array of characters containing the type encodings for the method arguments.   Indices begin with 0. The hidden arguments self (of type id) and _cmd (of type SEL) are at indices 0 and 1; method-specific arguments begin at index 2.</param>
         /// <returns>An NSMethodSignature object for the given Objective C method type string in types.</returns>
         [iOSVersion(2)]
-        [Export("init")]
         public NSMethodSignature(CString objCTypes) { }
 
         /// <summary>
@@ -37,7 +32,7 @@ namespace Foundation
         /// <returns>The number of arguments recorded in the receiver.</returns>
         [iOSVersion(2)]
         [Export("numberOfArguments")]
-        public static int NumberOfArguments { get; private set; }
+        public int NumberOfArguments { get; private set; }
 
         /// <summary>
         /// Returns the number of bytes that the arguments, taken together, occupy on the stack.
@@ -45,7 +40,7 @@ namespace Foundation
         /// <returns>The number of bytes that the arguments, taken together, occupy on the stack.</returns>
         [iOSVersion(2)]
         [Export("frameLength")]
-        public static int FrameLength { get; private set; }
+        public int FrameLength { get; private set; }
 
         /// <summary>
         /// Returns a C string encoding the return type of the method in Objective-C type encoding.
@@ -53,7 +48,7 @@ namespace Foundation
         /// <returns>A C string encoding the return type of the method in Objective-C type encoding.</returns>
         [iOSVersion(2)]
         [Export("methodReturnType")]
-        public static CString MethodReturnType { get; private set; }
+        public CString MethodReturnType { get; private set; }
 
         /// <summary>
         /// Returns the number of bytes required for the return value.
@@ -61,7 +56,7 @@ namespace Foundation
         /// <returns>The number of bytes required for the return value.</returns>
         [iOSVersion(2)]
         [Export("methodReturnLength")]
-        public static int MethodReturnLength { get; private set; }
+        public int MethodReturnLength { get; private set; }
 
         /// <summary>
         /// Returns a Boolean value that indicates whether the receiver is asynchronous when invoked through distributed objects.

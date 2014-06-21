@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Foundation;
+using SwiftSharp.Attributes;
 
 namespace ObjectiveC
 {
@@ -141,7 +139,7 @@ namespace ObjectiveC
         /// <returns>A proxy of the receiver.</returns>
         [iOSVersion(4)]
         [Export("autoContentAccessingProxy")]
-        public static AnyObject AutoContentAccessingProxy { get; private set; }
+        public AnyObject AutoContentAccessingProxy { get; private set; }
 
         /// <summary>
         /// Cancels perform requests previously registered with the performSelector:withObject:afterDelay: instance method.
@@ -155,8 +153,8 @@ namespace ObjectiveC
         /// Cancels perform requests previously registered with performSelector:withObject:afterDelay:.
         /// </summary>
         /// <param name="aTarget">The target for requests previously registered with the performSelector:withObject:afterDelay: instance method</param>
-        /// <param name="aSelector">The selector for requests previously registered with the performSelector:withObject:afterDelay: instance method.</param>
-        /// <param name="anArgument">The argument for requests previously registered with the performSelector:withObject:afterDelay: instance method. Argument equality is determined using isEqual:, so the value need not be the same object that was passed originally. Pass nil to match a request for nil that was originally passed as the argument.</param>
+        /// <param name="selector">The selector for requests previously registered with the performSelector:withObject:afterDelay: instance method.</param>
+        /// <param name="object">The argument for requests previously registered with the performSelector:withObject:afterDelay: instance method. Argument equality is determined using isEqual:, so the value need not be the same object that was passed originally. Pass nil to match a request for nil that was originally passed as the argument.</param>
         [iOSVersion(2)]
         [Export("cancelPreviousPerformRequestsWithTarget")]
         public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget, Selector selector, AnyObject @object) { }
@@ -219,14 +217,14 @@ namespace ObjectiveC
         /// <returns>The class to substitute for the receiver's own class during coding.</returns>
         [iOSVersion(2)]
         [Export("classForCoder")]
-        public static AnyClass ClassForCoder { get; private set; }
+        public AnyClass ClassForCoder { get; private set; }
 
         /// <summary>
         /// Overridden by subclasses to substitute a new class for instances during keyed archiving.
         /// </summary>
         [iOSVersion(2)]
         [Export("classForKeyedArchiver")]
-        public static AnyClass ClassForKeyedArchiver { get; private set; }
+        public AnyClass ClassForKeyedArchiver { get; private set; }
 
         /// <summary>
         /// Overridden to return the names of classes that can be used to decode objects if their class is unavailable.

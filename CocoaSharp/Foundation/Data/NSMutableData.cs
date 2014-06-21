@@ -1,8 +1,5 @@
 ﻿using ObjectiveC;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -10,6 +7,7 @@ namespace Foundation
     /// <summary>
     /// NSMutableData (and its superclass NSData) provide data objects, object-oriented wrappers for byte buffers. Data objects let simple allocated buffers (that is, data with no embedded pointers) take on the behavior of Foundation objects. They are typically used for data storage and are also useful in Distributed Objects applications, where data contained in data objects can be copied or moved between applications. NSData creates static data objects, and NSMutableData creates dynamic data objects. You can easily convert one type of data object to the other with the initializer that takes an NSData object or an NSMutableData object as an argument.
     /// </summary>
+    [iOSVersion(2)]
     public class NSMutableData : NSData
     {
         /// <summary>
@@ -33,10 +31,9 @@ namespace Foundation
         /// <summary>
         /// Extends or truncates a mutable data object to a given length.
         /// </summary>
-        /// <param name="length">The new length for the receiver.</param>
         [iOSVersion(2)]
         [Export("length")]
-        public static int Length { get; private set; }
+        public new int Length { get; set; }
 
         /// <summary>
         /// Returns a pointer to the receiver’s data.
@@ -44,7 +41,7 @@ namespace Foundation
         /// <returns>A pointer to the receiver’s data.</returns>
         [iOSVersion(2)]
         [Export("mutableBytes")]
-        public static COpaquePointer MutableBytes { get; private set; }
+        public COpaquePointer MutableBytes { get; private set; }
 
         /// <summary>
         /// Appends to the receiver a given number of bytes from a given buffer.
@@ -67,7 +64,7 @@ namespace Foundation
         /// Replaces with a given set of bytes a given range within the contents of the receiver.
         /// </summary>
         /// <param name="range">The range within the receiver's contents to replace with bytes. The range must not exceed the bounds of the receiver.</param>
-        /// <param name="bytes">The data to insert into the receiver's contents.</param>
+        /// <param name="withBytes">The data to insert into the receiver's contents.</param>
         [iOSVersion(2)]
         [Export("replaceBytesInRange")]
         public void ReplaceBytesInRange(NSRange range, CConstVoidPointer withBytes) { }
@@ -76,8 +73,8 @@ namespace Foundation
         /// Replaces with a given set of bytes a given range within the contents of the receiver.
         /// </summary>
         /// <param name="range">The range within the receiver's contents to replace with bytes. The range must not exceed the bounds of the receiver.</param>
-        /// <param name="replacementBytes">The data to insert into the receiver's contents.</param>
-        /// <param name="replacementLength">The number of bytes to take from replacementBytes.</param>
+        /// <param name="withBytes">The data to insert into the receiver's contents.</param>
+        /// <param name="length">The number of bytes to take from replacementBytes.</param>
         [iOSVersion(2)]
         [Export("replaceBytesInRange")]
         public void ReplaceBytesInRange(NSRange range, CConstVoidPointer withBytes, int length) { }

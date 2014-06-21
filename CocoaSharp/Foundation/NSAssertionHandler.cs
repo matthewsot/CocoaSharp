@@ -1,8 +1,5 @@
 ﻿using ObjectiveC;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -12,6 +9,7 @@ namespace Foundation
     /// 
     /// This is extremely preliminary
     /// </summary>
+    [iOSVersion(2)]
     public class NSAssertionHandler : NSObject
     {
         /// <summary>

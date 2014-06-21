@@ -1,8 +1,6 @@
 ﻿using ObjectiveC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -12,12 +10,13 @@ namespace Foundation
     /// <summary>
     /// The NSMutableArray class declares the programmatic interface to objects that manage a modifiable array of objects. This class adds insertion and deletion operations to the basic array-handling behavior inherited from NSArray.
     /// </summary>
+    [iOSVersion(2)]
     public class NSMutableArray : NSArray
     {
         /// <summary>
         /// Returns an array, initialized with enough memory to initially hold a given number of objects.
         /// </summary>
-        /// <param name="numItems">The initial capacity of the new array.</param>
+        /// <param name="capacity">The initial capacity of the new array.</param>
         /// <returns>An array initialized with enough memory to hold numItems objects. The returned object might be different than the original receiver.</returns>
         [iOSVersion(2)]
         public NSMutableArray(int capacity) { }
@@ -48,8 +47,8 @@ namespace Foundation
         /// <summary>
         /// Inserts a given object into the array's contents at a given index.
         /// </summary>
-        /// <param name="anObject">The object to add to the array's content. This value must not be nil.       Important     Raises an NSInvalidArgumentException if anObject is nil.</param>
-        /// <param name="index">The index in the array at which to insert anObject. This value must not be greater than the count of elements in the array.       Important     Raises an NSRangeException if index is greater than the number of elements in the array.</param>
+        /// <param name="anObject">The object to add to the array's content. This value must not be nil. !! Important !! Raises an NSInvalidArgumentException if anObject is nil.</param>
+        /// <param name="atIndex">The index in the array at which to insert anObject. This value must not be greater than the count of elements in the array. !! Important !! Raises an NSRangeException if index is greater than the number of elements in the array.</param>
         [iOSVersion(2)]
         [Export("insertObject")]
         public void InsertObject(AnyObject anObject, int atIndex) { }
@@ -58,7 +57,7 @@ namespace Foundation
         /// Inserts the objects in the provided array into the receiving array at the specified indexes.
         /// </summary>
         /// <param name="objects">An array of objects to insert into the receiving array.</param>
-        /// <param name="indexes">The indexes at which the objects in objects should be inserted. The count of locations in indexes must equal the count of objects. For more details, see the Discussion.</param>
+        /// <param name="atIndexes">The indexes at which the objects in objects should be inserted. The count of locations in indexes must equal the count of objects. For more details, see the Discussion.</param>
         [iOSVersion(2)]
         [Export("insertObjects")]
         public void InsertObjects(AnyObject[] objects, NSIndexSet atIndexes) { }
@@ -89,7 +88,7 @@ namespace Foundation
         /// Removes all occurrences within a specified range in the array of a given object.
         /// </summary>
         /// <param name="anObject">The object to remove from the array's content.</param>
-        /// <param name="aRange">The range from which to remove anObject.       Important     Raises an NSRangeException if aRange exceeds the bounds of the array.</param>
+        /// <param name="inRange">The range from which to remove anObject.       Important     Raises an NSRangeException if aRange exceeds the bounds of the array.</param>
         [iOSVersion(2)]
         [Export("removeObject")]
         public void RemoveObject(AnyObject anObject, NSRange inRange) { }
@@ -122,7 +121,7 @@ namespace Foundation
         /// Removes all occurrences of anObject within the specified range in the array.
         /// </summary>
         /// <param name="anObject">The object to remove from the array within aRange.</param>
-        /// <param name="aRange">The range in the array from which to remove anObject.       Important     Raises an NSRangeException if aRange exceeds the bounds of the array.</param>
+        /// <param name="inRange">The range in the array from which to remove anObject.       Important     Raises an NSRangeException if aRange exceeds the bounds of the array.</param>
         [iOSVersion(2)]
         [Export("removeObjectIdenticalTo")]
         public void RemoveObjectIdenticalTo(AnyObject anObject, NSRange inRange) { }
@@ -132,7 +131,7 @@ namespace Foundation
         /// Deprecation Statement: Use removeObjectsAtIndexes: instead.
         /// </summary>
         /// <param name="indices">A C array of the indices of the objects to remove from the receiving array.</param>
-        /// <param name="count">The number of objects to remove from the receiving array.</param>
+        /// <param name="numIndices">The number of objects to remove from the receiving array.</param>
         [iOSVersion(2)]
         [Obsolete]
         [Export("removeObjectsFromIndices")]
@@ -158,7 +157,7 @@ namespace Foundation
         /// Replaces the object at index with anObject.
         /// </summary>
         /// <param name="index">The index of the object to be replaced. This value must not exceed the bounds of the array.       Important     Raises an NSRangeException if index is beyond the end of the array.</param>
-        /// <param name="anObject">The object with which to replace the object at index index in the array. This value must not be nil.       Important     Raises an NSInvalidArgumentException if anObject is nil.</param>
+        /// <param name="withObject">The object with which to replace the object at index index in the array. This value must not be nil.       Important     Raises an NSInvalidArgumentException if anObject is nil.</param>
         [iOSVersion(2)]
         [Export("replaceObjectAtIndex")]
         public void ReplaceObjectAtIndex(int index, AnyObject withObject) { }
@@ -167,7 +166,7 @@ namespace Foundation
         /// Replaces the object at the index with the new object, possibly adding the object.
         /// </summary>
         /// <param name="anObject">The object with which to replace the object at index index in the array. This value must not be nil.       Important     Raises an NSInvalidArgumentException if anObject is nil.</param>
-        /// <param name="index">The index of the object to be replaced. This value must not exceed the bounds of the array.       Important     Raises an NSRangeException if index is beyond the end of the array.</param>
+        /// <param name="atIndexedSubscript">The index of the object to be replaced. This value must not exceed the bounds of the array.       Important     Raises an NSRangeException if index is beyond the end of the array.</param>
         [iOSVersion(6)]
         [Export("setObject")]
         public void SetObject(AnyObject anObject, int atIndexedSubscript) { }
@@ -176,7 +175,7 @@ namespace Foundation
         /// Replaces the objects in the receiving array at specified locations specified with the objects from a given array.
         /// </summary>
         /// <param name="indexes">The indexes of the objects to be replaced.</param>
-        /// <param name="objects">The objects with which to replace the objects in the receiving array at the indexes specified by indexes. The count of locations in indexes must equal the count of objects.</param>
+        /// <param name="withObjects">The objects with which to replace the objects in the receiving array at the indexes specified by indexes. The count of locations in indexes must equal the count of objects.</param>
         [iOSVersion(2)]
         [Export("replaceObjectsAtIndexes")]
         public void ReplaceObjectsAtIndexes(NSIndexSet indexes, AnyObject[] withObjects) { }
@@ -185,8 +184,8 @@ namespace Foundation
         /// Replaces the objects in the receiving array specified by one given range with the objects in another array specified by another range.
         /// </summary>
         /// <param name="aRange">The range of objects to replace in (or remove from) the receiving array.</param>
-        /// <param name="otherArray">The array of objects from which to select replacements for the objects in aRange.</param>
-        /// <param name="otherRange">The range of objects to select from otherArray as replacements for the objects in aRange.</param>
+        /// <param name="withObjectsFromArray">The array of objects from which to select replacements for the objects in aRange.</param>
+        /// <param name="range">The range of objects to select from otherArray as replacements for the objects in aRange.</param>
         [iOSVersion(2)]
         [Export("replaceObjectsInRange")]
         public void ReplaceObjectsInRange(NSRange aRange, AnyObject[] withObjectsFromArray, NSRange range) { }
@@ -195,7 +194,7 @@ namespace Foundation
         /// Replaces the objects in the receiving array specified by a given range with all of the objects from a given array.
         /// </summary>
         /// <param name="aRange">The range of objects to replace in (or remove from) the receiving array.</param>
-        /// <param name="otherArray">The array of objects from which to select replacements for the objects in aRange.</param>
+        /// <param name="withObjectsFromArray">The array of objects from which to select replacements for the objects in aRange.</param>
         [iOSVersion(2)]
         [Export("replaceObjectsInRange")]
         public void ReplaceObjectsInRange(NSRange aRange, AnyObject[] withObjectsFromArray) { }
@@ -220,7 +219,7 @@ namespace Foundation
         /// Exchanges the objects in the array at given indices.
         /// </summary>
         /// <param name="idx1">The index of the object with which to replace the object at index idx2.</param>
-        /// <param name="idx2">The index of the object with which to replace the object at index idx1.</param>
+        /// <param name="withObjectAtIndex">The index of the object with which to replace the object at index idx1.</param>
         [iOSVersion(2)]
         [Export("exchangeObjectAtIndex")]
         public void ExchangeObjectAtIndex(int idx1, int withObjectAtIndex) { }
@@ -245,7 +244,7 @@ namespace Foundation
         /// Sorts the array using the specified options and the comparison method specified by a given NSComparator Block.
         /// </summary>
         /// <param name="opts">A bitmask that specifies the options for the sort (whether it should be performed concurrently and whether it should be performed stably).</param>
-        /// <param name="cmptr">A comparator block.</param>
+        /// <param name="usingComparator">A comparator block.</param>
         [iOSVersion(4)]
         [Export("sortWithOptions")]
         public void SortWithOptions(NSSortOptions opts, NSComparator usingComparator) { }

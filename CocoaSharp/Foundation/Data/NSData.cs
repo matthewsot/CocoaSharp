@@ -1,21 +1,22 @@
 ﻿using ObjectiveC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
+    //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSData_Class/index.html#//apple_ref/occ/cl/NSData
+    /// <summary>
+    /// NSData and its mutable subclass NSMutableData provide data objects, object-oriented wrappers for byte buffers. Data objects let simple allocated buffers (that is, data with no embedded pointers) take on the behavior of Foundation objects.
+    /// </summary>
+    [iOSVersion(2)]
     public class NSData : NSObject
     {
-        //TODO: test if this sketch constructor stuff actually works 0.-
-
         /// <summary>
-        /// !!IMPORTANT!! Name the parameter!
+        /// !!IMPORTANT!! Name the parameter you're using!
         /// Returns a data object initialized with the given Base-64 encoded string.
         /// Deprecation Statement: You should transition to either initWithBase64EncodedString:options: or initWithBase64EncodedData:options:.
         /// </summary>
-        /// <param name="base64String">A Base-64 encoded string.</param>
+        /// <param name="base64Encoding">A Base-64 encoded string.</param>
         /// <returns>A data object built by Base-64 decoding the provided string. Returns nil if the data object could not be decoded.</returns>
         [iOSVersion(4)]
         [Obsolete]
@@ -25,17 +26,17 @@ namespace Foundation
         /// !!IMPORTANT!! Name the parameter you're using!
         /// Returns a data object initialized by reading from the source
         /// </summary>
-        /// [iOSVersion(2)] <param name="contentsOfFile">The absolute path of the file from which to read data.</param>
-        /// [iOSVersion(2)] <param name="contentsOfMappedFile">The absolute path of the file from which to read data.</param>
+        /// <param name="contentsOfFile">The absolute path of the file from which to read data.</param>
+        /// <param name="contentsOfMappedFile">The absolute path of the file from which to read data.</param>
         [iOSVersion(2)]
-        public NSData(string base64Encoding = "", string contentsOfFile = "", string contentsOfMappedFile = "") { }
+        public NSData(string contentsOfFile = "", string contentsOfMappedFile = "") { }
 
         /// <summary>
         /// Creates and returns a data object by reading every byte from the file specified by a given path.
         /// </summary>
         /// <param name="path">The absolute path of the file from which to read data.</param>
-        /// <param name="mask">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
-        /// <param name="errorPtr">If an error occurs, upon return contains an NSError object that describes the problem.</param>
+        /// <param name="options">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
+        /// <param name="error">If an error occurs, upon return contains an NSError object that describes the problem.</param>
         /// <returns>A data object by reading every byte from the file specified by path. Returns nil if the data object could not be created.</returns>
         [iOSVersion(2)]
         [Export("dataWithContentsOfFile")]
@@ -54,8 +55,8 @@ namespace Foundation
         /// Creates and returns a data object containing the data from the location specified by aURL.
         /// </summary>
         /// <param name="aURL">The URL from which to read data.</param>
-        /// <param name="mask">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
-        /// <param name="errorPtr">If there is an error reading in the data, upon return contains an NSError object that describes the problem.</param>
+        /// <param name="options">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
+        /// <param name="error">If there is an error reading in the data, upon return contains an NSError object that describes the problem.</param>
         [iOSVersion(2)]
         [Export("dataWithContentsOfURL")]
         public static NSData DataWithContentsOfURL(NSURL aURL, NSDataReadingOptions options, NSErrorPointer error) { return null; }
@@ -72,7 +73,7 @@ namespace Foundation
         /// <summary>
         /// Returns a data object initialized with the given Base-64 encoded data.
         /// </summary>
-        /// <param name="base64Data">A Base-64, UTF-8 encoded data object.</param>
+        /// <param name="base64EncodedData">A Base-64, UTF-8 encoded data object.</param>
         /// <param name="options">A mask that specifies options for Base-64 decoding the data. Possible values are given in “NSDataBase64DecodingOptions”.</param>
         /// <returns>A data object containing the Base-64 decoded data. Returns nil if the data object could not be decoded.</returns>
         [iOSVersion(7)]
@@ -81,7 +82,7 @@ namespace Foundation
         /// <summary>
         /// Returns a data object initialized with the given Base-64 encoded string.
         /// </summary>
-        /// <param name="base64String">A Base-64 encoded string.</param>
+        /// <param name="base64EncodedString">A Base-64 encoded string.</param>
         /// <param name="options">A mask that specifies options for Base-64 decoding the data. Possible values are given in “NSDataBase64DecodingOptions”.</param>
         /// <returns>A data object built by Base-64 decoding the provided string. Returns nil if the data object could not be decoded.</returns>
         [iOSVersion(7)]
@@ -96,7 +97,7 @@ namespace Foundation
         /// <summary>
         /// Returns a data object initialized by adding to it a given number of bytes of data from a given buffer.
         /// </summary>
-        /// <param name="bytes">A buffer containing data for the new object. bytes must point to a memory block allocated with malloc.</param>
+        /// <param name="bytesNoCopy">A buffer containing data for the new object. bytes must point to a memory block allocated with malloc.</param>
         /// <param name="length">The number of bytes to hold from bytes. This value must not exceed the length of bytes.</param>
         /// <returns>A data object initialized by adding to it length bytes of data from the buffer bytes. The returned object might be different than the original receiver.</returns>
         [iOSVersion(2)]
@@ -105,7 +106,7 @@ namespace Foundation
         /// <summary>
         /// Returns a data object initialized by adding to it a given number of bytes of data from a given buffer, with a custom deallocator block.
         /// </summary>
-        /// <param name="bytes">A buffer containing data for the new object.</param>
+        /// <param name="bytesNoCopy">A buffer containing data for the new object.</param>
         /// <param name="length">The number of bytes to hold from bytes. This value must not exceed the length of bytes.</param>
         /// <param name="deallocator">A block to invoke when the resulting NSData object is deallocated.</param>
         /// <returns>A data object initialized by adding to it length bytes of data from the buffer bytes. The returned object might be different than the original receiver.</returns>
@@ -115,18 +116,18 @@ namespace Foundation
         /// <summary>
         /// Initializes a newly allocated data object by adding to it length bytes of data from the buffer bytes.
         /// </summary>
-        /// <param name="bytes">A buffer containing data for the new object. If flag is true, bytes must point to a memory block allocated with malloc.</param>
+        /// <param name="bytesNoCopy">A buffer containing data for the new object. If flag is true, bytes must point to a memory block allocated with malloc.</param>
         /// <param name="length">The number of bytes to hold from bytes. This value must not exceed the length of bytes.</param>
-        /// <param name="flag">If true, the returned object takes ownership of the bytes pointer and frees it on deallocation.</param>
+        /// <param name="freeWhenDone">If true, the returned object takes ownership of the bytes pointer and frees it on deallocation.</param>
         [iOSVersion(2)]
         public NSData(CMutableVoidPointer bytesNoCopy, int length, bool freeWhenDone) { }
 
         /// <summary>
         /// Returns a data object initialized by reading into it the data from the file specified by a given path.
         /// </summary>
-        /// <param name="path">The absolute path of the file from which to read data.</param>
-        /// <param name="mask">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
-        /// <param name="errorPtr">If an error occurs, upon return contains an NSError object that describes the problem.</param>
+        /// <param name="contentsOfFile">The absolute path of the file from which to read data.</param>
+        /// <param name="options">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
+        /// <param name="error">If an error occurs, upon return contains an NSError object that describes the problem.</param>
         /// <returns>A data object initialized by reading into it the data from the file specified by path. The returned object might be different than the original receiver.</returns>
         [iOSVersion(2)]
         public NSData(string contentsOfFile, NSDataReadingOptions options, NSErrorPointer error) { }
@@ -134,7 +135,7 @@ namespace Foundation
         /// <summary>
         /// Initializes a newly allocated data object initialized with the data from the location specified by aURL.
         /// </summary>
-        /// <param name="aURL">The URL from which to read data</param>
+        /// <param name="contentsOfURL">The URL from which to read data</param>
         /// <returns>An NSData object initialized with the data from the location specified by aURL. The returned object might be different than the original receiver.</returns>
         [iOSVersion(2)]
         public NSData(NSURL contentsOfURL) { }
@@ -142,9 +143,9 @@ namespace Foundation
         /// <summary>
         /// Returns a data object initialized with the data from the location specified by a given URL.
         /// </summary>
-        /// <param name="aURL">The URL from which to read data.</param>
-        /// <param name="mask">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
-        /// <param name="errorPtr">If there is an error reading in the data, upon return contains an NSError object that describes the problem.</param>
+        /// <param name="contentsOfURL">The URL from which to read data.</param>
+        /// <param name="options">A mask that specifies options for reading the data. Constant components are described in “NSDataReadingOptions”.</param>
+        /// <param name="error">If there is an error reading in the data, upon return contains an NSError object that describes the problem.</param>
         /// <returns>A data object initialized with the data from the location specified by aURL. The returned object might be different than the original receiver.</returns>
         [iOSVersion(2)]
         public NSData(NSURL contentsOfURL, NSDataReadingOptions options, NSErrorPointer error) { }
@@ -163,7 +164,7 @@ namespace Foundation
         /// <returns>A read-only pointer to the receiver’s contents.</returns>
         [iOSVersion(2)]
         [Export("bytes")]
-        public static COpaquePointer Bytes { get; private set; }
+        public COpaquePointer Bytes { get; private set; }
 
         /// <summary>
         /// Returns an NSString object that contains a hexadecimal representation of the receiver’s contents.
@@ -171,7 +172,7 @@ namespace Foundation
         /// <returns>An NSString object that contains a hexadecimal representation of the receiver’s contents in NSData property list format.</returns>
         [iOSVersion(2)]
         [Export("description")]
-        public static string Description { get; private set; }
+        public new string Description { get; private set; }
 
         /// <summary>
         /// Enumerate through each range of bytes in the data object using a block.
@@ -276,7 +277,7 @@ namespace Foundation
         /// <returns>The number of bytes contained in the receiver.</returns>
         [iOSVersion(2)]
         [Export("length")]
-        public static int Length { get; private set; }
+        public int Length { get; private set; }
 
         /// <summary>
         /// Writes the bytes in the receiver to the file specified by a given path.
@@ -292,8 +293,8 @@ namespace Foundation
         /// Writes the bytes in the receiver to the file specified by a given path.
         /// </summary>
         /// <param name="path">The location to which to write the receiver's bytes.</param>
-        /// <param name="mask">A mask that specifies options for writing the data. Constant components are described in “NSDataWritingOptions”.</param>
-        /// <param name="errorPtr">If there is an error writing out the data, upon return contains an NSError object that describes the problem.</param>
+        /// <param name="options">A mask that specifies options for writing the data. Constant components are described in “NSDataWritingOptions”.</param>
+        /// <param name="error">If there is an error writing out the data, upon return contains an NSError object that describes the problem.</param>
         /// <returns>true if the operation succeeds, otherwise false.</returns>
         [iOSVersion(2)]
         [Export("writeToFile")]
@@ -313,8 +314,8 @@ namespace Foundation
         /// Writes the bytes in the receiver to the location specified by a given URL.
         /// </summary>
         /// <param name="aURL">The location to which to write the receiver's bytes.</param>
-        /// <param name="mask">A mask that specifies options for writing the data. Constant components are described in “NSDataWritingOptions”.</param>
-        /// <param name="errorPtr">If there is an error writing out the data, upon return contains an NSError object that describes the problem.</param>
+        /// <param name="options">A mask that specifies options for writing the data. Constant components are described in “NSDataWritingOptions”.</param>
+        /// <param name="error">If there is an error writing out the data, upon return contains an NSError object that describes the problem.</param>
         /// <returns>true if the operation succeeds, otherwise false.</returns>
         [iOSVersion(2)]
         [Export("writeToURL")]
@@ -323,35 +324,42 @@ namespace Foundation
         /// <summary>
         /// Options for methods used to read NSData objects.
         /// </summary>
+        [iOSVersion(4)]
         public enum NSDataReadingOptions 
         { 
             /// <summary>
             /// A hint indicating the file should be mapped into virtual memory, if possible and safe.
             /// </summary>
+            [iOSVersion(5)]
             DataReadingMappedIfSafe,
             /// <summary>
             ///  A hint indicating the file should not be stored in the file-system caches.
             ///  For data being read once and discarded, this option can improve performance. 
             /// </summary>
+            [iOSVersion(4)]
             DataReadingUncached,
             /// <summary>
             ///  Hint to map the file in if possible.
             ///  This takes precedence over NSDataReadingMappedIfSafe if both are given. 
             /// </summary>
+            [iOSVersion(5)]
             DataReadingMappedAlways,
             /// <summary>
             /// Deprecated name for NSDataReadingMappedIfSafe.
             /// </summary>
+            [iOSVersion(4)]
             [Obsolete]
             DataReadingMapped,
             /// <summary>
             /// Deprecated name for NSDataReadingMapped. 
             /// </summary>
+            [iOSVersion(2)]
             [Obsolete]
             MappedRead,
             /// <summary>
             /// Deprecated name for NSDataReadingUncached. 
             /// </summary>
+            [iOSVersion(2)]
             [Obsolete]
             UncachedRead
         }
@@ -359,70 +367,86 @@ namespace Foundation
         /// <summary>
         /// Options for methods used to Base-64 encode data.
         /// </summary>
+        [iOSVersion(7)]
         public enum NSDataBase64EncodingOptions {
             /// <summary>
             /// Set the maximum line length to 64 characters, after which a line ending is inserted.
             /// </summary>
+            [iOSVersion(7)]
             Encoding64CharacterLineLength,
             /// <summary>
             /// Set the maximum line length to 76 characters, after which a line ending is inserted.
             /// </summary>
+            [iOSVersion(7)]
             Encoding76CharacterLineLength,
             /// <summary>
             /// When a maximum line length is set, specify that the line ending to insert should include a carriage return.
             /// </summary>
+            [iOSVersion(7)]
             EncodingEndLineWithCarriageReturn,
             /// <summary>
             /// When a maximum line length is set, specify that the line ending to insert should include a line feed.
             /// </summary>
+            [iOSVersion(7)]
             EncodingEndLineWithLineFeed
         }
 
         /// <summary>
         /// Options to modify the decoding algorithm used to decode Base-64 encoded NSData objects.
         /// </summary>
+        [iOSVersion(7)]
         public enum NSDataBase64DecodingOptions {
             /// <summary>
             /// Modify the decoding algorithm so that it ignores unknown non-Base-64 bytes, including line ending characters. 
             /// </summary>
+            [iOSVersion(7)]
             IgnoreUnknownCharacters
         }
 
         /// <summary>
         /// Options for methods used to write NSData objects.
         /// </summary>
+        [iOSVersion(4)]
         public enum NSDataWritingOptions {
             /// <summary>
             /// A hint to write data to an auxiliary file first and then exchange the files. This option is equivalent to using a write method taking the parameter atomically:YES. 
             /// </summary>
+            [iOSVersion(4)]
             DataWritingAtomic,
             /// <summary>
             /// Hint to return prevent overwriting an existing file. Cannot be combined with NSDataWritingAtomic. 
             /// </summary>
+            [iOSVersion(6)]
             DataWritingWithoutOverwriting,
             /// <summary>
             /// A hint to set the content protection attribute of the file when writing it out. In this case, the file is not stored in an encrypted format and may be accessed at boot time and while the device is unlocked. 
             /// </summary>
+            [iOSVersion(4)]
             DataWritingFileProtectionNone,
             /// <summary>
             /// A hint to set the content protection attribute of the file when writing it out. In this case, the file is stored in an encrypted format and may be read from or written to only while the device is unlocked. At all other times, attempts to read and write the file result in failure. 
             /// </summary>
+            [iOSVersion(4)]
             DataWritingFileProtectionComplete,
             /// <summary>
             /// A hint to set the content protection attribute of the file when writing it out. In this case, the file cannot be opened for reading or writing when the device is locked, although new files can be created with this class. If one of these files is open when the device is locked, reading and writing are still allowed. 
             /// </summary>
+            [iOSVersion(5)]
             DataWritingFileProtectionCompleteUnlessOpen,
             /// <summary>
             /// A hint to set the content protection attribute of the file when writing it out. In this case, the file can be read or written to while the device is locked, but while it is booting up, they have protection equivalent to NSDataWritingFileProtectionComplete.
             /// </summary>
+            [iOSVersion(5)]
             DataWritingFileProtectionCompleteUntilFirstUserAuthentication,
             /// <summary>
             /// A mask to use when determining the file protection options assigned to the data. 
             /// </summary>
+            [iOSVersion(4)]
             DataWritingFileProtectionMask,
             /// <summary>
             /// Deprecated name for NSDataWritingAtomic.
             /// </summary>
+            [iOSVersion(2)]
             [Obsolete]
             AtomicWrite
         }
@@ -430,15 +454,18 @@ namespace Foundation
         /// <summary>
         /// Options for method used to search NSData objects. These options are used with the rangeOfData:options:range: method.
         /// </summary>
+        [iOSVersion(4)]
         public enum NSDataSearchOptions {
             /// <summary>
             /// Search from the end of NSData object.
             /// </summary>
+            [iOSVersion(4)]
             Backwards,
             /// <summary>
             ///  Search is limited to start (or end, if NSDataSearchBackwards) of NSData object.
             ///  This option performs searching only on bytes at the beginning or end of the range. No match at the beginning or end means nothing is found, even if a matching sequence of bytes occurs elsewhere in the data object. 
             /// </summary>
+            [iOSVersion(4)]
             Anchored
         }
     }

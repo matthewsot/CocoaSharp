@@ -53,9 +53,8 @@
     <Compile Include="NSCopying.cs" />
     <Compile Include="Collections\NSMutableDictionary.cs" />
     <Compile Include="DataTypes.cs" />
-    <Compile Include="ExportAttribute.cs" />
+    <Compile Include="Properties\Attributes.cs" />
     <Compile Include="Collections\NSArray.cs" />
-    <Compile Include="iOSVersionAttribute.cs" />
     <Compile Include="NSAssertionHandler.cs" />
     <Compile Include="NSAttributedString.cs" />
     <Compile Include="NSCoder.cs" />

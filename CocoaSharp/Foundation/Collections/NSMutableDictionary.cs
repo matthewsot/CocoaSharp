@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ObjectiveC;
+﻿using ObjectiveC;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
+    //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSMutableDictionary_Class/index.html#//apple_ref/occ/cl/NSMutableDictionary
+    /// <summary>
+    /// The NSMutableDictionary class declares the programmatic interface to objects that manage mutable associations of keys and values. It adds modification operations to the basic operations it inherits from NSDictionary. NSMutableDictionary is “toll-free bridged” with its Core Foundation counterpart, CFMutableDictionaryRef. See Toll-Free Bridging for more information.
+    /// </summary>
+    [iOSVersion(2)]
     public class NSMutableDictionary : NSDictionary
     {
         /// <summary>
         /// Initializes a newly allocated mutable dictionary, allocating enough memory to hold numItems entries.
         /// </summary>
-        /// <param name="numItems">The initial capacity of the initialized dictionary.</param>
+        /// <param name="capacity">The initial capacity of the initialized dictionary.</param>
         /// <returns>An initialized mutable dictionary, which might be different than the original receiver.</returns>
         [iOSVersion(2)]
         public NSMutableDictionary(int capacity) { }
@@ -26,7 +28,7 @@ namespace Foundation
         /// <summary>
         /// Creates a mutable dictionary which is optimized for dealing with a known set of keys.
         /// </summary>
-        /// <param name="keyset">The keyset, created by the NSDictionary class method sharedKeySetForKeys:. If keyset is nil, an exception is thrown. If keyset is not an object returned by sharedKeySetForKeys:, an exception is thrown.</param>
+        /// <param name="sharedKeySet">The keyset, created by the NSDictionary class method sharedKeySetForKeys:. If keyset is nil, an exception is thrown. If keyset is not an object returned by sharedKeySetForKeys:, an exception is thrown.</param>
         /// <returns>A new mutable dictionary optimized for a known set of keys.</returns>
         [iOSVersion(6)]
         public NSMutableDictionary(AnyObject sharedKeySet) { }
@@ -35,7 +37,7 @@ namespace Foundation
         /// Adds a given key-value pair to the dictionary.
         /// </summary>
         /// <param name="anObject">The value for aKey. A strong reference to the object is maintained by the dictionary. Raises an NSInvalidArgumentException if anObject is nil. If you need to represent a nil value in the dictionary, use NSNull.</param>
-        /// <param name="aKey">The key for value. The key is copied (using copyWithZone:; keys must conform to the NSCopying protocol). Raises an NSInvalidArgumentException if aKey is nil. If aKey already exists in the dictionary anObject takes its place.</param>
+        /// <param name="forKey">The key for value. The key is copied (using copyWithZone:; keys must conform to the NSCopying protocol). Raises an NSInvalidArgumentException if aKey is nil. If aKey already exists in the dictionary anObject takes its place.</param>
         [iOSVersion(2)]
         [Export("setObject")]
         public void SetObject(AnyObject anObject, NSCopying forKey) { }
@@ -45,7 +47,7 @@ namespace Foundation
         /// Adds a given key-value pair to the dictionary.
         /// </summary>
         /// <param name="object">The value for aKey. A strong reference to the object is maintained by the dictionary. Raises an NSInvalidArgumentException if anObject is nil. If you need to represent a nil value in the dictionary, use NSNull.</param>
-        /// <param name="aKey">The key for value. The key is copied (using copyWithZone:; keys must conform to the NSCopying protocol). Raises an NSInvalidArgumentException if aKey is nil. If aKey already exists in the dictionary anObject takes its place.</param>
+        /// <param name="forKeyedSubscript">The key for value. The key is copied (using copyWithZone:; keys must conform to the NSCopying protocol). Raises an NSInvalidArgumentException if aKey is nil. If aKey already exists in the dictionary anObject takes its place.</param>
         [iOSVersion(6)]
         [Export("setObject")]
         public void SetObjectForKeyedSubscript(AnyObject @object, NSCopying forKeyedSubscript) { }
@@ -54,7 +56,7 @@ namespace Foundation
         /// Adds a given key-value pair to the dictionary.
         /// </summary>
         /// <param name="value">The value for key.</param>
-        /// <param name="key">The key for value. Note that when using key-value coding, the key must be a string (see Key-Value Coding Fundamentals).</param>
+        /// <param name="forKey">The key for value. Note that when using key-value coding, the key must be a string (see Key-Value Coding Fundamentals).</param>
         [iOSVersion(2)]
         [Export("setValue")]
         public void SetValue(AnyObject value, string forKey) { }

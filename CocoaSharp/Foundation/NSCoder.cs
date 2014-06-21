@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ObjectiveC;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
     //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSCoder_Class/index.html#//apple_ref/occ/cl/NSCoder
+    /// <summary>
+    /// The NSCoder abstract class declares the interface used by concrete subclasses to transfer objects and other Objective-C data items between memory and some other format. This capability provides the basis for archiving (where objects and data items are stored on disk) and distribution (where objects and data items are copied between different processes or threads). The concrete subclasses provided by Foundation for these purposes are NSArchiver, NSUnarchiver, NSKeyedArchiver, NSKeyedUnarchiver, and NSPortCoder. Concrete subclasses of NSCoder are referred to in general as coder classes, and instances of these classes as coder objects (or simply coders). A coder object that can only encode values is referred to as an encoder object, and one that can only decode values as a decoder object.
+    /// </summary>
+    [iOSVersion(2)]
     public class NSCoder : NSObject
     {
         /// <summary>
@@ -14,7 +16,7 @@ namespace Foundation
         /// </summary>
         [iOSVersion(2)]
         [Export("allowsKeyedCoding")]
-        public static bool AllowsKeyedCoding { get; private set; }
+        public bool AllowsKeyedCoding { get; private set; }
 
         /// <summary>
         /// Returns a Boolean value that indicates whether an encoded value is available for a string.
@@ -258,7 +260,7 @@ namespace Foundation
         /// Decodes an object for the key, restricted to the specified class.
         /// </summary>
         /// <param name="aClass">The expect class type.</param>
-        /// <param name="key">The coder key.</param>
+        /// <param name="forKey">The coder key.</param>
         /// <returns>The decoded object.</returns>
         [iOSVersion(6)]
         [Export("decodeObjectOfClass")]
@@ -268,7 +270,7 @@ namespace Foundation
         /// Decodes an object for the key, restricted to the specified classes.
         /// </summary>
         /// <param name="classes">A set of the expected classes.</param>
-        /// <param name="key">The coder key.</param>
+        /// <param name="forKey">The coder key.</param>
         /// <returns>The decoded object.</returns>
         [iOSVersion(6)]
         [Export("decodeObjectOfClasses")]
@@ -289,7 +291,7 @@ namespace Foundation
         /// <returns>true if this coder requires secure coding; false otherwise.</returns>
         [iOSVersion(6)]
         [Export("requiresSecureCoding")]
-        public static bool RequiresSecureCoding { get; private set; }
+        public bool RequiresSecureCoding { get; private set; }
 
         /// <summary>
         /// Get the current set of coded classes that allow secure coding.
@@ -297,14 +299,14 @@ namespace Foundation
         /// <returns>The allowed classes.</returns>
         [iOSVersion(6)]
         [Export("allowedClasses")]
-        public static NSSet AllowedClasses { get; private set; }
+        public NSSet AllowedClasses { get; private set; }
 
         /// <summary>
         /// During encoding, this method should return the system version currently in effect.
         /// </summary>
         [iOSVersion(2)]
         [Export("systemVersion")]
-        public static CUnsignedInt SystemVersion { get; private set; }
+        public CUnsignedInt SystemVersion { get; private set; }
 
         /// <summary>
         /// This method is present for historical reasons and is not used with keyed archivers.

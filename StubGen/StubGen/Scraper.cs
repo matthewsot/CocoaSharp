@@ -113,8 +113,10 @@ namespace StubGen
         public static string ScrapeWithAgility(string data)
         {
             var output = "";
-            HtmlDocument doc = new HtmlDocument();
-            doc.OptionFixNestedTags = true;
+            var doc = new HtmlDocument
+            {
+                OptionFixNestedTags = true
+            };
             doc.LoadHtml(data);
             //thanks http://stackoverflow.com/questions/846994/how-to-use-html-agility-pack
             var sections = doc.DocumentNode.SelectNodes("/html/body//li[@class='item symbol']/div[@class='height-container']/section");
@@ -130,6 +132,24 @@ namespace StubGen
                         continue;
                     }
                     string declaration = ParseDeclaration(RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim());
+
+                    var objcPara = section.SelectSingleNode("./div[@class='declaration']/div[@class='Objective-C']/p[@class='para']");
+                    if (objcPara != null)
+                    {
+                        var objcdecl = RemoveHTMLTags(objcPara.InnerHtml.Trim()).Trim();
+                        if (objcdecl.Contains("@property") && !objcdecl.Contains("readonly"))
+                        {
+                            declaration = declaration.Replace("private set", "set");
+                        }
+                        else if (objcdecl.Contains("@property") && objcdecl.Contains("readonly"))
+                        {
+                            declaration = declaration.Replace("; set;", "; private set;");
+                        }
+                    }
+                    else
+                    {
+                        declaration = "[SwiftOnly]\r\n" + declaration;
+                    }
 
                     var parameters = "";
                     var paramTable = section.SelectSingleNode("./div[@class='parameters']/table/tbody");

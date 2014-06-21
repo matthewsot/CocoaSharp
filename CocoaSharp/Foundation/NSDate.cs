@@ -1,8 +1,6 @@
 ﻿using ObjectiveC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -12,6 +10,7 @@ namespace Foundation
     /// <summary>
     /// NSDate objects represent a single point in time. NSDate is a class cluster; its single public superclass, NSDate, declares the programmatic interface for specific and relative time values. The objects you create using NSDate are referred to as date objects. They are immutable objects. Because of the nature of class clusters, objects returned by the NSDate class are instances not of that abstract class but of one of its private subclasses. Although a date object’s class is private, its interface is public, as declared by the abstract superclass NSDate. Generally, you instantiate a suitable date object by invoking one of the date... class methods.
     /// </summary>
+    [iOSVersion(2)]
     public class NSDate : NSObject
     {
         /// <summary>
@@ -139,7 +138,7 @@ namespace Foundation
         /// <returns>The interval between the receiver and the reference date, 1 January 1970, GMT. If the receiver is earlier than the reference date, the value is negative.</returns>
         [iOSVersion(2)]
         [Export("timeIntervalSince1970")]
-        public static NSTimeInterval TimeIntervalSince1970 { get; private set; }
+        public NSTimeInterval TimeIntervalSince1970 { get; private set; }
 
         /// <summary>
         /// Returns a new NSDate object that is set to a given number of seconds relative to the receiver.
@@ -167,7 +166,7 @@ namespace Foundation
         /// <returns>A string representation of the receiver.</returns>
         [iOSVersion(2)]
         [Export("description")]
-        public static string Description { get; private set; }
+        public string Description { get; private set; }
 
         /// <summary>
         /// Returns a string representation of the receiver using the given locale.
@@ -178,12 +177,14 @@ namespace Foundation
         [Export("descriptionWithLocale")]
         public string DescriptionWithLocale(AnyObject locale) { return ""; }
 
+        //TODO: NSTimeIntervalSince1970 is apparently a constant, figure that out O.-
+
         /// <summary>
         /// NSDate provides a constant that specifies the number of seconds from 1 January 1970 to the reference date, 1 January 2001.
         /// </summary>
         [iOSVersion(2)]
         [Export("NSTimeIntervalSince1970")]
-        public static CDouble NSTimeIntervalSince1970 { get; private set; }
+        public CDouble NSTimeIntervalSince1970 { get; private set; }
 
         //TODO: Add NSSystemClockDidChangeNotification
     }

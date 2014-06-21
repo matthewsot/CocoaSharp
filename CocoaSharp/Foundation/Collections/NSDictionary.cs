@@ -1,8 +1,6 @@
 ﻿using ObjectiveC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -12,13 +10,14 @@ namespace Foundation
     /// <summary>
     /// The NSDictionary class declares the programmatic interface to objects that manage immutable associations of keys and values. Use this class or its subclass NSMutableDictionary when you need a convenient and efficient way to retrieve data associated with an arbitrary key. NSDictionary creates static dictionaries, and NSMutableDictionary creates dynamic dictionaries. (For convenience, the term dictionary refers to any instance of one of these classes without specifying its exact class membership.)
     /// </summary>
+    [iOSVersion(2)]
     public class NSDictionary : NSObject
     {
         /// <summary>
         /// Creates and returns a dictionary containing a given key and value.
         /// </summary>
-        /// <param name="anObject">The value corresponding to aKey.   If this value is nil, an NSInvalidArgumentException is raised.</param>
-        /// <param name="aKey">The key for anObject.   If this value is nil, an NSInvalidArgumentException is raised.</param>
+        /// <param name="object">The value corresponding to aKey.   If this value is nil, an NSInvalidArgumentException is raised.</param>
+        /// <param name="forKey">The key for anObject.   If this value is nil, an NSInvalidArgumentException is raised.</param>
         /// <returns>A new dictionary containing a single object, anObject, for a single key, aKey.</returns>
         [iOSVersion(2)]
         public NSDictionary(AnyObject @object, NSCopying forKey) { }
@@ -26,7 +25,7 @@ namespace Foundation
         /// <summary>
         /// Initializes a newly allocated dictionary using the keys and values found in a file at a given path.
         /// </summary>
-        /// <param name="path">A full or relative pathname. The file identified by path must contain a string representation of a property list whose root object is a dictionary.</param>
+        /// <param name="contentsOfFile">A full or relative pathname. The file identified by path must contain a string representation of a property list whose root object is a dictionary.</param>
         /// <returns>An initialized dictionary—which might be different than the original receiver—that contains the dictionary at path, or nil if there is a file error or if the contents of the file are an invalid representation of a dictionary.</returns>
         [iOSVersion(2)]
         public NSDictionary(string contentsOfFile) { }
@@ -34,7 +33,7 @@ namespace Foundation
         /// <summary>
         /// Initializes a newly allocated dictionary using the keys and values found at a given URL.
         /// </summary>
-        /// <param name="aURL">An URL that identifies a resource containing a string representation of a property list whose root object is a dictionary.</param>
+        /// <param name="contentsOfURL">An URL that identifies a resource containing a string representation of a property list whose root object is a dictionary.</param>
         /// <returns>An initialized dictionary—which might be different than the original receiver—that contains the dictionary at aURL, or nil if there is an error or if the contents of the resource are an invalid representation of a dictionary.</returns>
         [iOSVersion(2)]
         public NSDictionary(NSURL contentsOfURL) { }
@@ -42,7 +41,7 @@ namespace Foundation
         /// <summary>
         /// Initializes a newly allocated dictionary by placing in it the keys and values contained in another given dictionary.
         /// </summary>
-        /// <param name="otherDictionary">A dictionary containing the keys and values with which to initialize the new dictionary.</param>
+        /// <param name="dictionary">A dictionary containing the keys and values with which to initialize the new dictionary.</param>
         /// <returns>An initialized dictionary—which might be different than the original receiver—containing the keys and values found in otherDictionary.</returns>
         [iOSVersion(2)]
         public NSDictionary(NSDictionary dictionary) { }
@@ -50,8 +49,8 @@ namespace Foundation
         /// <summary>
         /// Initializes a newly allocated dictionary using the objects contained in another given dictionary.
         /// </summary>
-        /// <param name="otherDictionary">A dictionary containing the keys and values with which to initialize the new dictionary.</param>
-        /// <param name="flag">If true, each object in otherDictionary receives a copyWithZone: message to create a copy of the object—objects must conform to the NSCopying protocol. In a managed memory environment, this is instead of the retain message the object would otherwise receive. The object copy is then added to the returned dictionary.   If false, then in a managed memory environment each object in otherDictionary simply receives a retain message when it is added to the returned dictionary.</param>
+        /// <param name="dictionary">A dictionary containing the keys and values with which to initialize the new dictionary.</param>
+        /// <param name="copyItems">If true, each object in otherDictionary receives a copyWithZone: message to create a copy of the object—objects must conform to the NSCopying protocol. In a managed memory environment, this is instead of the retain message the object would otherwise receive. The object copy is then added to the returned dictionary.   If false, then in a managed memory environment each object in otherDictionary simply receives a retain message when it is added to the returned dictionary.</param>
         /// <returns>An initialized object—which might be different than the original receiver—containing the keys and values found in otherDictionary.</returns>
         [iOSVersion(2)]
         public NSDictionary(NSDictionary dictionary, bool copyItems) { }
@@ -60,7 +59,7 @@ namespace Foundation
         /// Initializes a newly allocated dictionary with entries constructed from the contents of the objects and keys arrays.
         /// </summary>
         /// <param name="objects">An array containing the values for the new dictionary.</param>
-        /// <param name="keys">An array containing the keys for the new dictionary. Each key is copied (using copyWithZone:; keys must conform to the NSCopying protocol), and the copy is added to the new dictionary.</param>
+        /// <param name="forKeys">An array containing the keys for the new dictionary. Each key is copied (using copyWithZone:; keys must conform to the NSCopying protocol), and the copy is added to the new dictionary.</param>
         [iOSVersion(2)]
         public NSDictionary(AnyObject[] objects, AnyObject[] forKeys) { }
 
@@ -68,7 +67,7 @@ namespace Foundation
         /// Initializes a newly allocated dictionary with count entries.
         /// </summary>
         /// <param name="objects">A C array of values for the new dictionary.</param>
-        /// <param name="keys">A C array of keys for the new dictionary. Each key is copied (using copyWithZone:; keys must conform to the NSCopying protocol), and the copy is added to the new dictionary.</param>
+        /// <param name="forKeys">A C array of keys for the new dictionary. Each key is copied (using copyWithZone:; keys must conform to the NSCopying protocol), and the copy is added to the new dictionary.</param>
         /// <param name="count">The number of elements to use from the keys and objects arrays. count must not exceed the number of elements in objects or keys.</param>
         [iOSVersion(2)]
         public NSDictionary(CConstPointer<AnyObject> objects, CConstPointer<NSCopying> forKeys, int count) { }
@@ -95,7 +94,7 @@ namespace Foundation
         /// <returns>The number of entries in the dictionary.</returns>
         [iOSVersion(2)]
         [Export("count")]
-        public static int Count { get; private set; }
+        public int Count { get; private set; }
 
         /// <summary>
         /// Returns a Boolean value that indicates whether the contents of the receiving dictionary are equal to the contents of another given dictionary.
@@ -112,7 +111,7 @@ namespace Foundation
         /// <returns>A new array containing the dictionary’s keys, or an empty array if the dictionary has no entries.</returns>
         [iOSVersion(2)]
         [Export("allKeys")]
-        public static AnyObject[] AllKeys { get; private set; }
+        public AnyObject[] AllKeys { get; private set; }
 
         /// <summary>
         /// Returns a new array containing the keys corresponding to all occurrences of a given object in the dictionary.
@@ -129,13 +128,13 @@ namespace Foundation
         /// <returns>A new array containing the dictionary’s values, or an empty array if the dictionary has no entries.</returns>
         [iOSVersion(2)]
         [Export("allValues")]
-        public static AnyObject[] AllValues { get; private set; }
+        public AnyObject[] AllValues { get; private set; }
 
         /// <summary>
         /// Returns by reference C arrays of the keys and values in the dictionary.
         /// </summary>
         /// <param name="objects">Upon return, contains a C array of the values in the dictionary.</param>
-        /// <param name="keys">Upon return, contains a C array of the keys in the dictionary.</param>
+        /// <param name="andKeys">Upon return, contains a C array of the keys in the dictionary.</param>
         [iOSVersion(2)]
         [Export("getObjects")]
         public void GetObjects(AutoreleasingUnsafePointer<AnyObject> objects, AutoreleasingUnsafePointer<AnyObject> andKeys) { }
@@ -162,7 +161,7 @@ namespace Foundation
         /// Returns the set of objects from the dictionary that corresponds to the specified keys as an NSArray.
         /// </summary>
         /// <param name="keys">An NSArray containing the keys for which to return corresponding values.</param>
-        /// <param name="anObject">The marker object to place in the corresponding element of the returned array if an object isn’t found in the dictionary to correspond to a given key.</param>
+        /// <param name="notFoundMarker">The marker object to place in the corresponding element of the returned array if an object isn’t found in the dictionary to correspond to a given key.</param>
         [iOSVersion(2)]
         [Export("objectsForKeys")]
         public AnyObject[] ObjectsForKeys(AnyObject[] keys, AnyObject notFoundMarker) { return null; }
@@ -204,7 +203,7 @@ namespace Foundation
         /// Applies a given block object to the entries of the dictionary.
         /// </summary>
         /// <param name="opts">Enumeration options.</param>
-        /// <param name="block">A block object to operate on entries in the dictionary.</param>
+        /// <param name="usingBlock">A block object to operate on entries in the dictionary.</param>
         [iOSVersion(4)]
         [Export("enumerateKeysAndObjectsWithOptions")]
         public void EnumerateKeysAndObjectsWithOptions(NSEnumerationOptions opts, Action<AnyObject, AnyObject, CMutablePointer<ObjCBool>> usingBlock) { }
@@ -231,7 +230,7 @@ namespace Foundation
         /// Returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using a given comparator block and a specified set of options.
         /// </summary>
         /// <param name="opts">A bitmask of sort options.</param>
-        /// <param name="cmptr">A comparator block.</param>
+        /// <param name="usingComparator">A comparator block.</param>
         /// <returns>An array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using cmptr with the options given in opts.</returns>
         [iOSVersion(4)]
         [Export("keysSortedByValueWithOptions")]
@@ -250,7 +249,7 @@ namespace Foundation
         /// Returns the set of keys whose corresponding value satisfies a constraint described by a block object.
         /// </summary>
         /// <param name="opts">A bit mask of enumeration options.</param>
-        /// <param name="predicate">A block object that specifies constraints for values in the dictionary.</param>
+        /// <param name="passingTest">A block object that specifies constraints for values in the dictionary.</param>
         /// <returns>The set of keys whose corresponding value satisfies predicate.</returns>
         [iOSVersion(4)]
         [Export("keysOfEntriesWithOptions")]
@@ -260,7 +259,7 @@ namespace Foundation
         /// Writes a property list representation of the contents of the dictionary to a given path.
         /// </summary>
         /// <param name="path">The path at which to write the file.   If path contains a tilde (~) character, you must expand it with stringByExpandingTildeInPath before invoking this method.</param>
-        /// <param name="flag">A flag that specifies whether the file should be written atomically.   If flag is true, the dictionary is written to an auxiliary file, and then the auxiliary file is renamed to path. If flag is false, the dictionary is written directly to path. The true option guarantees that path, if it exists at all, won’t be corrupted even if the system should crash during writing.</param>
+        /// <param name="atomically">A flag that specifies whether the file should be written atomically.   If flag is true, the dictionary is written to an auxiliary file, and then the auxiliary file is renamed to path. If flag is false, the dictionary is written directly to path. The true option guarantees that path, if it exists at all, won’t be corrupted even if the system should crash during writing.</param>
         /// <returns>true if the file is written successfully, otherwise false.</returns>
         [iOSVersion(2)]
         [Export("writeToFile")]
@@ -270,7 +269,7 @@ namespace Foundation
         /// Writes a property list representation of the contents of the dictionary to a given URL.
         /// </summary>
         /// <param name="aURL">The URL to which to write the dictionary.</param>
-        /// <param name="flag">A flag that specifies whether the output should be written atomically.   If flag is true, the dictionary is written to an auxiliary location, and then the auxiliary location is renamed to aURL. If flag is false, the dictionary is written directly to aURL. The true option guarantees that aURL, if it exists at all, won’t be corrupted even if the system should crash during writing. flag is ignored if aURL is of a type that cannot be written atomically.</param>
+        /// <param name="atomically">A flag that specifies whether the output should be written atomically.   If flag is true, the dictionary is written to an auxiliary location, and then the auxiliary location is renamed to aURL. If flag is false, the dictionary is written directly to aURL. The true option guarantees that aURL, if it exists at all, won’t be corrupted even if the system should crash during writing. flag is ignored if aURL is of a type that cannot be written atomically.</param>
         /// <returns>true if the location is written successfully, otherwise false.</returns>
         [iOSVersion(2)]
         [Export("writeToURL")]
@@ -410,7 +409,7 @@ namespace Foundation
         /// <returns>A string that represents the contents of the dictionary, formatted as a property list.</returns>
         [iOSVersion(2)]
         [Export("description")]
-        public static string Description { get; private set; }
+        public new string Description { get; private set; }
 
         /// <summary>
         /// Returns a string that represents the contents of the dictionary, formatted in .strings file format.
@@ -418,7 +417,7 @@ namespace Foundation
         /// <returns>A string that represents the contents of the dictionary, formatted in .strings file format.</returns>
         [iOSVersion(2)]
         [Export("descriptionInStringsFileFormat")]
-        public static string DescriptionInStringsFileFormat { get; private set; }
+        public string DescriptionInStringsFileFormat { get; private set; }
 
         /// <summary>
         /// Returns a string object that represents the contents of the dictionary, formatted as a property list.
@@ -432,7 +431,7 @@ namespace Foundation
         /// Returns a string object that represents the contents of the dictionary, formatted as a property list.
         /// </summary>
         /// <param name="locale">An object that specifies options used for formatting each of the dictionary’s keys and values; pass nil if you don’t want them formatted.   On iOS and OS X v10.5 and later, either an instance of NSDictionary or an NSLocale object may be used for locale. On OS X v10.4 and earlier it must be an instance of NSDictionary.</param>
-        /// <param name="level">Specifies a level of indentation, to make the output more readable: the indentation is (4 spaces) * level.</param>
+        /// <param name="indent">Specifies a level of indentation, to make the output more readable: the indentation is (4 spaces) * level.</param>
         /// <returns>A string object that represents the contents of the dictionary, formatted as a property list.</returns>
         [iOSVersion(2)]
         [Export("descriptionWithLocale")]
