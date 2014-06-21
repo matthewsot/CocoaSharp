@@ -18,6 +18,7 @@ namespace Foundation
         /// Returns the NSAssertionHandler object associated with the current thread.
         /// </summary>
         /// <returns>The NSAssertionHandler object associated with the current thread.</returns>
+        [iOSVersion(2)]
         [Export("currentHandler")]
         public static NSAssertionHandler CurrentHandler() { return null; }
     }

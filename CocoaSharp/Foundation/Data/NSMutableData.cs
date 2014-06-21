@@ -19,12 +19,14 @@ namespace Foundation
         /// </summary>
         /// <param name="capacity">The number of bytes the data object can initially contain.</param>
         /// <param name="length">The number of bytes the object initially contains.</param>
+        [iOSVersion(2)]
         public NSMutableData(int capacity = 0, int length = 0) { }
 
         /// <summary>
         /// Increases the length of the receiver by a given number of bytes.
         /// </summary>
         /// <param name="extraLength">The number of bytes by which to increase the receiver's length.</param>
+        [iOSVersion(2)]
         [Export("increaseLengthBy")]
         public void IncreaseLengthBy(int extraLength) { }
 
@@ -32,6 +34,7 @@ namespace Foundation
         /// Extends or truncates a mutable data object to a given length.
         /// </summary>
         /// <param name="length">The new length for the receiver.</param>
+        [iOSVersion(2)]
         [Export("length")]
         public static int Length { get; private set; }
 
@@ -39,6 +42,7 @@ namespace Foundation
         /// Returns a pointer to the receiver’s data.
         /// </summary>
         /// <returns>A pointer to the receiver’s data.</returns>
+        [iOSVersion(2)]
         [Export("mutableBytes")]
         public static COpaquePointer MutableBytes { get; private set; }
 
@@ -47,6 +51,7 @@ namespace Foundation
         /// </summary>
         /// <param name="bytes">A buffer containing data to append to the receiver's content.</param>
         /// <param name="length">The number of bytes from bytes to append.</param>
+        [iOSVersion(2)]
         [Export("appendBytes")]
         public void AppendBytes(CConstVoidPointer bytes, int length) { }
 
@@ -54,6 +59,7 @@ namespace Foundation
         /// Appends the content of another NSData object to the receiver.
         /// </summary>
         /// <param name="otherData">The data object whose content is to be appended to the contents of the receiver.</param>
+        [iOSVersion(2)]
         [Export("appendData")]
         public void AppendData(NSData otherData) { }
 
@@ -62,6 +68,7 @@ namespace Foundation
         /// </summary>
         /// <param name="range">The range within the receiver's contents to replace with bytes. The range must not exceed the bounds of the receiver.</param>
         /// <param name="bytes">The data to insert into the receiver's contents.</param>
+        [iOSVersion(2)]
         [Export("replaceBytesInRange")]
         public void ReplaceBytesInRange(NSRange range, CConstVoidPointer withBytes) { }
 
@@ -71,6 +78,7 @@ namespace Foundation
         /// <param name="range">The range within the receiver's contents to replace with bytes. The range must not exceed the bounds of the receiver.</param>
         /// <param name="replacementBytes">The data to insert into the receiver's contents.</param>
         /// <param name="replacementLength">The number of bytes to take from replacementBytes.</param>
+        [iOSVersion(2)]
         [Export("replaceBytesInRange")]
         public void ReplaceBytesInRange(NSRange range, CConstVoidPointer withBytes, int length) { }
 
@@ -78,6 +86,7 @@ namespace Foundation
         /// Replaces with zeroes the contents of the receiver in a given range.
         /// </summary>
         /// <param name="range">The range within the contents of the receiver to be replaced by zeros. The range must not exceed the bounds of the receiver.</param>
+        [iOSVersion(2)]
         [Export("resetBytesInRange")]
         public void ResetBytesInRange(NSRange range) { }
 
@@ -85,6 +94,7 @@ namespace Foundation
         /// Replaces the entire contents of the receiver with the contents of another data object.
         /// </summary>
         /// <param name="aData">The data object whose content replaces that of the receiver.</param>
+        [iOSVersion(2)]
         [Export("setData")]
         public void SetData(NSData aData) { }
     }

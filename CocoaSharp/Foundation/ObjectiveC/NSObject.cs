@@ -15,12 +15,14 @@ namespace ObjectiveC
         /// <summary>
         /// Initializes the class before it receives its first message.
         /// </summary>
+        [iOSVersion(2)]
         [Export("initialize")]
         public static void Initialize() { }
 
         /// <summary>
         /// Invoked whenever a class or category is added to the Objective-C runtime; implement this method to perform class-specific behavior upon loading.
         /// </summary>
+        [iOSVersion(2)]
         [Export("load")]
         public static void Load() { }
 
@@ -28,6 +30,7 @@ namespace ObjectiveC
         /// Returns a new instance of the receiving class.
         /// </summary>
         /// <returns>A new instance of the receiver.</returns>
+        [iOSVersion(2)]
         [Export("alloc")]
         public static NSObject Allocate() { return null; }
 
@@ -36,6 +39,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="zone">This parameter is ignored.</param>
         /// <returns>A new instance of the receiver.</returns>
+        [iOSVersion(2)]
         [Export("allocWithZone")]
         public static NSObject AllocateWithZone(COpaquePointer zone) { return null; }
 
@@ -43,13 +47,14 @@ namespace ObjectiveC
         /// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated.
         /// </summary>
         /// <returns>An initialized object, or nil if an object could not be created for some reason that would not result in an exception.</returns>
-        [Export("init")]
-        public void Init() { }
+        [iOSVersion(2)]
+        public NSObject() { }
 
         /// <summary>
         /// Returns the object returned by copyWithZone:.
         /// </summary>
         /// <returns>The object returned by the NSCopying protocol method copyWithZone:,.</returns>
+        [iOSVersion(2)]
         [Export("copy")]
         public AnyObject Copy() { return null; }
 
@@ -57,6 +62,7 @@ namespace ObjectiveC
         /// Returns the object returned by mutableCopyWithZone: where the zone is nil.
         /// </summary>
         /// <returns>The object returned by the NSMutableCopying protocol method mutableCopyWithZone:, where the zone is nil.</returns>
+        [iOSVersion(2)]
         [Export("mutableCopy")]
         public AnyObject MutableCopy() { return null; }
 
@@ -64,6 +70,7 @@ namespace ObjectiveC
         /// Allocates a new instance of the receiving class, sends it an init message, and returns the initialized object.
         /// </summary>
         /// <returns>A new instance of the receiver.</returns>
+        [iOSVersion(2)]
         [Export("new")]
         public static NSObject New() { return null; }
 
@@ -71,6 +78,7 @@ namespace ObjectiveC
         /// Returns the class object for the receiver’s superclass.
         /// </summary>
         /// <returns>The class object for the receiver’s superclass.</returns>
+        [iOSVersion(2)]
         [Export("superclass")]
         public static AnyClass Superclass() { return null; }
 
@@ -79,6 +87,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aClass">A class object.</param>
         /// <returns>true if the receiving class is a subclass of—or identical to—aClass, otherwise false.</returns>
+        [iOSVersion(2)]
         [Export("isSubclassOfClass")]
         public static bool IsSubclassOfClass(AnyClass aClass) { return false; }
 
@@ -87,6 +96,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aSelector">A selector.</param>
         /// <returns>true if instances of the receiver are capable of responding to aSelector messages, otherwise false.</returns>
+        [iOSVersion(2)]
         [Export("instancesRespondToSelector")]
         public static bool InstancesRespondToSelector(Selector aSelector) { return false; }
 
@@ -95,6 +105,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aProtocol">A protocol.</param>
         /// <returns>true if the receiver conforms to aProtocol, otherwise false.</returns>
+        [iOSVersion(2)]
         [Export("conformsToProtocol")]
         public static bool ConformsToProtocol(Protocol aProtocol) { return false; }
 
@@ -103,6 +114,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aSelector">A selector that identifies the method for which to return the implementation address.</param>
         /// <returns>An NSMethodSignature object that contains a description of the instance method identified by aSelector, or nil if the method can’t be found.</returns>
+        [iOSVersion(2)]
         [Export("instanceMethodSignatureForSelector")]
         public static NSMethodSignature InstanceMethodSignatureForSelector(Selector aSelector) { return null; }
 
@@ -111,6 +123,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aSelector">A selector that identifies the method for which to return the implementation address. When the receiver is an instance, aSelector should identify an instance method; when the receiver is a class, it should identify a class method.</param>
         /// <returns>An NSMethodSignature object that contains a description of the method identified by aSelector, or nil if the method can’t be found.</returns>
+        [iOSVersion(2)]
         [Export("methodSignatureForSelector")]
         public NSMethodSignature MethodSignatureForSelector(Selector aSelector) { return null; }
 
@@ -118,6 +131,7 @@ namespace ObjectiveC
         /// Returns a string that represents the contents of the receiving class.
         /// </summary>
         /// <returns>A string that represents the contents of the receiving class.</returns>
+        [iOSVersion(2)]
         [Export("description")]
         public static string Description() { return ""; }
 
@@ -125,6 +139,7 @@ namespace ObjectiveC
         /// Creates and returns a proxy for the receiving object
         /// </summary>
         /// <returns>A proxy of the receiver.</returns>
+        [iOSVersion(4)]
         [Export("autoContentAccessingProxy")]
         public static AnyObject AutoContentAccessingProxy { get; private set; }
 
@@ -132,6 +147,7 @@ namespace ObjectiveC
         /// Cancels perform requests previously registered with the performSelector:withObject:afterDelay: instance method.
         /// </summary>
         /// <param name="aTarget">The target for requests previously registered with the performSelector:withObject:afterDelay: instance method.</param>
+        [iOSVersion(2)]
         [Export("cancelPreviousPerformRequestsWithTarget")]
         public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget) { }
 
@@ -141,6 +157,7 @@ namespace ObjectiveC
         /// <param name="aTarget">The target for requests previously registered with the performSelector:withObject:afterDelay: instance method</param>
         /// <param name="aSelector">The selector for requests previously registered with the performSelector:withObject:afterDelay: instance method.</param>
         /// <param name="anArgument">The argument for requests previously registered with the performSelector:withObject:afterDelay: instance method. Argument equality is determined using isEqual:, so the value need not be the same object that was passed originally. Pass nil to match a request for nil that was originally passed as the argument.</param>
+        [iOSVersion(2)]
         [Export("cancelPreviousPerformRequestsWithTarget")]
         public static void CancelPreviousPerformRequestsWithTarget(AnyObject aTarget, Selector selector, AnyObject @object) { }
 
@@ -149,6 +166,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aSelector">A selector for a method that the receiver does not implement.</param>
         /// <returns>The object to which unrecognized messages should first be directed.</returns>
+        [iOSVersion(2)]
         [Export("forwardingTargetForSelector")]
         public AnyObject ForwardingTargetForSelector(Selector aSelector) { return null; }
 
@@ -156,6 +174,7 @@ namespace ObjectiveC
         /// Overridden by subclasses to forward messages to other objects.
         /// </summary>
         /// <param name="anInvocation">The invocation to forward.</param>
+        [iOSVersion(2)]
         [Export("forwardInvocation")]
         public void ForwardInvocation(NSInvocation anInvocation) { }
 
@@ -164,6 +183,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="name">The name of a selector to resolve.</param>
         /// <returns>true if the method was found and added to the receiver, otherwise false.</returns>
+        [iOSVersion(2)]
         [Export("resolveClassMethod")]
         public static bool ResolveClassMethod(Selector name) { return false; }
 
@@ -172,6 +192,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="name">The name of a selector to resolve.</param>
         /// <returns>true if the method was found and added to the receiver, otherwise false.</returns>
+        [iOSVersion(2)]
         [Export("resolveInstanceMethod")]
         public static bool ResolveInstanceMethod(Selector name) { return false; }
 
@@ -179,6 +200,7 @@ namespace ObjectiveC
         /// Handles messages the receiver doesn’t recognize.
         /// </summary>
         /// <param name="aSelector">A selector that identifies a method not implemented or recognized by the receiver.</param>
+        [iOSVersion(2)]
         [Export("doesNotRecognizeSelector")]
         public void DoesNotRecognizeSelector(Selector aSelector) { }
 
@@ -187,6 +209,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aDecoder">The decoder used to decode the receiver.</param>
         /// <returns>The receiver, or another object to take the place of the object that was decoded and subsequently received this message.</returns>
+        [iOSVersion(2)]
         [Export("awakeAfterUsingCoder")]
         public AnyObject AwakeAfterUsingCoder(NSCoder aDecoder) { return null; }
 
@@ -194,12 +217,14 @@ namespace ObjectiveC
         /// Overridden by subclasses to substitute a class other than its own during coding.
         /// </summary>
         /// <returns>The class to substitute for the receiver's own class during coding.</returns>
+        [iOSVersion(2)]
         [Export("classForCoder")]
         public static AnyClass ClassForCoder { get; private set; }
 
         /// <summary>
         /// Overridden by subclasses to substitute a new class for instances during keyed archiving.
         /// </summary>
+        [iOSVersion(2)]
         [Export("classForKeyedArchiver")]
         public static AnyClass ClassForKeyedArchiver { get; private set; }
 
@@ -207,6 +232,7 @@ namespace ObjectiveC
         /// Overridden to return the names of classes that can be used to decode objects if their class is unavailable.
         /// </summary>
         /// <returns>An array of NSString objects that specify the names of classes in preferred order for unarchiving</returns>
+        [iOSVersion(2)]
         [Export("classFallbacksForKeyedArchiver")]
         public static AnyObject[] ClassFallbacksForKeyedArchiver() { return null; }
 
@@ -214,6 +240,7 @@ namespace ObjectiveC
         /// Overridden by subclasses to substitute a new class during keyed unarchiving.
         /// </summary>
         /// <returns>The class to substitute for the receiver during keyed unarchiving.</returns>
+        [iOSVersion(2)]
         [Export("classForKeyedUnarchiver")]
         public static AnyClass ClassForKeyedUnarchiver() { return null; }
 
@@ -222,6 +249,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="aCoder">The coder encoding the receiver.</param>
         /// <returns>The object encode instead of the receiver (if different).</returns>
+        [iOSVersion(2)]
         [Export("replacementObjectForCoder")]
         public AnyObject ReplacementObjectForCoder(NSCoder aCoder) { return null; }
 
@@ -230,6 +258,7 @@ namespace ObjectiveC
         /// </summary>
         /// <param name="archiver">A keyed archiver creating an archive.</param>
         /// <returns>The object encode instead of the receiver (if different).</returns>
+        [iOSVersion(2)]
         [Export("replacementObjectForKeyedArchiver")]
         public AnyObject ReplacementObjectForKeyedArchiver(NSKeyedArchiver archiver) { return null; }
 
@@ -237,6 +266,7 @@ namespace ObjectiveC
         /// Sets the receiver's version number.
         /// </summary>
         /// <param name="aVersion">The version number for the receiver.</param>
+        [iOSVersion(2)]
         [Export("setVersion")]
         public static void SetVersion(int aVersion) { }
 
@@ -244,6 +274,7 @@ namespace ObjectiveC
         /// Returns the version number assigned to the class.
         /// </summary>
         /// <returns>The version number assigned to the class.</returns>
+        [iOSVersion(2)]
         [Export("version")]
         public static int Version() { return 0; }
 
@@ -251,6 +282,7 @@ namespace ObjectiveC
         /// The garbage collector invokes this method on the receiver before disposing of the memory it uses.
         /// Garbage collection is deprecated in OS X v10.8; instead, you should use Automatic Reference Counting—see Transitioning to ARC Release Notes.
         /// </summary>
+        [iOSVersion(2)]
         [Obsolete]
         [Export("finalize")]
         public void Finalize() { }

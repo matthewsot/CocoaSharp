@@ -151,7 +151,14 @@ namespace StubGen
                         result = "/// <returns>" + RemoveHTMLTags(resultPara.InnerHtml).Trim() + "</returns>\r\n";
                     }
 
-                    var thisFinal = summary + parameters + result + declaration;
+                    var availabilityDiv = section.SelectSingleNode("./div[@class='availability']/p[@class='para availability-item']");
+                    string availability = "";
+                    if (availabilityDiv != null)
+                    {
+                        availability = "[iOSVersion(" + Regex.Split(RemoveHTMLTags(availabilityDiv.InnerHtml).Trim(), "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                    }
+
+                    var thisFinal = summary + parameters + result + availability + declaration;
                     output += thisFinal;
                 }
                 catch
