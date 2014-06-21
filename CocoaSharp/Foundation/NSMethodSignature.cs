@@ -18,7 +18,8 @@ namespace Foundation
         /// </summary>
         /// <param name="types">An array of characters containing the type encodings for the method arguments.   Indices begin with 0. The hidden arguments self (of type id) and _cmd (of type SEL) are at indices 0 and 1; method-specific arguments begin at index 2.</param>
         /// <returns>An NSMethodSignature object for the given Objective C method type string in types.</returns>
-        //[Export("init")]
+        [iOSVersion(2)]
+        [Export("init")]
         public NSMethodSignature(CString objCTypes) { }
 
         /// <summary>
@@ -26,6 +27,7 @@ namespace Foundation
         /// </summary>
         /// <param name="index">The index of the argument to get.</param>
         /// <returns>The type encoding for the argument at index.</returns>
+        [iOSVersion(2)]
         [Export("getArgumentTypeAtIndex")]
         public CString GetArgumentTypeAtIndex(int index) { return null; }
 
@@ -33,6 +35,7 @@ namespace Foundation
         /// Returns the number of arguments recorded in the receiver.
         /// </summary>
         /// <returns>The number of arguments recorded in the receiver.</returns>
+        [iOSVersion(2)]
         [Export("numberOfArguments")]
         public static int NumberOfArguments { get; private set; }
 
@@ -40,6 +43,7 @@ namespace Foundation
         /// Returns the number of bytes that the arguments, taken together, occupy on the stack.
         /// </summary>
         /// <returns>The number of bytes that the arguments, taken together, occupy on the stack.</returns>
+        [iOSVersion(2)]
         [Export("frameLength")]
         public static int FrameLength { get; private set; }
 
@@ -47,6 +51,7 @@ namespace Foundation
         /// Returns a C string encoding the return type of the method in Objective-C type encoding.
         /// </summary>
         /// <returns>A C string encoding the return type of the method in Objective-C type encoding.</returns>
+        [iOSVersion(2)]
         [Export("methodReturnType")]
         public static CString MethodReturnType { get; private set; }
 
@@ -54,6 +59,7 @@ namespace Foundation
         /// Returns the number of bytes required for the return value.
         /// </summary>
         /// <returns>The number of bytes required for the return value.</returns>
+        [iOSVersion(2)]
         [Export("methodReturnLength")]
         public static int MethodReturnLength { get; private set; }
 
@@ -61,6 +67,7 @@ namespace Foundation
         /// Returns a Boolean value that indicates whether the receiver is asynchronous when invoked through distributed objects.
         /// </summary>
         /// <returns>true if the receiver is asynchronous when invoked through distributed objects, otherwise false.</returns>
+        [iOSVersion(2)]
         [Export("isOneway")]
         public bool IsOneway() { return false; }
     }

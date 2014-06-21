@@ -17,6 +17,7 @@ namespace Foundation
         /// </summary>
         /// <param name="data">An archive previously encoded by NSKeyedArchiver.</param>
         /// <returns>An NSKeyedUnarchiver object initialized for for decoding data.</returns>
+        [iOSVersion(2)]
         [Export("init")]
         public void Init(NSData forReadingWithData) { }
 
@@ -25,6 +26,7 @@ namespace Foundation
         /// </summary>
         /// <param name="data">An object graph previously encoded by NSKeyedArchiver.</param>
         /// <returns>The object graph previously encoded by NSKeyedArchiver and stored in data.</returns>
+        [iOSVersion(2)]
         [Export("unarchiveObjectWithData")]
         public static AnyObject UnarchiveObjectWithData(NSData data) { return null; }
 
@@ -33,6 +35,7 @@ namespace Foundation
         /// </summary>
         /// <param name="path">A path to a file that contains an object graph previously encoded by NSKeyedArchiver.</param>
         /// <returns>The object graph previously encoded by NSKeyedArchiver written to the file path. Returns nil if there is no file at path.</returns>
+        [iOSVersion(2)]
         [Export("unarchiveObjectWithFile")]
         public static AnyObject UnarchiveObjectWithFile(string path) { return null; }
 
@@ -40,6 +43,7 @@ namespace Foundation
         /// Indicates whether the receiver requires all unarchived classes to conform to NSSecureCoding.
         /// </summary>
         /// <param name="flag">true if the receiver requires NSSecureCoding; false if not.</param>
+        [iOSVersion(6)]
         [Export("setRequiresSecureCoding")]
         public void SetRequiresSecureCoding(bool flag) { }
 
@@ -48,6 +52,7 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>true if the archive contains a value for key within the current decoding scope, otherwise false.</returns>
+        [iOSVersion(2)]
         [Export("containsValueForKey")]
         public bool ContainsValueForKey(string key) { return false; }
 
@@ -56,6 +61,7 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>The Boolean value associated with the key key. Returns false if key does not exist.</returns>
+        [iOSVersion(2)]
         [Export("decodeBoolForKey")]
         public bool DecodeBoolForKey(string key) { return false; }
 
@@ -65,6 +71,7 @@ namespace Foundation
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <param name="lengthp">Upon return, contains the number of bytes returned.</param>
         /// <returns>The stream of bytes associated with the key key. Returns NULL if key does not exist.</returns>
+        [iOSVersion(2)]
         [Export("decodeBytesForKey")]
         public UnsafePointer<uint> DecodeBytesForKey(string key, CMutablePointer<int> returnedLength) { return null; }
 
@@ -73,6 +80,7 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>The double-precision floating-point value associated with the key key. Returns 0.0 if key does not exist.</returns>
+        [iOSVersion(2)]
         [Export("decodeDoubleForKey")]
         public CDouble DecodeDoubleForKey(string key) { return null; }
 
@@ -81,6 +89,7 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>The single-precision floating-point value associated with the key key. Returns 0.0 if key does not exist.</returns>
+        [iOSVersion(2)]
         [Export("decodeFloatForKey")]
         public CFloat DecodeFloatForKey(string key) { return null; }
 
@@ -89,6 +98,7 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>The integer value associated with the key key. Returns 0 if key does not exist.</returns>
+        [iOSVersion(2)]
         [Export("decodeIntForKey")]
         public CInt DecodeIntForKey(string key) { return null; }
 
@@ -97,6 +107,7 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>The 32-bit integer value associated with the key key. Returns 0 if key does not exist.</returns>
+        [iOSVersion(2)]
         [Export("decodeInt32ForKey")]
         public Int32 DecodeInt32ForKey(string key) { return 0; }
 
@@ -105,6 +116,7 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>The 64-bit integer value associated with the key key. Returns 0 if key does not exist.</returns>
+        [iOSVersion(2)]
         [Export("decodeInt64ForKey")]
         public Int64 DecodeInt64ForKey(string key) { return 0; }
 
@@ -113,19 +125,22 @@ namespace Foundation
         /// </summary>
         /// <param name="key">A key in the archive within the current decoding scope. key must not be nil.</param>
         /// <returns>The object associated with the key key. Returns nil if key does not exist, or if the value for key is nil.</returns>
+        [iOSVersion(2)]
         [Export("decodeObjectForKey")]
         public AnyObject DecodeObjectForKey(string key) { return null; }
 
         /// <summary>
         /// Tells the receiver that you are finished decoding objects.
         /// </summary>
+        [iOSVersion(2)]
         [Export("finishDecoding")]
         public void FinishDecoding() { }
 
         /// <summary>
-        /// Gets or sets the receiver’s delegate.
+        /// Sets or returns the receiver’s delegate.
         /// </summary>
         /// <returns>The receiver’s delegate.</returns>
+        [iOSVersion(2)]
         [Export("delegate")]
         public static NSKeyedUnarchiverDelegate Delegate { get; set; }
 
@@ -134,6 +149,7 @@ namespace Foundation
         /// </summary>
         /// <param name="cls">The class with which to replace instances of the class named codedName.</param>
         /// <param name="codedName">The ostensible name of a class in an archive.</param>
+        [iOSVersion(2)]
         [Export("setClass")]
         public static void SetClass(AnyClass cls, string forClassName) { }
 
@@ -142,8 +158,29 @@ namespace Foundation
         /// </summary>
         /// <param name="codedName">The ostensible name of a class in an archive.</param>
         /// <returns>The class from which NSKeyedUnarchiver instantiates an object encoded with the class name codedName. Returns nil if NSKeyedUnarchiver does not have a translation mapping for codedName.</returns>
+        [iOSVersion(2)]
         [Export("classForClassName")]
         public static AnyClass ClassForClassName(string codedName) { return null; }
+
+        /// <summary>
+        /// It's not necessary to use this
+        /// Adds a class translation mapping to the receiver whereby objects encoded with a given class name are decoded as instances of a given class instead.
+        /// </summary>
+        /// <param name="cls">The class with which to replace instances of the class named codedName.</param>
+        /// <param name="codedName">The ostensible name of a class in an archive.</param>
+        [iOSVersion(2)]
+        [Export("setClass")]
+        public void SetClassInstance(AnyClass cls, string forClassName) { }
+
+        /// <summary>
+        /// It's not necessary to use this
+        /// Returns the class from which the receiver instantiates an encoded object with a given class name.
+        /// </summary>
+        /// <param name="codedName">The name of a class.</param>
+        /// <returns>The class from which the receiver instantiates an encoded object with the class name codedName. Returns nil if the receiver does not have a translation mapping for codedName.</returns>
+        [iOSVersion(2)]
+        [Export("classForClassName")]
+        public AnyClass ClassForClassNameInstance(string codedName) { return null; }
 
         /// <summary>
         /// Names of exceptions that are raised by NSKeyedUnarchiver if there is a problem extracting an archive.
