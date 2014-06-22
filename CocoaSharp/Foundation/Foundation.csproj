@@ -49,6 +49,9 @@
     <Compile Include="CClasses\CString.cs" />
     <Compile Include="CClasses\CUnsignedInt.cs" />
     <Compile Include="CClasses\CUnsignedLongLong.cs" />
+    <Compile Include="NSDirectoryEnumerator.cs" />
+    <Compile Include="NSMutableIndexSet.cs" />
+    <Compile Include="NSZone.cs" />
     <Compile Include="OSType.cs" />
     <Compile Include="NSCopying.cs" />
     <Compile Include="Collections\NSMutableDictionary.cs" />
