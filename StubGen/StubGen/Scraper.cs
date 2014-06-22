@@ -20,17 +20,22 @@ namespace StubGen
         {
             declaration = declaration.Replace("&gt;", ">").Replace("&lt;", "<").Trim();
             var output = "public ";
-            if (declaration.StartsWith("class") || declaration.StartsWith("static") || declaration.StartsWith("func") || declaration.StartsWith("init"))
+            if (declaration.StartsWith("class") || declaration.StartsWith("static"))
             {
-                if (declaration.StartsWith("class") || declaration.StartsWith("static"))
-                {
-                    output += "static ";
-                }
+                output += "static ";
+            }
+            if (declaration.StartsWith("class func") || declaration.StartsWith("func") || declaration.StartsWith("init") || declaration.StartsWith("convenience init"))
+            {
                 var typeOfMethod = "void";
                 //method
                 if (declaration.Contains("->"))
                 {
                     typeOfMethod = ParseType(Regex.Split(declaration, Regex.Escape("->"))[1].Trim().TrimEnd('!'));
+                    if (Regex.Split(declaration, Regex.Escape("->")).Length > 2 ||
+                        (declaration.Contains("->") && declaration.EndsWith(")")))
+                    {
+                        output = "//" + declaration + "\r\n" + output;
+                    }
                     output += typeOfMethod + " ";
                 }
                 else
@@ -89,7 +94,7 @@ namespace StubGen
                 }
                 output += " }";
             }
-            else if(declaration.StartsWith("var"))
+            else if (declaration.StartsWith("var"))
             {
                 output += "static ";
                 //property
@@ -106,6 +111,10 @@ namespace StubGen
                 {
                     output += "{ get; set; }";
                 }
+            }
+            else
+            {
+                output += "\r\n//" + declaration;
             }
             return output + "\r\n\r\n";
         }

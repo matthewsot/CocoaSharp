@@ -6,7 +6,8 @@ using System.Text;
 
 namespace Foundation
 {
-    public class NSCopying : NSObject
+    public interface NSCopying
     {
+
     }
 }
