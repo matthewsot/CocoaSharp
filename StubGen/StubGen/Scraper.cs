@@ -141,6 +141,25 @@ namespace StubGen
                 }
                 output += name.ToUpper()[0] + name.Substring(1) + "(";
 
+                var arguments = Regex.Match(declaration, "\\([\\s\\S]*\\)").Value;
+                arguments = arguments.Substring(1, arguments.Length - 2);
+                var funcArgs = Regex.Matches(arguments, "\\(\\([\\s\\S]*?\\)[\\s\\S]*?\\)");
+                foreach (var funcArg in funcArgs)
+                {
+                    var sides = Regex.Split(funcArg.ToString(), Regex.Escape("->"));
+                    var retVal = ParseType(sides.Last().Trim().TrimEnd('!', ')'));
+                    var parameters = sides.First().Trim().Trim('(', ')').Replace(",", "COMMAHERE123").Replace("!", "");
+
+                    if (retVal == "void")
+                    {
+                        declaration = declaration.Replace(funcArg.ToString(), "Action<" + parameters + ">");
+                    }
+                    else
+                    {
+                        declaration = declaration.Replace(funcArg.ToString(), "Func<" + parameters + "COMMAHERE123 " + retVal + ">");
+                    }
+                }
+
                 var args = declaration.Split('(')[1].Split(')')[0].Split(',');
                 foreach(var arg in args)
                 {
@@ -323,12 +342,15 @@ namespace StubGen
         {
             switch (type)
             {
+                case "Void":
+                    return "void";
                 case "NSString":
                 case "String":
                     return "string";
                 case "Bool":
                     return "bool";
                 case "Int":
+                case "Int32":
                     return "int";
                 default:
                     return type.Trim().Trim('_', '!').Trim();
@@ -347,10 +369,8 @@ namespace StubGen
                 return "NEEDS DEFINITION";
             }
         }
-        public static string ScrapeToCSFile(string url)
+        public static string ScrapeToCSFile(string url, string self)
         {
-            Console.WriteLine("What is Self?");
-            var self = Console.ReadLine();
             var output = "using ObjectiveC;\r\nusing System;\r\n\r\n";
             output += "//" + url + "\r\n";
             using (var client = new HttpClient())
@@ -373,7 +393,7 @@ namespace StubGen
                 output += ScrapeWithAgility(data);
             }
 
-            return output.Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("public Self Init(", "public Self(").Replace("void Init(", "Self(").Replace("Self", self) + "}\r\n}";
+            return output.Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("public Self Init(", "public Self(").Replace("void Init(", "Self(").Replace("Self", self).Replace("COMMAHERE123", ",").Replace("Int", "int") + "}\r\n}";
         }
     }
 }
