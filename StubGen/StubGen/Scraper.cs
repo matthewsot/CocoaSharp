@@ -364,31 +364,35 @@ namespace StubGen
                 return "NEEDS DEFINITION";
             }
         }
-        public static string ScrapeToCSFile(string url, string self)
+        public static string ScrapeToCSFile(string url, string self, string inherits)
         {
-            var output = "using ObjectiveC;\r\nusing System;\r\n\r\n";
-            output += "//" + url + "\r\n";
-            using (var client = new HttpClient())
-            {
-                var data = client.GetStringAsync(url).Result;
-                var doc = new HtmlDocument
+            try {
+                var output = "using ObjectiveC;\r\nusing System;\r\nusing SwiftSharp.Attributes;\r\n\r\n";
+                output += "namespace Foundation\r\n{\r\n";
+                output += "//" + url + "\r\n";
+                using (var client = new HttpClient())
                 {
-                    OptionFixNestedTags = true
-                };
-                doc.LoadHtml(data);
-                var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
-                desc = desc.Replace("More...", "").Trim();
-                output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
+                    var data = client.GetStringAsync(url).Result;
+                    var doc = new HtmlDocument
+                    {
+                        OptionFixNestedTags = true
+                    };
+                    doc.LoadHtml(data);
+                    var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
+                    desc = desc.Replace("More...", "").Trim();
+                    output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
 
-                var availability = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
-                output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                    var availability = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
 
-                output += "namespace Foundation\r\n{\r\nclass " + self + "\r\n{\r\n";
+                    output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                    output += "public class " + self + " : " + inherits + "\r\n{\r\n";
 
-                output += ScrapeWithAgility(data);
+                    output += ScrapeWithAgility(data);
+                }
+
+                return output.TrimEnd().Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("public Self Init(", "public Self(").Replace("void Init(", "Self(").Replace("Self", self).Replace("COMMAHERE123", ",").Replace("Int", "int") + "\r\n}\r\n}";
             }
-
-            return output.Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("public Self Init(", "public Self(").Replace("void Init(", "Self(").Replace("Self", self).Replace("COMMAHERE123", ",").Replace("Int", "int") + "}\r\n}";
+            catch { Console.WriteLine("Error parsing " + self); return ""; }
         }
     }
 }

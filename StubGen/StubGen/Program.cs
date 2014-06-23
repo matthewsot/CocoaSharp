@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 
 namespace StubGen
 {
@@ -37,13 +39,43 @@ namespace StubGen
         {
             Console.WriteLine("What to scrape?");
             var scrape = Console.ReadLine();
-            Console.WriteLine("What is Self?");
-            var self = Console.ReadLine();
-            using (var writer = new StreamWriter(self + ".cs"))
+            using (var client = new HttpClient())
             {
-                writer.Write(IndentDocument(Scraper.ScrapeToCSFile(scrape, self)));
-                writer.Flush();
+                var resp = client.GetStringAsync(scrape).Result;
+                var doc = new HtmlDocument{OptionFixNestedTags = true};
+                doc.LoadHtml(resp);
+                var rows = doc.DocumentNode.SelectSingleNode("//table[@class='collection-table Objective-C']").SelectNodes("./tbody/tr");
+                var parents = new Dictionary<int, string> {{1, ""}};
+                var currDepth = 0;
+                foreach (var row in rows)
+                {
+                    var td = row.SelectSingleNode("./td");
+                    var name = Scraper.RemoveHTMLTags(td.InnerHtml).Trim();
+                    var depth = int.Parse(td.GetAttributeValue("class", "depth0").Split('h')[1].Split(' ')[0]);
+                    parents[depth] = name;
+                    var parent = parents[depth - 1];
+                    
+                    //todo: make sure to change the href base path
+                    string link;
+                    try
+                    {
+                        link = td.SelectSingleNode("./p/code/a").GetAttributeValue("href", "");
+                    }
+                    catch
+                    {
+                        Console.WriteLine("No link for " + name);
+                        continue;
+                    }
+                    link = link.Replace("..", "https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation");
+                    using (var writer = new StreamWriter("Output\\" + name + ".cs"))
+                    {
+                        writer.Write(IndentDocument(Scraper.ScrapeToCSFile(link, name, parent)));
+                        writer.Flush();
+                    }
+                }
             }
+            Console.WriteLine("Done!");
+            Console.ReadLine();
         }
     }
 }
