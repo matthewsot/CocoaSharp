@@ -8,4 +8,7 @@ namespace Foundation
     public class CInt
     {
     }
+    public class Cint
+    {
+    }
 }
