@@ -1,5 +1,4 @@
-﻿using ObjectiveC;
-using SwiftSharp.Attributes;
+﻿using SwiftSharp.Attributes;
 
 namespace Foundation
 {

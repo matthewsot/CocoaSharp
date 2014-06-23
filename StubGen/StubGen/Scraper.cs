@@ -239,6 +239,10 @@ namespace StubGen
             doc.LoadHtml(data);
             //thanks http://stackoverflow.com/questions/846994/how-to-use-html-agility-pack
             var sections = doc.DocumentNode.SelectNodes("/html/body//li[@class='item symbol']/div[@class='height-container']/section");
+            if (sections == null)
+            {
+                return "";
+            }
             foreach(var section in sections)
             {
                 try
@@ -366,7 +370,7 @@ namespace StubGen
         }
         public static string ScrapeToCSFile(string url, string self, string inherits)
         {
-            try {
+           // try {
                 var output = "using ObjectiveC;\r\nusing System;\r\nusing SwiftSharp.Attributes;\r\n\r\n";
                 output += "namespace Foundation\r\n{\r\n";
                 output += "//" + url + "\r\n";
@@ -391,8 +395,8 @@ namespace StubGen
                 }
 
                 return output.TrimEnd().Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("public Self Init(", "public Self(").Replace("void Init(", "Self(").Replace("Self", self).Replace("COMMAHERE123", ",").Replace("Int", "int") + "\r\n}\r\n}";
-            }
-            catch { Console.WriteLine("Error parsing " + self); return ""; }
+            //}
+            //catch { Console.WriteLine("Error parsing " + self); return ""; }
         }
     }
 }

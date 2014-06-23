@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
@@ -39,6 +40,31 @@ namespace StubGen
         {
             Console.WriteLine("What to scrape?");
             var scrape = Console.ReadLine();
+            //Console.WriteLine("What's Self?");
+            //var self = Console.ReadLine();
+            //Console.WriteLine("What's the parent?");
+            //var parent = Console.ReadLine();
+
+            //var input = new List<string>();
+            //using (var reader = new StreamReader("input.txt"))
+            //{
+            //    input.AddRange(reader.ReadToEnd().Split('\n'));
+            //    input = input.Select(line => line.Trim()).ToList();
+            //}
+
+            //foreach(var line in input)
+            //{
+            //    if (line.Trim() == "") continue;
+
+            //    var parts = line.Split(' ');
+
+            //    using (var writer = new StreamWriter("Output\\" + parts[0] + ".cs"))
+            //    {
+            //        writer.Write(IndentDocument(Scraper.ScrapeToCSFile(parts[1], parts[0], parts[2])));
+            //        writer.Flush();
+            //    }
+            //}
+
             using (var client = new HttpClient())
             {
                 var resp = client.GetStringAsync(scrape).Result;
@@ -66,6 +92,10 @@ namespace StubGen
                         Console.WriteLine("No link for " + name);
                         continue;
                     }
+                    link = link.Replace("../../../../..", "https://developer.apple.com/library/prerelease/ios");
+                    link = link.Replace("../../../..", "https://developer.apple.com/library/prerelease/ios/documentation");
+                    link = link.Replace("../../..", "https://developer.apple.com/library/prerelease/ios/documentation/Cocoa");
+                    link = link.Replace("../..", "https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference");
                     link = link.Replace("..", "https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation");
                     using (var writer = new StreamWriter("Output\\" + name + ".cs"))
                     {
