@@ -113,12 +113,7 @@ namespace StubGen
                 //method
                 if (declaration.Contains("->"))
                 {
-                    typeOfMethod = ParseType(Regex.Split(declaration, Regex.Escape("->"))[1].Trim().TrimEnd('!'));
-                    if (Regex.Split(declaration, Regex.Escape("->")).Length > 2 ||
-                        (declaration.Contains("->") && declaration.EndsWith(")")))
-                    {
-                        output = "//" + declaration + "\r\n" + output;
-                    }
+                    typeOfMethod = ParseType(Regex.Split(declaration, Regex.Escape("->")).Last().Trim().TrimEnd('!', ')'));
                     output += typeOfMethod + " ";
                 }
                 else

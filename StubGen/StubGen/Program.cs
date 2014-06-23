@@ -35,12 +35,12 @@ namespace StubGen
 
         static void Main(string[] args)
         {
-            using (var writer = new StreamWriter("output.cs"))
+            Console.WriteLine("What to scrape?");
+            var scrape = Console.ReadLine();
+            Console.WriteLine("What is Self?");
+            var self = Console.ReadLine();
+            using (var writer = new StreamWriter(self + ".cs"))
             {
-                Console.WriteLine("What to scrape?");
-                var scrape = Console.ReadLine();
-                Console.WriteLine("What is Self?");
-                var self = Console.ReadLine();
                 writer.Write(IndentDocument(Scraper.ScrapeToCSFile(scrape, self)));
                 writer.Flush();
             }
