@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Security.Cryptography.X509Certificates;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,96 @@ namespace StubGen
 {
     class Scraper
     {
+        public static string ParseStruct(HtmlNode section, HtmlNode declarationPara, string summary)
+        {
+            var declaration = RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim();
+            var name = Regex.Split(declaration, "struct ")[1].Split(':')[0].Trim();
+            var output = summary + "public enum " + name + "\r\n{";
+
+            var items = Regex.Split(declaration, "\n");
+
+            var descriptions = section.SelectNodes("./ul[@class='list-bullet']/li");
+
+            var keysAndTrivia = new Dictionary<string, string>();
+            foreach (var desc in descriptions)
+            {
+                var keyName = RemoveHTMLTags(desc.SelectSingleNode("./p[@class='para Swift']").InnerHtml).Trim();
+                var summarry = RemoveHTMLTags(desc.SelectNodes("./div[@class='definition']/p").First().InnerHtml).Trim();
+                var availableIn = RemoveHTMLTags(desc.SelectNodes("./div[@class='definition']/p").Last().InnerHtml).Trim();
+
+                var trivia = "\r\n/// <summary>\r\n/// " + summarry + "\r\n/// </summary>\r\n";
+
+                if (availableIn.Contains("in iOS "))
+                {
+                    trivia += "[iOSVersion(" + Regex.Split(availableIn, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                }
+
+                keysAndTrivia.Add(keyName, trivia);
+            }
+
+            foreach (var item in items)
+            {
+                if (item.Contains("var ") && !item.Contains("var value:"))
+                {
+                    var itemName = item.Split(':')[0].Split(' ').Last();
+                    var trivia = "";
+                    if (keysAndTrivia.ContainsKey(itemName))
+                    {
+                        trivia = keysAndTrivia[itemName];
+                    }
+                    output += trivia + itemName + ",\r\n";
+                }
+            }
+            return output + "}\r\n";
+        }
+
+        public static string ParseKeys(HtmlNode section, HtmlNode declarationPara, string summary)
+        {
+            var declaration = RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim();
+            var keys = Regex.Split(declaration, "\n");
+            
+            var descriptions = section.SelectNodes("./ul[@class='list-bullet']/li");
+            var keysAndTrivia = new Dictionary<string, string>();
+            foreach (var desc in descriptions)
+            {
+                var keyName = RemoveHTMLTags(desc.SelectSingleNode("./p[@class='para Swift']").InnerHtml).Trim();
+                var summarry = RemoveHTMLTags(desc.SelectNodes("./div[@class='definition']/p").First().InnerHtml).Trim();
+                var availableIn = RemoveHTMLTags(desc.SelectNodes("./div[@class='definition']/p").Last().InnerHtml).Trim();
+
+                var trivia = "\r\n/// <summary>\r\n/// " + summarry + "\r\n/// </summary>\r\n";
+
+                if (availableIn.Contains("in iOS "))
+                {
+                    trivia += "[iOSVersion(" + Regex.Split(availableIn, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                }
+
+                keysAndTrivia.Add(keyName, trivia);
+            }
+
+            var output = summary;
+            foreach (var key in keys)
+            {
+                var type = ParseType(key.Split(':')[1].Trim().Trim('!'));
+                var keyName = key.Split(':')[0].Split(' ')[1];
+                var trivia = "";
+                if (keysAndTrivia.ContainsKey(keyName))
+                {
+                    trivia = keysAndTrivia[keyName];
+                }
+                output += trivia + key.Split(':')[0].Trim().Replace("var ", "public " + type + " ") + " { get;" + (trivia.Contains("read-write") ? "" : " private") + " set; }\r\n";
+            }
+            return output + "\r\n";
+        }
+
         public static string RemoveHTMLTags(string html)
         {
             return Regex.Replace(html, "<.*?>", "");
         }
 
-        public static string ParseDeclaration(string declaration)
+        public static Tuple<string, Dictionary<string, string>>  ParseDeclaration(string declaration)
         {
             declaration = declaration.Replace("&gt;", ">").Replace("&lt;", "<").Trim();
+            var argsToRename = new Dictionary<string, string>();
             var output = "public ";
             if (declaration.StartsWith("class") || declaration.StartsWith("static"))
             {
@@ -52,7 +135,10 @@ namespace StubGen
                 {
                     name = Regex.Split(declaration, "func ")[1].Split('(')[0].Trim();
                 }
-                output = "[Export(\"" + name + "\")]\r\n" + output;
+                if (name != "init")
+                {
+                    output = "[Export(\"" + name + "\")]\r\n" + output;
+                }
                 output += name.ToUpper()[0] + name.Substring(1) + "(";
 
                 var args = declaration.Split('(')[1].Split(')')[0].Split(',');
@@ -65,6 +151,15 @@ namespace StubGen
                         {
                             argName = arg.Split(':')[0].Trim().Split(' ').Last();
                         }
+                        else
+                        {
+                            var internalArgName = arg.Split(':')[0].Trim().Split(' ').Last();
+                            argsToRename.Add(internalArgName, argName);
+                        }
+                        if (argName == "object" || argName == "string")
+                        {
+                            argName = "@" + argName;
+                        }
                         var argType = ParseType(arg.Split(':')[1].Trim().Trim('!'));
                         output += argType + " " + argName + ", ";
                     }
@@ -72,32 +167,33 @@ namespace StubGen
                 output = output.TrimEnd(' ', ',');
 
                 output += ") { ";
-                switch(typeOfMethod)
+                if (name != "init")
                 {
-                    case "void":
-                        output += "";
-                        break;
-                    case "string":
-                        output += "return \"\";";
-                        break;
-                    case "int":
-                    case "float":
-                    case "double":
-                        output += "return 0;";
-                        break;
-                    case "bool":
-                        output += "return false;";
-                        break;
-                    default:
-                        output += "return null;";
-                        break;
+                    switch (typeOfMethod)
+                    {
+                        case "void":
+                            output += "";
+                            break;
+                        case "string":
+                            output += "return \"\";";
+                            break;
+                        case "int":
+                        case "float":
+                        case "double":
+                            output += "return 0;";
+                            break;
+                        case "bool":
+                            output += "return false;";
+                            break;
+                        default:
+                            output += "return null;";
+                            break;
+                    }
                 }
                 output += " }";
             }
             else if (declaration.StartsWith("var"))
             {
-                output += "static ";
-                //property
                 var type = ParseType(declaration.Split(':')[1].Trim().Split(' ')[0].TrimEnd('!'));
                 output += type + " ";
                 var name = Regex.Split(declaration, "var ")[1].Split(':')[0].Trim();
@@ -116,7 +212,7 @@ namespace StubGen
             {
                 output += "\r\n//" + declaration;
             }
-            return output + "\r\n\r\n";
+            return new Tuple<string, Dictionary<string, string>>(output + "\r\n\r\n", argsToRename);
         }
 
         public static string ScrapeWithAgility(string data)
@@ -135,60 +231,85 @@ namespace StubGen
                 {
                     var summary = "/// <summary>\r\n/// " + RemoveHTMLTags(section.ChildNodes.First(node => node.Attributes.Any(attr => attr.Name == "class" && attr.Value == "abstract")).InnerHtml.Trim()).Trim() + "\r\n/// </summary>\r\n";
 
+                    var obsolete = "";
+                    if (summary.ToLower().Contains("deprecat"))
+                    {
+                        obsolete = "[Obsolete]\r\n";
+                    }
+
                     var declarationPara = section.SelectSingleNode("./div[@class='declaration']/div[@class='Swift']/p[@class='para']");
                     if (declarationPara == null)
                     {
                         continue;
                     }
-                    string declaration = ParseDeclaration(RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim());
-
-                    var objcPara = section.SelectSingleNode("./div[@class='declaration']/div[@class='Objective-C']/p[@class='para']");
-                    if (objcPara != null)
+                    if (RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Contains("struct "))
                     {
-                        var objcdecl = RemoveHTMLTags(objcPara.InnerHtml.Trim()).Trim();
-                        if (objcdecl.Contains("@property") && !objcdecl.Contains("readonly"))
-                        {
-                            declaration = declaration.Replace("private set", "set");
-                        }
-                        else if (objcdecl.Contains("@property") && objcdecl.Contains("readonly"))
-                        {
-                            declaration = declaration.Replace("; set;", "; private set;");
-                        }
+                        output += ParseStruct(section, declarationPara, summary);
+                    }
+                    else if (Regex.Split(RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim(), "var ").Length > 2)
+                    {
+                        output += ParseKeys(section, declarationPara, summary);
                     }
                     else
                     {
-                        declaration = "[SwiftOnly]\r\n" + declaration;
-                    }
+                        var parsedDecl = ParseDeclaration(RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim());
 
-                    var parameters = "";
-                    var paramTable = section.SelectSingleNode("./div[@class='parameters']/table/tbody");
-                    if (paramTable != null)
-                    {
-                        var paramsInTable = paramTable.SelectNodes("./tr");
-                        foreach (var param in paramsInTable)
+                        string declaration = parsedDecl.Item1;
+                        var argsToRename = parsedDecl.Item2;
+
+                        var objcPara = section.SelectSingleNode("./div[@class='declaration']/div[@class='Objective-C']/p[@class='para']");
+                        if (objcPara != null)
                         {
-                            var name = ParseType(RemoveHTMLTags(param.SelectNodes("./td").First().InnerHtml.Trim()).Trim());
-                            var desc = RemoveHTMLTags(param.SelectNodes("./td").Last().InnerHtml.Trim()).Trim().Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
-                            parameters += "/// <param name=\"" + name + "\">" + desc + "</param>\r\n";
+                            var objcdecl = RemoveHTMLTags(objcPara.InnerHtml.Trim()).Trim();
+                            if (objcdecl.Contains("@property") && !objcdecl.Contains("readonly"))
+                            {
+                                declaration = declaration.Replace("private set", "set");
+                            }
+                            else if (objcdecl.Contains("@property") && objcdecl.Contains("readonly"))
+                            {
+                                declaration = declaration.Replace("; set;", "; private set;");
+                            }
                         }
-                    }
+                        else
+                        {
+                            declaration = "[SwiftOnly]\r\n" + declaration;
+                        }
 
-                    var resultPara = section.SelectSingleNode("./div[@class='result-description']/p[@class='para']");
-                    string result = "";
-                    if (resultPara != null)
-                    {
-                        result = "/// <returns>" + RemoveHTMLTags(resultPara.InnerHtml).Trim() + "</returns>\r\n";
-                    }
+                        var parameters = "";
+                        var paramTable = section.SelectSingleNode("./div[@class='parameters']/table/tbody");
+                        if (paramTable != null)
+                        {
+                            var paramsInTable = paramTable.SelectNodes("./tr");
+                            foreach (var param in paramsInTable)
+                            {
+                                var name = ParseType(RemoveHTMLTags(param.SelectNodes("./td").First().InnerHtml.Trim()).Trim());
+                                var desc = RemoveHTMLTags(param.SelectNodes("./td").Last().InnerHtml.Trim()).Trim().Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+                                parameters += "/// <param name=\"" + name + "\">" + desc + "</param>\r\n";
+                            }
+                        }
+                        foreach (var argToRename in argsToRename)
+                        {
+                            parameters = parameters.Replace("<param name=\"" + argToRename.Key + "\"",
+                                "<param name=\"" + argToRename.Value + "\"");
+                        }
 
-                    var availabilityDiv = section.SelectSingleNode("./div[@class='availability']/p[@class='para availability-item']");
-                    string availability = "";
-                    if (availabilityDiv != null)
-                    {
-                        availability = "[iOSVersion(" + Regex.Split(RemoveHTMLTags(availabilityDiv.InnerHtml).Trim(), "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
-                    }
+                        var resultPara = section.SelectSingleNode("./div[@class='result-description']/p[@class='para']");
+                        string result = "";
+                        if (resultPara != null)
+                        {
+                            result = "/// <returns>" + RemoveHTMLTags(resultPara.InnerHtml).Trim() + "</returns>\r\n";
+                        }
 
-                    var thisFinal = summary + parameters + result + availability + declaration;
-                    output += thisFinal;
+                        var availabilityDiv = section.SelectSingleNode("./div[@class='availability']/p[@class='para availability-item']");
+                        string availability = "";
+                        if (availabilityDiv != null)
+                        {
+                            availability = "[iOSVersion(" + Regex.Split(RemoveHTMLTags(availabilityDiv.InnerHtml).Trim(), "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                        }
+
+                        var thisFinal = summary + parameters + result + obsolete + availability + declaration;
+                        output += thisFinal;
+                    }
                 }
                 catch
                 {
@@ -228,14 +349,31 @@ namespace StubGen
         }
         public static string ScrapeToCSFile(string url)
         {
-            var output = "";
-            using (HttpClient client = new HttpClient())
+            Console.WriteLine("What is Self?");
+            var self = Console.ReadLine();
+            var output = "using ObjectiveC;\r\nusing System;\r\n\r\n";
+            output += "//" + url + "\r\n";
+            using (var client = new HttpClient())
             {
                 var data = client.GetStringAsync(url).Result;
-                output = ScrapeWithAgility(data);
+                var doc = new HtmlDocument
+                {
+                    OptionFixNestedTags = true
+                };
+                doc.LoadHtml(data);
+                var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
+                desc = desc.Replace("More...", "").Trim();
+                output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
+
+                var availability = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
+                output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+
+                output += "namespace Foundation\r\n{\r\nclass " + self + "\r\n{\r\n";
+
+                output += ScrapeWithAgility(data);
             }
-            Console.WriteLine("What is Self?");
-            return output.Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("Self", Console.ReadLine());
+
+            return output.Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("public Self Init(", "public Self(").Replace("void Init(", "Self(").Replace("Self", self) + "}\r\n}";
         }
     }
 }

@@ -9,11 +9,35 @@ namespace StubGen
 {
     class Program
     {
+        public static string IndentDocument(string swift)
+        {
+            var output = "";
+            var lines = swift.Split('\n');
+            var currIndent = "";
+
+            foreach (var line in lines)
+            {
+                if (line.Contains("}") && !line.Contains("{"))
+                {
+                    currIndent = currIndent.Substring(1);
+                }
+
+                output += currIndent + line;
+
+                if (line.Contains("{") && !line.Contains("}"))
+                {
+                    currIndent += '\t';
+                }
+            }
+
+            return output;
+        }
+
         static void Main(string[] args)
         {
-            using (StreamWriter writer = new StreamWriter("output.cs"))
+            using (var writer = new StreamWriter("output.cs"))
             {
-                writer.Write(Scraper.ScrapeToCSFile(Console.ReadLine()));
+                writer.Write(IndentDocument(Scraper.ScrapeToCSFile(Console.ReadLine())));
                 writer.Flush();
             }
         }
