@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
-    public class CUnsignedInt
+    public interface NSSecureCoding : NSCoding
     {
-    }
-
-    public class CUnsignedint
-    {
+        //TODO: do this
     }
 }

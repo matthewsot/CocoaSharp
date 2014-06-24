@@ -5,11 +5,7 @@ using System.Text;
 
 namespace Foundation
 {
-    public class CUnsignedInt
-    {
-    }
-
-    public class CUnsignedint
+    public class NSStreamDelegate
     {
     }
 }

@@ -37,12 +37,17 @@ namespace Foundation
         public static NSURL URLWithString(string URLString) { return null; }
 
         /// <summary>
+        /// !! IMPORTANT !! Name the parameter you're using
+        /// 
+        /// Initializes a newly created NSURL referencing the local file or directory at path.
         /// Initializes an NSURL object with a provided URL string.
         /// </summary>
+        /// <param name="fileURLWithPath">The path that the NSURL object will represent. path should be a valid system path. If path begins with a tilde, it must first be expanded with stringByExpandingTildeInPath. If path is a relative path, it is treated as being relative to the current working directory.   Passing nil for this parameter produces an exception.</param>
         /// <param name="string">The URL string with which to initialize the NSURL object. This URL string must conform to URL format as described in RFC 2396, and must not be nil. This method parses URLString according to RFCs 1738 and 1808.</param>
+        /// <returns>An NSURL object initialized with path.</returns>
         /// <returns>An NSURL object initialized with URLString. If the URL string was malformed, returns nil.</returns>
         [iOSVersion(2)]
-        public NSURL(string @string) { }
+        public NSURL(string fileURLWithPath = "", string @string = "") { }
 
         /// <summary>
         /// Creates and returns an NSURL object initialized with a base URL and a relative string.
@@ -90,14 +95,6 @@ namespace Foundation
         [iOSVersion(2)]
         [Export("fileURLWithPath")]
         public static NSURL FileURLWithPath(string path) { return null; }
-
-        /// <summary>
-        /// Initializes a newly created NSURL referencing the local file or directory at path.
-        /// </summary>
-        /// <param name="fileURLWithPath">The path that the NSURL object will represent. path should be a valid system path. If path begins with a tilde, it must first be expanded with stringByExpandingTildeInPath. If path is a relative path, it is treated as being relative to the current working directory.   Passing nil for this parameter produces an exception.</param>
-        /// <returns>An NSURL object initialized with path.</returns>
-        [iOSVersion(2)]
-        public NSURL(string fileURLWithPath) { }
 
         /// <summary>
         /// Initializes and returns a newly created NSURL object as a file URL with specified path components.
@@ -565,65 +562,531 @@ namespace Foundation
         [Export("promisedItemResourceValuesForKeys")]
         public NSDictionary PromisedItemResourceValuesForKeys(AnyObject[] keys, NSErrorPointer error) { return null; }
 
+
+
         /// <summary>
         /// These schemes are the ones that NSURL can parse.
         /// </summary>
         [Export("NSURLFileScheme")]
-        public static string NSURLFileScheme { get; private set; }
+        public string NSURLFileScheme { get; private set; }
 
         /// <summary>
         /// Keys that apply to file system URLs.
         /// </summary>
-        [Export("NSURLAddedToDirectoryDateKey")]
-        public static NSString!
-        var NSURLAddedToDirectoryDateKey { get; private set; }
+
+        /// <summary>
+        /// The time at which the resource’s was created or renamed into or within its parent directory, returned as an NSDate. Inconsistent behavior may be observed when this attribute is requested on hard-linked items. This property is not supported by all volumes. (read-only)
+        /// </summary>
+        public string NSURLAddedToDirectoryDateKey { get; private set; }
+
+        /// <summary>
+        /// The time at which the resource’s attributes were most recently modified, returned as an NSDate object if the volume supports attribute modification dates, or nil if attribute modification dates are unsupported (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLAttributeModificationDateKey { get; set; }
+
+        /// <summary>
+        /// The time at which the resource was most recently accessed, returned as an NSDate object if the volume supports access dates, or nil if access dates are unsupported (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLContentAccessDateKey { get; private set; }
+
+        /// <summary>
+        /// The time at which the resource was most recently modified, returned as an NSDate object if the volume supports modification dates, or nil if modification dates are unsupported (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLContentModificationDateKey { get; set; }
+
+        /// <summary>
+        /// The resource’s creation date, returned as an NSDate object if the volume supports creation dates, or nil if creation dates are unsupported (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLCreationDateKey { get; set; }
+
+        /// <summary>
+        /// The icon stored with the resource, returned as an NSImage object, or nil if the resource has no custom icon.
+        /// </summary>
+        public string NSURLCustomIconKey { get; private set; }
+
+        /// <summary>
+        /// The document identifier returned as an NSNumber (read-only).
+        /// </summary>
+        public string NSURLDocumentIdentifierKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s normal icon, returned as an NSImage object (read-only).
+        /// </summary>
+        public string NSURLEffectiveIconKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s unique identifier, returned as an id (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceIdentifierKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s object type, returned as an NSString object (read-only). See File Resource Types for possible values.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s security information, returned as an NSFileSecurity object (read-write).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileSecurityKey { get; set; }
+
+        /// <summary>
+        /// An opaque generation identifier, returned as an id &lt;NSCopying, NSCoding, NSObject&gt; (read-only)
+        /// </summary>
+        public string NSURLGenerationIdentifierKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the resource’s extension is normally removed from its localized name, returned as a Boolean NSNumber object (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLHasHiddenExtensionKey { get; set; }
+
+        /// <summary>
+        /// Key for determining whether the resource is a directory, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsDirectoryKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the resource is excluded from all backups of app data, returned as a Boolean NSNumber object (read-write).
+        /// </summary>
+        [iOSVersion(5.1)]
+        public string NSURLIsExcludedFromBackupKey { get; set; }
+
+        /// <summary>
+        /// Key for determining whether the current process (as determined by the EUID) can execute the resource (if it is a file) or search the resource (if it is a directory), returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLIsExecutableKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the resource is normally not displayed to users, returned as a Boolean NSNumber object (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsHiddenKey { get; set; }
+
+        /// <summary>
+        /// Key for determining whether the URL is a file system trigger directory, returned as a Boolean NSNumber object (read-only). Traversing or opening a file system trigger directory causes an attempt to mount a file system on the directory.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLIsMountTriggerKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the resource is a file package, returned as a Boolean NSNumber object (read-write in OS X v10.8 and later, read-only in previous versions). A true value means that the resource is a file package.
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsPackageKey { get; set; }
+
+        /// <summary>
+        /// Key for determining whether the current process (as determined by the EUID) can read the resource, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLIsReadableKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the resource is a regular file, as opposed to a directory or a symbolic link. Returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsRegularFileKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the resource is a symbolic link, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsSymbolicLinkKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the resource's system immutable bit is set, returned as a Boolean NSNumber object (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsSystemImmutableKey { get; set; }
+
+        /// <summary>
+        /// Key for determining whether the resource's user immutable bit is set, returned as a Boolean NSNumber object (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsUserImmutableKey { get; set; }
+
+        /// <summary>
+        /// Key for determining whether the resource is the root directory of a volume, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsVolumeKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the current process (as determined by the EUID) can write to the resource, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLIsWritableKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s label color, returned as an NSColor object, or nil if the resource has no label color (read-only).
+        /// </summary>
+        public string NSURLLabelColorKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s label number, returned as an NSNumber object (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLLabelNumberKey { get; set; }
+
+        /// <summary>
+        /// The number of hard links to the resource, returned as an NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLLinkCountKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s localized label text, returned as an NSString object, or nil if the resource has no localized label text (read-only).
+        /// </summary>
+        public string NSURLLocalizedLabelKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s localized or extension-hidden name, returned as an NSString object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLLocalizedNameKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s localized type description, returned as an NSString object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLLocalizedTypeDescriptionKey { get; private set; }
+
+        /// <summary>
+        /// The resource’s name in the file system, returned as an NSString object (read-write).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLNameKey { get; set; }
+
+        /// <summary>
+        /// The parent directory of the resource, returned as an NSURL object, or nil if the resource is the root directory of its volume (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLParentDirectoryURLKey { get; private set; }
+
+        /// <summary>
+        /// The file system path for the URL, returned as an NSString object (read-only).
+        /// </summary>
+        [iOSVersion(6)]
+        public string NSURLPathKey { get; private set; }
+
+        /// <summary>
+        /// The optimal block size to use when reading or writing this file's data, returned as an NSNumber object, or nil if the preferred size is not available (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLPreferredIOBlockSizeKey { get; private set; }
+
+        /// <summary>
+        /// A dictionary of NSImage/UIImage objects keyed by size (read-write). See Thumbnail Property Keys for a list of possible keys.
+        /// </summary>
+        public string NSURLThumbnailDictionaryKey { get; set; }
+
+        /// <summary>
+        /// The resource’s uniform type identifier (UTI), returned as an NSString object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLTypeIdentifierKey { get; private set; }
+
+        /// <summary>
+        /// The unique identifier of the resource’s volume, returned as an id (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIdentifierKey { get; private set; }
+
+        /// <summary>
+        /// The root directory of the resource’s volume, returned as an NSURL object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeURLKey { get; private set; }
 
         /// <summary>
         /// Possible values for the NSURLFileResourceTypeKey key.
         /// </summary>
-        [Export("NSURLFileResourceTypeNamedPipe")]
-        public static NSString!
-        var NSURLFileResourceTypeNamedPipe { get; private set; }
+
+        /// <summary>
+        /// The resource is a named pipe.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeNamedPipe { get; private set; }
+
+        /// <summary>
+        /// The resource is a character special file.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeCharacterSpecial { get; private set; }
+
+        /// <summary>
+        /// The resource is a directory.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeDirectory { get; private set; }
+
+        /// <summary>
+        /// The resource is a block special file.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeBlockSpecial { get; private set; }
+
+        /// <summary>
+        /// The resource is a regular file.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeRegular { get; private set; }
+
+        /// <summary>
+        /// The resource is a symbolic link.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeSymbolicLink { get; private set; }
+
+        /// <summary>
+        /// The resource is a socket.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeSocket { get; private set; }
+
+        /// <summary>
+        /// The resource’s type is unknown.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLFileResourceTypeUnknown { get; private set; }
 
         /// <summary>
         /// Possible keys for the NSURLThumbnailDictionaryKey dictionary.
         /// </summary>
         [Export("NSThumbnail1024x1024SizeKey")]
-        public static string NSThumbnail1024x1024SizeKey { get; private set; }
+        public string NSThumbnail1024x1024SizeKey { get; private set; }
 
         /// <summary>
         /// Keys that apply to properties of files.
         /// </summary>
-        [Export("NSURLFileSizeKey")]
-        public static NSString!
-        var NSURLFileSizeKey { get; private set; }
+
+        /// <summary>
+        /// Key for the file’s size in bytes, returned as an NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLFileSizeKey { get; private set; }
+
+        /// <summary>
+        /// Key for the total size allocated on disk for the file, returned as an NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLFileAllocatedSizeKey { get; private set; }
+
+        /// <summary>
+        /// Key for the total displayable size of the file in bytes, returned as an NSNumber object (read-only). This includes the size of any file metadata.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLTotalFileSizeKey { get; private set; }
+
+        /// <summary>
+        /// Key for the total allocated size of the file in bytes, returned as an NSNumber object (read-only). This includes the size of any file metadata.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLTotalFileAllocatedSizeKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the file is an alias, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLIsAliasFileKey { get; private set; }
 
         /// <summary>
         /// Keys that apply to volumes.
         /// </summary>
-        [Export("NSURLVolumeLocalizedFormatDescriptionKey")]
-        public static NSString!
-        var NSURLVolumeLocalizedFormatDescriptionKey { get; private set; }
 
         /// <summary>
-        /// Keys in the userInfo dictionary of an NSError object when certain NSURL methods return an error.
+        /// Key for the volume’s descriptive format name, returned as an NSString object (read-only).
         /// </summary>
-        [Export("NSURLKeysOfUnsetValuesKey")]
-        public static string NSURLKeysOfUnsetValuesKey { get; set; }
+        [iOSVersion(4)]
+        public string NSURLVolumeLocalizedFormatDescriptionKey { get; private set; }
 
         /// <summary>
-        /// Keys that describe the iCloud storage state of a file.
+        /// Key for the volume’s capacity in bytes, returned as an NSNumber object (read-only).
         /// </summary>
-        [Export("NSURLIsUbiquitousItemKey")]
-        public static NSString!
-        var NSURLIsUbiquitousItemKey { get; private set; }
+        [iOSVersion(4)]
+        public string NSURLVolumeTotalCapacityKey { get; private set; }
 
         /// <summary>
-        /// Values that describe the iCloud storage state of a file.
+        /// Key for the volume’s available capacity in bytes, returned as an NSNumber object (read-only).
         /// </summary>
-        [Export("NSURLUbiquitousItemDownloadingStatusCurrent")]
-        public static NSString!
-        var NSURLUbiquitousItemDownloadingStatusCurrent { get; private set; }
+        [iOSVersion(4)]
+        public string NSURLVolumeAvailableCapacityKey { get; private set; }
+
+        /// <summary>
+        /// Key for the total number of resources on the volume, returned as an NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeResourceCountKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports persistent IDs, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsPersistentIDsKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports symbolic links, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsSymbolicLinksKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports hard links, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsHardLinksKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports journaling, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsJournalingKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is currently journaling, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeIsJournalingKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports sparse files, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsSparseFilesKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports zero runs, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsZeroRunsKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports case-sensitive names, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsCaseSensitiveNamesKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports case-preserved names, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(4)]
+        public string NSURLVolumeSupportsCasePreservedNamesKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports reliable storage of times for the root directory, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeSupportsRootDirectoryDatesKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports returning volume size information, returned as a Boolean NSNumber object (read-only). If true, volume size information is available as values of the NSURLVolumeTotalCapacityKey andNSURLVolumeAvailableCapacityKey keys.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeSupportsVolumeSizesKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume can be renamed, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeSupportsRenamingKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume implements whole-file advisory locks in the style of flock, along with the O_EXLOCK and O_SHLOCK flags of the open function, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeSupportsAdvisoryFileLockingKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume supports extended security (access control lists), returned as a Boolean NSNumber object (read-only) (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeSupportsExtendedSecurityKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is visible in GUI-based file-browsing environments, such as the Desktop or the Finder application, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIsBrowsableKey { get; private set; }
+
+        /// <summary>
+        /// Key for the largest file size supported by the volume in bytes, returned as a Boolean NSNumber object, or nil if it cannot be determined (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeMaximumFileSizeKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is ejectable from the drive mechanism under software control, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIsEjectableKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is removable from the drive mechanism, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIsRemovableKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is connected to an internal bus, returned as a Boolean NSNumber object, or nil if it cannot be determined (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIsinternalKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is automounted, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIsAutomountedKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is stored on a local device, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIsLocalKey { get; private set; }
+
+        /// <summary>
+        /// Key for determining whether the volume is read-only, returned as a Boolean NSNumber object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeIsReadOnlyKey { get; private set; }
+
+        /// <summary>
+        /// Key for the volume’s creation date, returned as an NSDate object, or NULL if it cannot be determined (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeCreationDateKey { get; private set; }
+
+        /// <summary>
+        /// Key for the URL needed to remount the network volume, returned as an NSURL object, or nil if a URL is not available (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeURLForRemountingKey { get; private set; }
+
+        /// <summary>
+        /// Key for the volume’s persistent UUID, returned as an NSString object, or nil if a persistent UUID is not available (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeUUIDStringKey { get; private set; }
+
+        /// <summary>
+        /// The name of the volume, returned as an NSString object (read-write). Settable only if NSURLVolumeSupportsRenamingKey is true.
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeNameKey { get; set; }
+
+        /// <summary>
+        /// The name of the volume as it should be displayed in the user interface, returned as an NSString object (read-only).
+        /// </summary>
+        [iOSVersion(5)]
+        public string NSURLVolumeLocalizedNameKey { get; private set; }
     }
 
     /// <summary>

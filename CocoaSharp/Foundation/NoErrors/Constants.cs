@@ -49,4 +49,58 @@ namespace Foundation
         [iOSVersion(4)]
         Stable
     }
+
+    public enum NSSearchPathDirectory
+    {
+        NSApplicationDirectory = 1,
+        NSDemoApplicationDirectory,
+        NSDeveloperApplicationDirectory,
+        NSAdminApplicationDirectory,
+        NSLibraryDirectory,
+        NSDeveloperDirectory,
+        NSUserDirectory,
+        NSDocumentationDirectory,
+        NSDocumentDirectory,
+        NSCoreServiceDirectory,
+        NSAutosavedInformationDirectory = 11,
+        NSDesktopDirectory = 12,
+        NSCachesDirectory = 13,
+        NSApplicationSupportDirectory = 14,
+        NSDownloadsDirectory = 15,
+        NSInputMethodsDirectory = 16,
+        NSMoviesDirectory = 17,
+        NSMusicDirectory = 18,
+        NSPicturesDirectory = 19,
+        NSPrinterDescriptionDirectory = 20,
+        NSSharedPublicDirectory = 21,
+        NSPreferencePanesDirectory = 22,
+        NSItemReplacementDirectory = 99,
+        NSAllApplicationsDirectory = 100,
+        NSAllLibrariesDirectory = 101,
+    }
+
+    public enum NSSearchPathDomainMask
+    {
+        NSUserDomainMask = 1,
+        NSLocalDomainMask = 2,
+        NSNetworkDomainMask = 4,
+        NSSystemDomainMask = 8,
+        NSAllDomainsMask = 0x0ffff
+    }
+
+
+    //from https://developer.apple.com/library/prerelease/ios/documentation/Security/Reference/secureTransportRef/index.html#//apple_ref/swift/struct/SSLProtocol
+    public enum SSLProtocol
+    {
+        kSSLProtocolUnknown = 0,
+        kSSLProtocol3 = 2,
+        kTLSProtocol1 = 4,
+        kTLSProtocol11 = 7,
+        kTLSProtocol12 = 8,
+        kDTLSProtocol1 = 9, /* DEPRECATED on iOS */
+        kSSLProtocol2 = 1,
+        kSSLProtocol3Only = 3,
+        kTLSProtocol1Only = 5,
+        kSSLProtocolAll = 6,
+    }
 }
