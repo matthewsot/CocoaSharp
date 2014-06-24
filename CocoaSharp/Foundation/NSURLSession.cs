@@ -1,4 +1,6 @@
-using ObjectiveC;using System;using SwiftSharp.Attributes;
+using ObjectiveC;
+using System;
+using SwiftSharp.Attributes;
 
 namespace Foundation
 {
@@ -353,9 +355,28 @@ namespace Foundation
     [iOSVersion(7)]
     public enum NSURLSessionAuthChallengeDisposition
     {
+        /// <summary>
+        /// Use the specified credential, which may be nil.
+        /// </summary>
+        [iOSVersion(7)]
         UseCredential,
+
+        /// <summary>
+        /// Use the default handling for the challenge as though this delegate method were not implemented. The provided credential parameter is ignored.
+        /// </summary>
+        [iOSVersion(7)]
         PerformDefaultHandling,
+
+        /// <summary>
+        /// Cancel the entire request. The provided credential parameter is ignored.
+        /// </summary>
+        [iOSVersion(7)]
         CancelAuthenticationChallenge,
-        RejectProtectionSpace
+
+        /// <summary>
+        /// Reject this challenge, and call the authentication delegate method again with the next authentication protection space. The provided credential parameter is ignored.
+        /// </summary>
+        [iOSVersion(7)]
+        RejectProtectionSpace,
     }
 }

@@ -4,7 +4,7 @@ using ObjectiveC;using System;using SwiftSharp.Attributes;namespace Foundati
     /// <summary>
     /// These constants are returned as the value for a NSKeyValueChangeKindKey key in the change dictionary passed to observeValueForKeyPath:ofObject:change:context: indicating the type of change made:
     /// </summary>
-    enum NSKeyValueChange
+    public enum NSKeyValueChange
     {
         /// <summary>
         /// Indicates that the value of the observed key path was set to a new value. This change can occur when observing an attribute of an object, as well as properties that specify to-one and to-many relationships.
@@ -63,7 +63,7 @@ using ObjectiveC;using System;using SwiftSharp.Attributes;namespace Foundati
     /// <summary>
     /// These constants are specified as the parameter to the methods willChangeValueForKey:withSetMutation:usingObjects: and didChangeValueForKey:withSetMutation:usingObjects:. Their semantics correspond exactly to the NSMutableSet class methods unionSet:, minusSet:, intersectSet:, and setSet: method, respectively.
     /// </summary>
-    enum NSKeyValueSetMutationKind
+    public enum NSKeyValueSetMutationKind
     {
         /// <summary>
         /// Indicates that objects in the specified set are being added to the receiver.
