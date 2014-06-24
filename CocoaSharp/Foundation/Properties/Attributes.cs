@@ -26,4 +26,8 @@ namespace SwiftSharp.Attributes
     class OptionalAttribute : Attribute
     {
     }
+
+    class GlobalAttribute : Attribute
+    {
+    }
 }

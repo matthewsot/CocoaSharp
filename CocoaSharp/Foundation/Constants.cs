@@ -242,6 +242,7 @@ namespace Foundation
     /// <summary>
     /// NSError codes in the Cocoa error domain.
     /// </summary>
+    [Global]
     public static class NSErrorCodes
     {
         /// <summary>
@@ -453,6 +454,7 @@ namespace Foundation
     /// <summary>
     /// These values are returned as the error code property of an NSError object with the domain “NSURLErrorDomain”.
     /// </summary>
+    [Global]
     public static class URLLoadingSystemErrorCodes
     {
         /// <summary>
@@ -708,6 +710,7 @@ namespace Foundation
     /// <summary>
     /// Errors returned by XPC connections. Note that these are not currently available on iOS.
     /// </summary>
+    [Global]
     public static class XPCErrors
     {
         /// <summary>
@@ -739,22 +742,25 @@ namespace Foundation
     /// <summary>
     /// These constants defines the Cocoa error domain.
     /// </summary>
+    [Global]
     public static class CocoaErrors
     {
-        [Export("NSCocoaErrorDomain")] private const string NSCocoaErrorDomain = "";
+        public const string NSCocoaErrorDomain = "";
     }
 
     /// <summary>
     /// This error domain is defined for NSURL.
     /// </summary>
+    [Global]
     public static class NSURLError
     {
-        [Export("NSURLErrorDomain")] private const string NSURLErrorDomain = "";
+        public const string NSURLErrorDomain = "";
     }
 
     /// <summary>
     /// Constants used by NSDecimal.
     /// </summary>
+    [Global]
     public static class NSDecimalConstants
     {
         /// <summary>
@@ -771,6 +777,7 @@ namespace Foundation
     /// <summary>
     /// Constants representing the maximum and minimum values of NSinteger and NSUinteger.
     /// </summary>
+    [Global]
     public static class NSIntegerConstants
     {
         /// <summary>
@@ -787,6 +794,7 @@ namespace Foundation
     /// <summary>
     /// Exceptions defined by NSException.
     /// </summary>
+    [Global]
     public class NSExceptionExceptions
     {
         /// <summary>
@@ -860,17 +868,19 @@ namespace Foundation
         [iOSVersion(2)] public const string NSOldStyleException = null;
     }
 
+    [Global]
     public static class FoundationVersionNumber
     {
         /// <summary>
         /// Version of the Foundation framework in the current environment.
         /// </summary>
-        [Export("NSFoundationVersionNumber")] public const CDouble NSFoundationVersionNumber = null;
+        public const CDouble NSFoundationVersionNumber = null;
     }
 
     /// <summary>
     /// Constants to define Foundation Framework version numbers.
     /// </summary>
+    [Global]
     public static class FoundationVersionNumbers
     {
         /// <summary>
