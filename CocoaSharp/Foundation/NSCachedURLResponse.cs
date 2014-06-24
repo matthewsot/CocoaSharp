@@ -64,8 +64,6 @@ namespace Foundation
         public NSDictionary UserInfo { get; private set; }
     }
 
-    //TODO: check if NSURLCacheStoragePolicy enum is correct
-
     /// <summary>
     /// These constants specify the caching strategy used by an NSCachedURLResponse object.
     /// </summary>

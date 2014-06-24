@@ -16,7 +16,7 @@ namespace StubGen
         {
             var declaration = RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim();
             var name = Regex.Split(declaration, "enum ")[1].Split(':')[0].Trim();
-            var output = summary + /*"public*/ "enum " + name + "\r\n{";
+            var output = summary + "public enum " + name + "\r\n{";
 
             var items = Regex.Split(declaration, "\n");
 
@@ -143,7 +143,7 @@ namespace StubGen
 
         public static Tuple<string, Dictionary<string, string>>  ParseDeclaration(string declaration)
         {
-            var output = /*"public "*/"";
+            var output = "public ";
             if (declaration.StartsWith("@optional"))
             {
                 output = "[Optional]\r\n" + output;
@@ -229,8 +229,8 @@ namespace StubGen
                 }
                 output = output.TrimEnd(' ', ',');
 
-                //output += ") { ";
-                output += ");";/*
+                output += ") { ";
+                //output += ");";
                 if (name != "init")
                 {
                     switch (typeOfMethod)
@@ -254,7 +254,7 @@ namespace StubGen
                             break;
                     }
                 }
-                output += " }";*/
+                output += " }";
             }
             else if (declaration.StartsWith("var"))
             {
@@ -438,14 +438,14 @@ namespace StubGen
                     doc.LoadHtml(data);
                     //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
                     //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='intro']/p[@class='para']").InnerHtml).Trim();
-                    var desc = "This document describes the data types and constants found in the Foundation framework.";
+                    var desc = "The NSKeyValueCoding informal protocol defines a mechanism by which you can access the properties of an object indirectly by name (or key), rather than directly through invocation of an accessor method or as instance variables. Thus, all of an object’s properties can be accessed in a consistent manner.";
                     desc = desc.Replace("More...", "").Trim();
                     output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
 
-                    var availability = "";//RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
+                    var availability = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
 
-                    //output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
-                    output += "public class " + self /*+ " : " + inherits*/ + "\r\n{\r\n";
+                    output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                    output += "public interface " + self /*+ " : " + inherits*/ + "\r\n{\r\n";
 
                     output += ScrapeWithAgility(data);
                 }

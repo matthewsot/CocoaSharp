@@ -183,7 +183,7 @@ namespace Foundation
         [iOSVersion(4)] PreferencePanesDirectory,
 
         /// <summary>
-        /// TODO: ApplicationScriptsDirectory
+        /// No info
         /// </summary>
         ApplicationScriptsDirectory,
 
@@ -203,7 +203,7 @@ namespace Foundation
         [iOSVersion(2)] AllLibrariesDirectory,
 
         /// <summary>
-        /// TODO: TrashDirectory
+        /// No info
         /// </summary>
         TrashDirectory,
     }

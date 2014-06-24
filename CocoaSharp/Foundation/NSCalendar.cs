@@ -164,135 +164,134 @@ namespace Foundation
         [iOSVersion(2)]
         [Export("dateFromComponents")]
         public NSDate DateFromComponents(NSDateComponents comps) { return null; }
-
-        //TODO: implement NSCalendarOptions
-        public enum NSCalendarOptions
-        {
-            
-        }
-        
-        /// <summary>
-        /// Specify calendrical units such as day and month.
-        /// </summary>
-        public enum NSCalendarUnit
-        {
-            CalendarUnitEra,
-            CalendarUnitYear,
-            CalendarUnitMonth,
-            CalendarUnitDay,
-            CalendarUnitHour,
-            CalendarUnitMinute,
-            CalendarUnitSecond,
-            CalendarUnitWeekday,
-            CalendarUnitWeekdayOrdinal,
-            CalendarUnitQuarter,
-            CalendarUnitWeekOfMonth,
-            CalendarUnitWeekOfYear,
-            CalendarUnitYearForWeekOfYear,
-            CalendarUnitNanosecond,
-            CalendarUnitCalendar,
-            CalendarUnitTimeZone,
-            
-            /// <summary>
-            /// Specifies the era unit.
-            /// </summary>
-            [iOSVersion(8)]
-            EraCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the year unit.
-            /// </summary>
-            [iOSVersion(8)]
-            YearCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the month unit.
-            /// </summary>
-            [iOSVersion(8)]
-            MonthCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the day unit.
-            /// </summary>
-            [iOSVersion(8)]
-            DayCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the hour unit.
-            /// </summary>
-            [iOSVersion(8)]
-            HourCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the minute unit.
-            /// </summary>
-            [iOSVersion(8)]
-            MinuteCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the second unit.
-            /// </summary>
-            [iOSVersion(8)]
-            SecondCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the week unit.
-            /// </summary>
-            [iOSVersion(8)]
-            WeekCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the weekday unit.
-            /// </summary>
-            [iOSVersion(8)]
-            WeekdayCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the ordinal weekday unit.
-            /// </summary>
-            [iOSVersion(8)]
-            WeekdayOrdinalCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the quarter of the calendar as an kCFCalendarUnitSecond.
-            /// </summary>
-            [iOSVersion(8)]
-            QuarterCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the original week of a month calendar unit.
-            /// </summary>
-            [iOSVersion(8)]
-            WeekOfMonthCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the original week of the year calendar unit.
-            /// </summary>
-            [iOSVersion(8)]
-            WeekOfYearCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the year when the calendar is being interpreted as a week-based calendar.
-            /// </summary>
-            [iOSVersion(8)]
-            YearForWeekOfYearCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the calendar of the calendar.
-            /// </summary>
-            [iOSVersion(8)]
-            CalendarCalendarUnit,
-            
-            /// <summary>
-            /// Specifies the time zone of the calendar as an NSTimeZone.
-            /// </summary>
-            [iOSVersion(8)]
-            TimeZoneCalendarUnit,
-        }
         /// <summary>
         /// The wrapping option specifies wrapping behavior for calculations involving NSDateComponents objects.
         /// </summary>
         [Export("NSWrapCalendarComponents")]
         public int NSWrapCalendarComponents { get; private set; }
+    }
+
+    public enum NSCalendarOptions
+    {
+        //TODO: Check later for NSCalendarOptions
+    }
+
+    /// <summary>
+    /// Specify calendrical units such as day and month.
+    /// </summary>
+    public enum NSCalendarUnit
+    {
+        CalendarUnitEra,
+        CalendarUnitYear,
+        CalendarUnitMonth,
+        CalendarUnitDay,
+        CalendarUnitHour,
+        CalendarUnitMinute,
+        CalendarUnitSecond,
+        CalendarUnitWeekday,
+        CalendarUnitWeekdayOrdinal,
+        CalendarUnitQuarter,
+        CalendarUnitWeekOfMonth,
+        CalendarUnitWeekOfYear,
+        CalendarUnitYearForWeekOfYear,
+        CalendarUnitNanosecond,
+        CalendarUnitCalendar,
+        CalendarUnitTimeZone,
+
+        /// <summary>
+        /// Specifies the era unit.
+        /// </summary>
+        [iOSVersion(8)]
+        EraCalendarUnit,
+
+        /// <summary>
+        /// Specifies the year unit.
+        /// </summary>
+        [iOSVersion(8)]
+        YearCalendarUnit,
+
+        /// <summary>
+        /// Specifies the month unit.
+        /// </summary>
+        [iOSVersion(8)]
+        MonthCalendarUnit,
+
+        /// <summary>
+        /// Specifies the day unit.
+        /// </summary>
+        [iOSVersion(8)]
+        DayCalendarUnit,
+
+        /// <summary>
+        /// Specifies the hour unit.
+        /// </summary>
+        [iOSVersion(8)]
+        HourCalendarUnit,
+
+        /// <summary>
+        /// Specifies the minute unit.
+        /// </summary>
+        [iOSVersion(8)]
+        MinuteCalendarUnit,
+
+        /// <summary>
+        /// Specifies the second unit.
+        /// </summary>
+        [iOSVersion(8)]
+        SecondCalendarUnit,
+
+        /// <summary>
+        /// Specifies the week unit.
+        /// </summary>
+        [iOSVersion(8)]
+        WeekCalendarUnit,
+
+        /// <summary>
+        /// Specifies the weekday unit.
+        /// </summary>
+        [iOSVersion(8)]
+        WeekdayCalendarUnit,
+
+        /// <summary>
+        /// Specifies the ordinal weekday unit.
+        /// </summary>
+        [iOSVersion(8)]
+        WeekdayOrdinalCalendarUnit,
+
+        /// <summary>
+        /// Specifies the quarter of the calendar as an kCFCalendarUnitSecond.
+        /// </summary>
+        [iOSVersion(8)]
+        QuarterCalendarUnit,
+
+        /// <summary>
+        /// Specifies the original week of a month calendar unit.
+        /// </summary>
+        [iOSVersion(8)]
+        WeekOfMonthCalendarUnit,
+
+        /// <summary>
+        /// Specifies the original week of the year calendar unit.
+        /// </summary>
+        [iOSVersion(8)]
+        WeekOfYearCalendarUnit,
+
+        /// <summary>
+        /// Specifies the year when the calendar is being interpreted as a week-based calendar.
+        /// </summary>
+        [iOSVersion(8)]
+        YearForWeekOfYearCalendarUnit,
+
+        /// <summary>
+        /// Specifies the calendar of the calendar.
+        /// </summary>
+        [iOSVersion(8)]
+        CalendarCalendarUnit,
+
+        /// <summary>
+        /// Specifies the time zone of the calendar as an NSTimeZone.
+        /// </summary>
+        [iOSVersion(8)]
+        TimeZoneCalendarUnit,
     }
 }
