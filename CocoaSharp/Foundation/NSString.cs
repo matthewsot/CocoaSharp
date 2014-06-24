@@ -1310,14 +1310,6 @@ namespace Foundation
         public AnyObject[] LinguisticTagsInRange(NSRange range, string scheme, NSLinguisticTaggerOptions options, NSOrthography orthography, AutoreleasingUnsafePointer<NSArray> tokenRanges) { return null; }
         
         /// <summary>
-        /// Type for Unicode characters.
-        /// </summary>
-        //[iOSVersion(2)]
-        //public 
-        //typealias char = CUnsignedShort
-        
-        //todo notifications
-        /// <summary>
         /// These constants define the names of exceptions raised if NSString cannot represent a string in a given encoding, or parse a string as a property list.
         /// </summary>
         
