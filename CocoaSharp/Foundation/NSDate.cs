@@ -185,7 +185,14 @@ namespace Foundation
         [iOSVersion(2)]
         [Export("NSTimeIntervalSince1970")]
         public CDouble NSTimeIntervalSince1970 { get; private set; }
+    }
 
-        //TODO: Add NSSystemClockDidChangeNotification
+    /// <summary>
+    /// Posted whenever the system clock is changed. This can be initiated by a call to nulluserInfo
+    /// </summary>
+    [iOSVersion(4)]
+    public class NSSystemClockDidChangeNotification : NSNotification
+    {
+        public NSSystemClockDidChangeNotification() : base("", null) { }
     }
 }
