@@ -70,7 +70,7 @@ namespace StubGen
                 var resp = client.GetStringAsync(scrape).Result;
                 var doc = new HtmlDocument{OptionFixNestedTags = true};
                 doc.LoadHtml(resp);
-                var rows = doc.DocumentNode.SelectSingleNode("//table[@class='collection-table Objective-C']").SelectNodes("./tbody/tr");
+                var rows = doc.DocumentNode.SelectNodes("//table[@class='collection-table Objective-C']")[1].SelectNodes("./tbody/tr");
                 var parents = new Dictionary<int, string> {{1, ""}};
                 var currDepth = 0;
                 foreach (var row in rows)
@@ -79,7 +79,8 @@ namespace StubGen
                     var name = Scraper.RemoveHTMLTags(td.InnerHtml).Trim();
                     var depth = int.Parse(td.GetAttributeValue("class", "depth0").Split('h')[1].Split(' ')[0]);
                     parents[depth] = name;
-                    var parent = parents[depth - 1];
+                    //var parent = parents[depth - 1];
+                    var parent = "";
                     
                     //todo: make sure to change the href base path
                     string link;

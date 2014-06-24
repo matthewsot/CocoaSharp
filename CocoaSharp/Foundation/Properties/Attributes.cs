@@ -22,4 +22,8 @@ namespace SwiftSharp.Attributes
             Version = version;
         }
     }
+
+    class OptionalAttribute : Attribute
+    {
+    }
 }

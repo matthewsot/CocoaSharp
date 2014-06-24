@@ -12,6 +12,49 @@ namespace StubGen
 {
     class Scraper
     {
+        public static string ParseEnum(HtmlNode section, HtmlNode declarationPara, string summary)
+        {
+            var declaration = RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim();
+            var name = Regex.Split(declaration, "enum ")[1].Split(':')[0].Trim();
+            var output = summary + /*"public*/ "enum " + name + "\r\n{";
+
+            var items = Regex.Split(declaration, "\n");
+
+            var descriptions = section.SelectNodes("./ul[@class='list-bullet']/li");
+
+            var keysAndTrivia = new Dictionary<string, string>();
+            foreach (var desc in descriptions)
+            {
+                var keyName = RemoveHTMLTags(desc.SelectSingleNode("./p[@class='para Swift']").InnerHtml).Trim();
+                var summarry = RemoveHTMLTags(desc.SelectNodes("./div[@class='definition']/p").First().InnerHtml).Trim();
+                var availableIn = RemoveHTMLTags(desc.SelectNodes("./div[@class='definition']/p").Last().InnerHtml).Trim();
+
+                var trivia = "\r\n/// <summary>\r\n/// " + summarry + "\r\n/// </summary>\r\n";
+
+                if (availableIn.Contains("in iOS "))
+                {
+                    trivia += "[iOSVersion(" + Regex.Split(availableIn, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                }
+
+                keysAndTrivia.Add(keyName, trivia);
+            }
+
+            foreach (var item in items)
+            {
+                if (item.Contains("case "))
+                {
+                    var itemName = Regex.Split(item, "case ").Last().Trim();
+                    var trivia = "";
+                    if (keysAndTrivia.ContainsKey(itemName))
+                    {
+                        trivia = keysAndTrivia[itemName];
+                    }
+                    output += trivia + itemName + ",\r\n";
+                }
+            }
+            return output + "}\r\n";
+        }
+
         public static string ParseStruct(HtmlNode section, HtmlNode declarationPara, string summary)
         {
             var declaration = RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim();
@@ -100,9 +143,15 @@ namespace StubGen
 
         public static Tuple<string, Dictionary<string, string>>  ParseDeclaration(string declaration)
         {
+            var output = /*"public "*/"";
+            if (declaration.StartsWith("@optional"))
+            {
+                output = "[Optional]\r\n" + output;
+                declaration = declaration.Substring(10);
+            }
+
             declaration = declaration.Replace("&gt;", ">").Replace("&lt;", "<").Trim();
             var argsToRename = new Dictionary<string, string>();
-            var output = "public ";
             if (declaration.StartsWith("class") || declaration.StartsWith("static"))
             {
                 output += "static ";
@@ -170,7 +219,7 @@ namespace StubGen
                             var internalArgName = arg.Split(':')[0].Trim().Split(' ').Last();
                             argsToRename.Add(internalArgName, argName);
                         }
-                        if (argName == "object" || argName == "string")
+                        if (argName == "object" || argName == "string" || argName == "delegate")
                         {
                             argName = "@" + argName;
                         }
@@ -180,7 +229,8 @@ namespace StubGen
                 }
                 output = output.TrimEnd(' ', ',');
 
-                output += ") { ";
+                //output += ") { ";
+                output += ");";/*
                 if (name != "init")
                 {
                     switch (typeOfMethod)
@@ -204,7 +254,7 @@ namespace StubGen
                             break;
                     }
                 }
-                output += " }";
+                output += " }";*/
             }
             else if (declaration.StartsWith("var"))
             {
@@ -263,6 +313,10 @@ namespace StubGen
                     if (RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Contains("struct "))
                     {
                         output += ParseStruct(section, declarationPara, summary);
+                    }
+                    else if (RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Contains("enum "))
+                    {
+                        output += ParseEnum(section, declarationPara, summary);
                     }
                     else if (Regex.Split(RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim(), "var ").Length > 2)
                     {
@@ -382,14 +436,15 @@ namespace StubGen
                         OptionFixNestedTags = true
                     };
                     doc.LoadHtml(data);
-                    var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
+                    //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
+                    var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-protocol-description section']/p[@class='para']").InnerHtml).Trim();
                     desc = desc.Replace("More...", "").Trim();
                     output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
 
                     var availability = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
 
                     output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
-                    output += "public class " + self + " : " + inherits + "\r\n{\r\n";
+                    output += "public interface " + self /*+ " : " + inherits*/ + "\r\n{\r\n";
 
                     output += ScrapeWithAgility(data);
                 }

@@ -1,13 +1,1 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SwiftSharp.Attributes;
-
-namespace Foundation
-{
-    public interface NSSecureCoding : NSCoding
-    {
-        //TODO: do this
-    }
-}
+using ObjectiveC;using System;using SwiftSharp.Attributes;namespace Foundation{	//https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSSecureCoding_Protocol_Ref/index.html#//apple_ref/occ/intf/NSSecureCoding	/// <summary>	/// Conforming to the NSSecureCoding protocol indicates that an object handles encoding and decoding instances of itself in a manner that is robust against object substitution attacks.	/// </summary>	[iOSVersion(6)]	public interface NSSecureCoding	{		/// <summary>		/// Returns whether the class supports secure coding. (required)		/// </summary>		/// <returns>Return true if your class supports secure coding, or false otherwise.</returns>		//[iOSVersion(6)]		//[Export("supportsSecureCoding")]		//static bool SupportsSecureCoding();	}}
