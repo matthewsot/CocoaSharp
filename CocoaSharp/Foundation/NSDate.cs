@@ -97,7 +97,7 @@ namespace Foundation
         /// <returns>If:</returns>
         [iOSVersion(2)]
         [Export("compare")]
-        public NSComparisonResult Compare(NSDate anotherDate) { return null; }
+        public NSComparisonResult Compare(NSDate anotherDate) { return NSComparisonResult.OrderedSame; }
 
         /// <summary>
         /// Returns the interval between the receiver and another given date.

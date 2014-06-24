@@ -437,14 +437,14 @@ namespace StubGen
                     };
                     doc.LoadHtml(data);
                     //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
-                    var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-protocol-description section']/p[@class='para']").InnerHtml).Trim();
+                    var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='intro']/p[@class='para']").InnerHtml).Trim();
                     desc = desc.Replace("More...", "").Trim();
                     output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
 
-                    var availability = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
+                    var availability = "";//RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
 
-                    output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
-                    output += "public interface " + self /*+ " : " + inherits*/ + "\r\n{\r\n";
+                    //output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                    output += "public class " + self /*+ " : " + inherits*/ + "\r\n{\r\n";
 
                     output += ScrapeWithAgility(data);
                 }

@@ -40,32 +40,18 @@ namespace StubGen
         {
             Console.WriteLine("What to scrape?");
             var scrape = Console.ReadLine();
-            //Console.WriteLine("What's Self?");
-            //var self = Console.ReadLine();
-            //Console.WriteLine("What's the parent?");
-            //var parent = Console.ReadLine();
+            Console.WriteLine("What's Self?");
+            var self = Console.ReadLine();
+            Console.WriteLine("What's the parent?");
+            var parent = Console.ReadLine();
 
-            //var input = new List<string>();
-            //using (var reader = new StreamReader("input.txt"))
-            //{
-            //    input.AddRange(reader.ReadToEnd().Split('\n'));
-            //    input = input.Select(line => line.Trim()).ToList();
-            //}
+            using (var writer = new StreamWriter("Output\\" + self[0] + ".cs"))
+            {
+                writer.Write(IndentDocument(Scraper.ScrapeToCSFile(scrape, self, parent)));
+                writer.Flush();
+            }
 
-            //foreach(var line in input)
-            //{
-            //    if (line.Trim() == "") continue;
-
-            //    var parts = line.Split(' ');
-
-            //    using (var writer = new StreamWriter("Output\\" + parts[0] + ".cs"))
-            //    {
-            //        writer.Write(IndentDocument(Scraper.ScrapeToCSFile(parts[1], parts[0], parts[2])));
-            //        writer.Flush();
-            //    }
-            //}
-
-            using (var client = new HttpClient())
+            /*using (var client = new HttpClient())
             {
                 var resp = client.GetStringAsync(scrape).Result;
                 var doc = new HtmlDocument{OptionFixNestedTags = true};
@@ -104,7 +90,7 @@ namespace StubGen
                         writer.Flush();
                     }
                 }
-            }
+            }*/
             Console.WriteLine("Done!");
             Console.ReadLine();
         }

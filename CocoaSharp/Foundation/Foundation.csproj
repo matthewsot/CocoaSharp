@@ -241,7 +241,6 @@
     <Compile Include="NSExtensionContext.cs" />
     <Compile Include="Protocols\NSCoding.cs" />
     <Compile Include="unfinished\AutoreleasingUnsafePointer.cs" />
-    <Compile Include="unfinished\NSComparisonResult.cs" />
     <Compile Include="unfinished\NSErrorPointer.cs" />
     <Compile Include="unfinished\NSTimeinterval.cs" />
     <Compile Include="unfinished\NSZone.cs" />

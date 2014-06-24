@@ -777,7 +777,7 @@ namespace Foundation
         /// <returns>The result of invoking compare:options: with NSCaseInsensitiveSearch as the only option.</returns>
         [iOSVersion(2)]
         [Export("caseInsensitiveCompare")]
-        public NSComparisonResult CaseInsensitiveCompare(string aString) { return null; }
+        public NSComparisonResult CaseInsensitiveCompare(string aString) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Compares the string with a given string using a case-insensitive, localized, comparison.
@@ -786,7 +786,7 @@ namespace Foundation
         /// <returns>Returns an NSComparisonResult value that indicates the lexical ordering. NSOrderedAscending the receiver precedes aString in lexical ordering, NSOrderedSame the receiver and aString are equivalent in lexical value, and NSOrderedDescending if the receiver follows aString.</returns>
         [iOSVersion(2)]
         [Export("localizedCaseInsensitiveCompare")]
-        public NSComparisonResult LocalizedCaseInsensitiveCompare(string aString) { return null; }
+        public NSComparisonResult LocalizedCaseInsensitiveCompare(string aString) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Returns the result of invoking compare:options:range: with no options and the receiver’s full extent as the range.
@@ -795,7 +795,7 @@ namespace Foundation
         /// <returns>The result of invoking compare:options:range: with no options and the receiver’s full extent as the range.</returns>
         [iOSVersion(2)]
         [Export("compare")]
-        public NSComparisonResult Compare(string aString) { return null; }
+        public NSComparisonResult Compare(string aString) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Compares the string and a given string using a localized comparison.
@@ -804,7 +804,7 @@ namespace Foundation
         /// <returns>Returns an NSComparisonResult. NSOrderedAscending the receiver precedes string in lexical ordering, NSOrderedSame the receiver and string are equivalent in lexical value, and NSOrderedDescending if the receiver follows string.</returns>
         [iOSVersion(2)]
         [Export("localizedCompare")]
-        public NSComparisonResult LocalizedCompare(string aString) { return null; }
+        public NSComparisonResult LocalizedCompare(string aString) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Compares the string with the specified string using the given options.
@@ -814,7 +814,7 @@ namespace Foundation
         /// <returns>The result of invoking compare:options:range: with a given mask as the options and the receiver’s full extent as the range.</returns>
         [iOSVersion(2)]
         [Export("compare")]
-        public NSComparisonResult Compare(string aString, NSStringCompareOptions options) { return null; }
+        public NSComparisonResult Compare(string aString, NSStringCompareOptions options) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Returns the result of invoking compare:options:range:locale: with a nil locale.
@@ -825,7 +825,7 @@ namespace Foundation
         /// <returns>The result of invoking compare:options:range:locale: with a nil locale.</returns>
         [iOSVersion(2)]
         [Export("compare")]
-        public NSComparisonResult Compare(string aString, NSStringCompareOptions options, NSRange range) { return null; }
+        public NSComparisonResult Compare(string aString, NSStringCompareOptions options, NSRange range) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Compares the string using the specified options and returns the lexical ordering for the range.
@@ -837,7 +837,7 @@ namespace Foundation
         /// <returns>Returns an NSComparisonResult value that indicates the lexical ordering of a specified range within the receiver and a given string. NSOrderedAscending if the substring of the receiver given by range precedes aString in lexical ordering for the locale given in dict, NSOrderedSame if the substring of the receiver and aString are equivalent in lexical value, and NSOrderedDescending if the substring of the receiver follows aString.</returns>
         [iOSVersion(2)]
         [Export("compare")]
-        public NSComparisonResult Compare(string aString, NSStringCompareOptions options, NSRange range, AnyObject locale) { return null; }
+        public NSComparisonResult Compare(string aString, NSStringCompareOptions options, NSRange range, AnyObject locale) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Compares strings as sorted by the Finder.
@@ -846,7 +846,7 @@ namespace Foundation
         /// <returns>The result of the comparison.</returns>
         [iOSVersion(4)]
         [Export("localizedStandardCompare")]
-        public NSComparisonResult LocalizedStandardCompare(string @string) { return null; }
+        public NSComparisonResult LocalizedStandardCompare(string @string) { return NSComparisonResult.OrderedSame; }
         
         /// <summary>
         /// Returns a Boolean value that indicates whether a given string matches the beginning characters of the receiver.
