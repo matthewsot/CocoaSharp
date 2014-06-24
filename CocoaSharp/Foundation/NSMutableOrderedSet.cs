@@ -54,18 +54,16 @@ namespace Foundation
         /// <summary>
         /// Inserts the given object at the specified index of the mutable ordered set.
         /// </summary>
-        /// <param name="object">The object to insert into to the set’s content. This value must not be nil.       Important     Important: Raises an NSInvalidArgumentException if object is nil.</param>
+        /// <param name="object">The object to insert into to the set’s content. This value must not be nil. !! Important !! Raises an NSInvalidArgumentException if object is nil.</param>
         /// <param name="atIndex">The index in the mutable ordered set at which to insert object. This value must not be greater than the count of elements in the array.       Important     Important: Raises an NSRangeException if idx is greater than the number of elements in the mutable ordered set.</param>
         [iOSVersion(5)]
         [Export("insertObject")]
         public void InsertObject(AnyObject @object, int atIndex) { }
-
-        //TODO: wasup with the two SetObjects?
         
         /// <summary>
         /// Inserts the given object at the specified index of the mutable ordered set.
         /// </summary>
-        /// <param name="object">The object to insert into to the set’s content. This value must not be nil.       Important     Important: Raises an NSInvalidArgumentException if object is nil.</param>
+        /// <param name="object">The object to insert into to the set’s content. This value must not be nil. !! Important !! Raises an NSInvalidArgumentException if object is nil.</param>
         /// <param name="atIndexedSubscript">The index in the mutable ordered set at which to insert object. This value must not be greater than the count of elements in the array.       Important     Important: Raises an NSRangeException if idx is greater than the number of elements in the mutable ordered set.</param>
         [iOSVersion(6)]
         [Export("setObject")]
@@ -78,7 +76,7 @@ namespace Foundation
         /// <param name="atIndex">The index. If the index is equal to the length of the collection, then it inserts the object at that index, otherwise it replaces the object at that index with the given object.</param>
         [iOSVersion(5)]
         [Export("setObject")]
-        public void SetObjectiOS5(AnyObject obj, int atIndex) { }
+        public void SetObjectAtIndex(AnyObject obj, int atIndex) { }
         
         /// <summary>
         /// Inserts the objects in the array at the specified indexes.

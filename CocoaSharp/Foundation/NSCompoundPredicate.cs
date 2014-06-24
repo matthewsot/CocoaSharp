@@ -19,7 +19,7 @@ namespace Foundation
         [iOSVersion(3)]
         [Export("andPredicateWithSubpredicates")]
         public static NSCompoundPredicate AndPredicateWithSubpredicates(AnyObject[] subpredicates) { return null; }
-        
+
         /// <summary>
         /// Returns a new predicate formed by NOT-ing a given predicate.
         /// </summary>
@@ -28,7 +28,7 @@ namespace Foundation
         [iOSVersion(3)]
         [Export("notPredicateWithSubpredicate")]
         public static NSCompoundPredicate NotPredicateWithSubpredicate(NSPredicate predicate) { return null; }
-        
+
         /// <summary>
         /// Returns a new predicate formed by OR-ing the predicates in a given array.
         /// </summary>
@@ -37,7 +37,7 @@ namespace Foundation
         [iOSVersion(3)]
         [Export("orPredicateWithSubpredicates")]
         public static NSCompoundPredicate OrPredicateWithSubpredicates(AnyObject[] subpredicates) { return null; }
-        
+
         /// <summary>
         /// Returns the receiver initialized to a given type using predicates from a given array.
         /// </summary>
@@ -46,7 +46,7 @@ namespace Foundation
         /// <returns>The receiver initialized with its type set to type and subpredicates array to subpredicates.</returns>
         [iOSVersion(3)]
         public NSCompoundPredicate(NSCompoundPredicateType type, AnyObject[] subpredicates) : base(false) { }
-        
+
         /// <summary>
         /// Returns the predicate type for the receiver.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Foundation
         [iOSVersion(3)]
         [Export("compoundPredicateType")]
         public NSCompoundPredicateType CompoundPredicateType { get; private set; }
-        
+
         /// <summary>
         /// Returns the array of the receiver’s subpredicates.
         /// </summary>
@@ -62,13 +62,10 @@ namespace Foundation
         [iOSVersion(3)]
         [Export("subpredicates")]
         public AnyObject[] Subpredicates { get; private set; }
-        
-        //TODO: check NSCompoundPredicateType
 
         /// <summary>
         /// These constants describe the possible types of NSCompoundPredicate.
         /// </summary>
-        [iOSVersion(3)]
         public enum NSCompoundPredicateType
         {
             /// <summary>
@@ -87,7 +84,7 @@ namespace Foundation
             /// A logical OR predicate.
             /// </summary>
             [iOSVersion(3)]
-            OrPredicateType
+            OrPredicateType,
         }
     }
 }

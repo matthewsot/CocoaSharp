@@ -241,18 +241,46 @@ namespace Foundation
         public NSSystemTimeZoneDidChangeNotification() : base("", null) { }
     }
 
-    //TODO: trivia this
-
     /// <summary>
     /// Specify styles for presenting time zone names.
     /// </summary>
     [iOSVersion(2)]
-    public enum NSTimeZoneNameStyle {
+    public enum NSTimeZoneNameStyle
+    {
+        /// <summary>
+        /// Specifies a standard name style. For example, “Central Standard Time” for Central Time.
+        /// </summary>
+        [iOSVersion(2)]
         Standard,
+
+        /// <summary>
+        /// Specifies a short name style. For example, “CST” for Central Time.
+        /// </summary>
+        [iOSVersion(2)]
         ShortStandard,
+
+        /// <summary>
+        /// Specifies a daylight saving name style. For example, “Central Daylight Time” for Central Time.
+        /// </summary>
+        [iOSVersion(2)]
         DaylightSaving,
+
+        /// <summary>
+        /// Specifies a short daylight saving name style. For example, “CDT” for Central Time.
+        /// </summary>
+        [iOSVersion(2)]
         ShortDaylightSaving,
+
+        /// <summary>
+        /// Specifies a generic name style. For example, “Central Time” for Central Time.
+        /// </summary>
+        [iOSVersion(4)]
         Generic,
-        ShortGeneric
+
+        /// <summary>
+        /// Specifies a generic time zone name. For example, “CT” for Central Time.
+        /// </summary>
+        [iOSVersion(4)]
+        ShortGeneric,
     }
 }
