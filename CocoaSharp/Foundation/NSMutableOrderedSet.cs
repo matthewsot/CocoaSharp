@@ -4,8 +4,6 @@ using SwiftSharp.Attributes;
 
 namespace Foundation
 {
-    using NSComparator = Func<AnyObject, AnyObject, NSComparisonResult>;
-
     //https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSMutableOrderedSet_Class/index.html#//apple_ref/occ/cl/NSMutableOrderedSet
     /// <summary>
     /// NSMutableOrderedSet class declares the programmatic interface to a mutable, ordered collection of distinct objects.

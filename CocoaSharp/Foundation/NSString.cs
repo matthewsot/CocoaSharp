@@ -581,7 +581,7 @@ namespace Foundation
         /// <returns>The range in the receiver of the first character found from aSet. Returns a range of {NSNotFound, 0} if none of the characters in aSet are found.</returns>
         [iOSVersion(2)]
         [Export("rangeOfCharacterFromSet")]
-        public NSRange RangeOfCharacterFromSet(NSCharacterSet aSet) { return null; }
+        public NSRange RangeOfCharacterFromSet(NSCharacterSet aSet) { return new NSRange(); }
         
         /// <summary>
         /// Finds and returns the range in the receiver of the first character, using given options, from a given character set.
@@ -591,7 +591,7 @@ namespace Foundation
         /// <returns>The range in the receiver of the first character found from aSet. Returns a range of {NSNotFound, 0} if none of the characters in aSet are found.</returns>
         [iOSVersion(2)]
         [Export("rangeOfCharacterFromSet")]
-        public NSRange RangeOfCharacterFromSet(NSCharacterSet aSet, NSStringCompareOptions options) { return null; }
+        public NSRange RangeOfCharacterFromSet(NSCharacterSet aSet, NSStringCompareOptions options) { return new NSRange(); }
         
         /// <summary>
         /// Finds and returns the range in the receiver of the first character from a given character set found in a given range with given options.
@@ -602,7 +602,7 @@ namespace Foundation
         /// <returns>The range in the receiver of the first character found from aSet within aRange. Returns a range of {NSNotFound, 0} if none of the characters in aSet are found.</returns>
         [iOSVersion(2)]
         [Export("rangeOfCharacterFromSet")]
-        public NSRange RangeOfCharacterFromSet(NSCharacterSet aSet, NSStringCompareOptions options, NSRange range) { return null; }
+        public NSRange RangeOfCharacterFromSet(NSCharacterSet aSet, NSStringCompareOptions options, NSRange range) { return new NSRange(); }
         
         /// <summary>
         /// Finds and returns the range of the first occurrence of a given string within the receiver.
@@ -611,7 +611,7 @@ namespace Foundation
         /// <returns>An NSRange structure giving the location and length in the receiver of the first occurrence of aString. Returns {NSNotFound, 0} if aString is not found or is empty (@&quot;&quot;).</returns>
         [iOSVersion(2)]
         [Export("rangeOfString")]
-        public NSRange RangeOfString(string aString) { return null; }
+        public NSRange RangeOfString(string aString) { return new NSRange(); }
         
         /// <summary>
         /// Finds and returns the range of the first occurrence of a given string within the receiver, subject to given options.
@@ -621,7 +621,7 @@ namespace Foundation
         /// <returns>An NSRange structure giving the location and length in the receiver of the first occurrence of aString, modulo the options in mask. Returns {NSNotFound, 0} if aString is not found or is empty (@&quot;&quot;).</returns>
         [iOSVersion(2)]
         [Export("rangeOfString")]
-        public NSRange RangeOfString(string aString, NSStringCompareOptions options) { return null; }
+        public NSRange RangeOfString(string aString, NSStringCompareOptions options) { return new NSRange(); }
         
         /// <summary>
         /// Finds and returns the range of the first occurrence of a given string, within the given range of the receiver, subject to given options.
@@ -632,7 +632,7 @@ namespace Foundation
         /// <returns>An NSRange structure giving the location and length in the receiver of aString within aRange in the receiver, modulo the options in mask. The range returned is relative to the start of the string, not to the passed-in range. Returns {NSNotFound, 0} if aString is not found or is empty (@&quot;&quot;).</returns>
         [iOSVersion(2)]
         [Export("rangeOfString")]
-        public NSRange RangeOfString(string aString, NSStringCompareOptions options, NSRange range) { return null; }
+        public NSRange RangeOfString(string aString, NSStringCompareOptions options, NSRange range) { return new NSRange(); }
         
         /// <summary>
         /// Finds and returns the range of the first occurrence of a given string within a given range of the receiver, subject to given options, using the specified locale, if any.
@@ -644,7 +644,7 @@ namespace Foundation
         /// <returns>An NSRange structure giving the location and length in the receiver of aString within aRange in the receiver, modulo the options in mask. The range returned is relative to the start of the string, not to the passed-in range. Returns {NSNotFound, 0} if aString is not found or is empty (@&quot;&quot;).</returns>
         [iOSVersion(2)]
         [Export("rangeOfString")]
-        public NSRange RangeOfString(string aString, NSStringCompareOptions options, NSRange range, NSLocale locale) { return null; }
+        public NSRange RangeOfString(string aString, NSStringCompareOptions options, NSRange range, NSLocale locale) { return new NSRange(); }
         
         /// <summary>
         /// Enumerates all the lines in a string.
@@ -714,7 +714,7 @@ namespace Foundation
         /// <returns>The range of characters representing the line or lines containing aRange, including the line termination characters. See getLineStart:end:contentsEnd:forRange: for a discussion of line terminators.</returns>
         [iOSVersion(2)]
         [Export("lineRangeForRange")]
-        public NSRange LineRangeForRange(NSRange aRange) { return null; }
+        public NSRange LineRangeForRange(NSRange aRange) { return new NSRange(); }
         
         /// <summary>
         /// Returns by reference the beginning of the first paragraph and the end of the last paragraph touched by the given range.
@@ -734,7 +734,7 @@ namespace Foundation
         /// <returns>The range of characters representing the paragraph or paragraphs containing aRange, including the paragraph termination characters.</returns>
         [iOSVersion(2)]
         [Export("paragraphRangeForRange")]
-        public NSRange ParagraphRangeForRange(NSRange aRange) { return null; }
+        public NSRange ParagraphRangeForRange(NSRange aRange) { return new NSRange(); }
         
         /// <summary>
         /// Returns the range in the receiver of the composed character sequence located at a given index.
@@ -743,7 +743,7 @@ namespace Foundation
         /// <returns>The range in the receiver of the composed character sequence located at anIndex.</returns>
         [iOSVersion(2)]
         [Export("rangeOfComposedCharacterSequenceAtIndex")]
-        public NSRange RangeOfComposedCharacterSequenceAtIndex(int anIndex) { return null; }
+        public NSRange RangeOfComposedCharacterSequenceAtIndex(int anIndex) { return new NSRange(); }
         
         /// <summary>
         /// Returns the range in the string of the composed character sequences for a given range.
@@ -752,7 +752,7 @@ namespace Foundation
         /// <returns>The range in the receiver that includes the composed character sequences in range.</returns>
         [iOSVersion(2)]
         [Export("rangeOfComposedCharacterSequencesForRange")]
-        public NSRange RangeOfComposedCharacterSequencesForRange(NSRange range) { return null; }
+        public NSRange RangeOfComposedCharacterSequencesForRange(NSRange range) { return new NSRange(); }
         
         /// <summary>
         /// Parses the receiver as a text representation of a property list, returning an NSString, NSData, NSArray, or NSDictionary object, according to the topmost element.

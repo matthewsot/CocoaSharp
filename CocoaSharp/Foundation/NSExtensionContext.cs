@@ -4,12 +4,6 @@ using SwiftSharp.Attributes;
 
 namespace Foundation
 {
-	/// <summary>
-	/// An identifier for a background session.
-	/// </summary>
-	// [iOSVersion(8)]
-	using NSExtensionBackgroundTaskIdentifier = Int32;
-
 	//https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSExtensionContext_Class/index.html#//apple_ref/occ/cl/NSExtensionContext
 	/// <summary>
 	/// An NSExtensionContext object represents the context in which an app extension is invoked. When the currently running app (known as the host app) sends a request to an extension, it defines the context in which the extension runs. For many app extensions, the most important thing to know is the data the user wants to work with, which is contained in the inputItems property.

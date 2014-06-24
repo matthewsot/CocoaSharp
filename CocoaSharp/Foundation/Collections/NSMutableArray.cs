@@ -4,8 +4,6 @@ using SwiftSharp.Attributes;
 
 namespace Foundation
 {
-    using NSComparator = Func<AnyObject, AnyObject, NSComparisonResult>;
-
     //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSMutableArray_Class/index.html#//apple_ref/occ/cl/NSMutableArray
     /// <summary>
     /// The NSMutableArray class declares the programmatic interface to objects that manage a modifiable array of objects. This class adds insertion and deletion operations to the basic array-handling behavior inherited from NSArray.

@@ -57,6 +57,21 @@
     <Compile Include="CClasses\CUnsignedShort.cs" />
     <Compile Include="CClasses\CVaListPointer.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DataTypes\NSComparator.cs" />
+    <Compile Include="DataTypes\NSExtensionBackgroundTaskIdentifier.cs" />
+    <Compile Include="DataTypes\NSHashTableOptions.cs" />
+    <Compile Include="DataTypes\NSInteger.cs" />
+    <Compile Include="DataTypes\NSMapTableOptions.cs" />
+    <Compile Include="DataTypes\NSPointerFunctionsOptions.cs" />
+    <Compile Include="DataTypes\NSRange.cs" />
+    <Compile Include="DataTypes\NSRangePointer.cs" />
+    <Compile Include="DataTypes\NSSocketNativeHandle.cs" />
+    <Compile Include="DataTypes\NSSwappedDouble.cs" />
+    <Compile Include="DataTypes\NSSwappedFloat.cs" />
+    <Compile Include="DataTypes\NSTimeInterval.cs" />
+    <Compile Include="DataTypes\NSUInteger.cs" />
+    <Compile Include="DataTypes\NSURLBookmarkFileCreationOptions.cs" />
+    <Compile Include="DataTypes\NSURLFileScheme.cs" />
     <Compile Include="NSAutoreleasePool.cs" />
     <Compile Include="NSExtensionItem.cs" />
     <Compile Include="NSFileAccessIntent.cs" />
@@ -179,7 +194,6 @@
     <Compile Include="NSProcessInfo.cs" />
     <Compile Include="NSPropertyListSerialization.cs" />
     <Compile Include="NSProxy.cs" />
-    <Compile Include="unfinished\NSRange.cs" />
     <Compile Include="NSRecursiveLock.cs" />
     <Compile Include="NSRunLoop.cs" />
     <Compile Include="NSScanner.cs" />
@@ -242,7 +256,6 @@
     <Compile Include="Protocols\NSCoding.cs" />
     <Compile Include="unfinished\AutoreleasingUnsafePointer.cs" />
     <Compile Include="unfinished\NSErrorPointer.cs" />
-    <Compile Include="unfinished\NSTimeinterval.cs" />
     <Compile Include="unfinished\NSZone.cs" />
     <Compile Include="unfinished\SecIdentity.cs" />
     <Compile Include="unfinished\SecTrust.cs" />

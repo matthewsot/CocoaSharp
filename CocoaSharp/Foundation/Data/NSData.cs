@@ -232,7 +232,7 @@ namespace Foundation
         /// <returns>An NSRange structure giving the location and length of dataToFind within searchRange, modulo the options in mask. The range returned is relative to the start of the searched data, not the passed-in search range. Returns {NSNotFound, 0} if dataToFind is not found or is empty (@&quot;&quot;).</returns>
         [iOSVersion(4)]
         [Export("rangeOfData")]
-        public NSRange RangeOfData(NSData dataToFind, NSDataSearchOptions options, NSRange range) { return null; }
+        public NSRange RangeOfData(NSData dataToFind, NSDataSearchOptions options, NSRange range) { return new NSRange(); }
 
         /// <summary>
         /// Create a Base-64, UTF-8 encoded NSData from the receiver's contents using the given options.

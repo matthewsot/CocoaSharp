@@ -4,8 +4,6 @@ using SwiftSharp.Attributes;
 
 namespace Foundation
 {
-    using NSComparator = Func<AnyObject, AnyObject, NSComparisonResult>;
-
     //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary_Class/index.html#//apple_ref/occ/cl/NSDictionary
     /// <summary>
     /// The NSDictionary class declares the programmatic interface to objects that manage immutable associations of keys and values. Use this class or its subclass NSMutableDictionary when you need a convenient and efficient way to retrieve data associated with an arbitrary key. NSDictionary creates static dictionaries, and NSMutableDictionary creates dynamic dictionaries. (For convenience, the term dictionary refers to any instance of one of these classes without specifying its exact class membership.)

@@ -4,8 +4,6 @@ using SwiftSharp.Attributes;
 
 namespace Foundation
 {
-    using NSComparator = Func<AnyObject, AnyObject, NSComparisonResult>;
-
     //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/index.html#//apple_ref/occ/cl/NSArray
     /// <summary>
     /// NSArray and its subclass NSMutableArray manage ordered collections of objects called arrays. NSArray creates static arrays, and NSMutableArray creates dynamic arrays. You can use arrays when you need an ordered collection of objects.

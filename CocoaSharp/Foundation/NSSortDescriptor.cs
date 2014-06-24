@@ -4,8 +4,6 @@ using SwiftSharp.Attributes;
 
 namespace Foundation
 {
-    using NSComparator = Func<AnyObject, AnyObject, NSComparisonResult>;
-
     //https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSSortDescriptor_Class/index.html#//apple_ref/occ/cl/NSSortDescriptor
     /// <summary>
     /// An instance of NSSortDescriptor describes a basis for ordering objects by specifying the property to use to compare the objects, the method to use to compare the properties, and whether the comparison should be ascending or descending. Instances of NSSortDescriptor are immutable.
