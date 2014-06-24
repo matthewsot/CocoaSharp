@@ -437,7 +437,8 @@ namespace StubGen
                     };
                     doc.LoadHtml(data);
                     //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
-                    var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='intro']/p[@class='para']").InnerHtml).Trim();
+                    //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='intro']/p[@class='para']").InnerHtml).Trim();
+                    var desc = "This document describes the data types and constants found in the Foundation framework.";
                     desc = desc.Replace("More...", "").Trim();
                     output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
 
