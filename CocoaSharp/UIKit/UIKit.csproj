@@ -37,7 +37,10 @@
     <Compile Include="DataTypes\UIAccelerationValue.cs" />
     <Compile Include="DataTypes\UIActivityViewControllerCompletionHandler.cs" />
     <Compile Include="DataTypes\UICollectionViewLayoutinteractiveTransitionCompletion.cs" />
+    <Compile Include="DataTypes\UIFontDescriptorClass.cs" />
     <Compile Include="DataTypes\UILayoutPriority.cs" />
+    <Compile Include="DataTypes\UIPrinterPickerCompletionHandler.cs" />
+    <Compile Include="DataTypes\UIPrintinteractionCompletionHandler.cs" />
     <Compile Include="NSFileProviderExtension.cs" />
     <Compile Include="NSLayoutConstraint.cs" />
     <Compile Include="NSLayoutManager.cs" />
