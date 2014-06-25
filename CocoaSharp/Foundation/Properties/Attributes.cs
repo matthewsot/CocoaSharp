@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SwiftSharp.Attributes
 {
-    class ExportAttribute : Attribute
+    public class ExportAttribute : Attribute
     {
         public string ExportAs { get; set; }
         public ExportAttribute(string exportAs)
@@ -14,7 +14,7 @@ namespace SwiftSharp.Attributes
         }
     }
 
-    class iOSVersionAttribute : Attribute
+    public class iOSVersionAttribute : Attribute
     {
         public double Version { get; set; }
         public iOSVersionAttribute(double version)
@@ -23,11 +23,11 @@ namespace SwiftSharp.Attributes
         }
     }
 
-    class OptionalAttribute : Attribute
+    public class OptionalAttribute : Attribute
     {
     }
 
-    class GlobalAttribute : Attribute
+    public class GlobalAttribute : Attribute
     {
     }
 }

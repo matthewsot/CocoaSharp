@@ -40,18 +40,18 @@ namespace StubGen
         {
             Console.WriteLine("What to scrape?");
             var scrape = Console.ReadLine();
-            Console.WriteLine("What's Self?");
-            var self = Console.ReadLine();
-            Console.WriteLine("What's the parent?");
-            var parent = Console.ReadLine();
+            //Console.WriteLine("What's Self?");
+            //var self = Console.ReadLine();
+            //Console.WriteLine("What's the parent?");
+            //var parent = Console.ReadLine();
 
-            using (var writer = new StreamWriter("Output\\" + self[0] + ".cs"))
-            {
-                writer.Write(IndentDocument(Scraper.ScrapeToCSFile(scrape, self, parent)));
-                writer.Flush();
-            }
+            //using (var writer = new StreamWriter("Output\\" + self[0] + ".cs"))
+            //{
+            //    writer.Write(IndentDocument(Scraper.ScrapeToCSFile(scrape, self, parent)));
+            //    writer.Flush();
+            //}
 
-            /*using (var client = new HttpClient())
+            using (var client = new HttpClient())
             {
                 var resp = client.GetStringAsync(scrape).Result;
                 var doc = new HtmlDocument{OptionFixNestedTags = true};
@@ -79,18 +79,19 @@ namespace StubGen
                         Console.WriteLine("No link for " + name);
                         continue;
                     }
-                    link = link.Replace("../../../../..", "https://developer.apple.com/library/prerelease/ios");
-                    link = link.Replace("../../../..", "https://developer.apple.com/library/prerelease/ios/documentation");
-                    link = link.Replace("../../..", "https://developer.apple.com/library/prerelease/ios/documentation/Cocoa");
-                    link = link.Replace("../..", "https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference");
-                    link = link.Replace("..", "https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation");
+                    //https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIKit_Framework/index.html
+                    link = link.Replace("../../../../..", "https://developer.apple.com/library/prerelease");
+                    link = link.Replace("../../../..", "https://developer.apple.com/library/prerelease/ios");
+                    link = link.Replace("../../..", "https://developer.apple.com/library/prerelease/ios/documentation");
+                    link = link.Replace("../..", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit");
+                    link = link.Replace("..", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference");
                     using (var writer = new StreamWriter("Output\\" + name + ".cs"))
                     {
                         writer.Write(IndentDocument(Scraper.ScrapeToCSFile(link, name, parent)));
                         writer.Flush();
                     }
                 }
-            }*/
+            }
             Console.WriteLine("Done!");
             Console.ReadLine();
         }
