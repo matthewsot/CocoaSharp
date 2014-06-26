@@ -41,7 +41,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CGAffineTransform.cs" />
+    <Compile Include="CGContext.cs" />
     <Compile Include="CGFloat.cs" />
+    <Compile Include="CGFontIndex.cs" />
+    <Compile Include="CGGlyph.cs" />
+    <Compile Include="CGPath.cs" />
     <Compile Include="CGPoint.cs" />
     <Compile Include="CGRect.cs" />
     <Compile Include="CGSize.cs" />

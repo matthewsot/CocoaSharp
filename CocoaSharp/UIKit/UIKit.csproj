@@ -34,17 +34,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Additions\NSAttributedString.cs" />
+    <Compile Include="Additions\NSBundle.cs" />
+    <Compile Include="Additions\NSCoder.cs" />
+    <Compile Include="Additions\NSIndexPath.cs" />
+    <Compile Include="Additions\NSObject.cs" />
+    <Compile Include="Additions\NSString.cs" />
+    <Compile Include="Additions\NSValue.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="DataTypes\UIAccelerationValue.cs" />
+    <Compile Include="DataTypes\UIAccessibilityNotifications.cs" />
+    <Compile Include="DataTypes\UIAccessibilityTraits.cs" />
     <Compile Include="DataTypes\UIActivityViewControllerCompletionHandler.cs" />
+    <Compile Include="DataTypes\UIBackgroundTaskIdentifier.cs" />
     <Compile Include="DataTypes\UICollectionViewLayoutinteractiveTransitionCompletion.cs" />
     <Compile Include="DataTypes\UIFontDescriptorClass.cs" />
     <Compile Include="DataTypes\UILayoutPriority.cs" />
     <Compile Include="DataTypes\UIPrinterPickerCompletionHandler.cs" />
     <Compile Include="DataTypes\UIPrintinteractionCompletionHandler.cs" />
+    <Compile Include="DataTypes\UIWindowLevel.cs" />
     <Compile Include="NSFileProviderExtension.cs" />
     <Compile Include="NSLayoutConstraint.cs" />
     <Compile Include="NSLayoutManager.cs" />
-    <Compile Include="NSMutableAttributedString.cs" />
+    <Compile Include="Additions\NSMutableAttributedString.cs" />
     <Compile Include="NSMutableParagraphStyle.cs" />
     <Compile Include="NSParagraphStyle.cs" />
     <Compile Include="NSShadow.cs" />

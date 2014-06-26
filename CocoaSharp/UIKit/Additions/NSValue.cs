@@ -1,0 +1,2 @@
+using ObjectiveC;using System;using SwiftSharp.Attributes;using Foundation;namespace UIKit{    //https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSValue_UIKit_Additions/index.html#//apple_ref/doc/uid/TP40007293    /// <summary>    /// This category adds methods to the Foundation framework’s NSValue class. The methods in this category let you represent geometry-based data using an NSValue object.    /// </summary>    [iOSVersion(2)]
+    [Export("NSValue")]    public class NSValueAdditions    {        //ObjC only    }}
