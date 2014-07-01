@@ -67,6 +67,7 @@
     <Compile Include="NSTextTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocols\Delegates\NSLayoutManagerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIAdaptivePresentationControllerDelegate.cs" />
     <Compile Include="Protocols\NSTextAttachmentContainer.cs" />
     <Compile Include="Protocols\NSTextLayoutOrientationProvider.cs" />
     <Compile Include="Protocols\Delegates\NSTextStorageDelegate.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="Protocols\UIAccessibilityReadingContent.cs" />
     <Compile Include="Protocols\Delegates\UIActionSheetDelegate.cs" />
     <Compile Include="Protocols\UIActivityItemSource.cs" />
-    <Compile Include="Protocols\UIAdaptivePresentationControllerDelegate.cs" />
     <Compile Include="Protocols\Delegates\UIAlertViewDelegate.cs" />
     <Compile Include="Protocols\UIAppearance.cs" />
     <Compile Include="Protocols\UIAppearanceContainer.cs" />
