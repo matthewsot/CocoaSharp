@@ -40,17 +40,17 @@ namespace StubGen
         {
             Console.WriteLine("What to scrape?");
             var scrape = Console.ReadLine();
-            Console.WriteLine("What's Self?");
-            var self = Console.ReadLine();
-            Console.WriteLine("What's the parent?");
-            var parent = Console.ReadLine();
+            //Console.WriteLine("What's Self?");
+            //var self = Console.ReadLine();
+            //Console.WriteLine("What's the parent?");
+            //var parent = Console.ReadLine();
 
-            using (var writer = new StreamWriter("Output\\" + self + ".cs"))
-            {
-                writer.Write(IndentDocument(Scraper.ScrapeToCSFile(scrape, self, parent)));
-                writer.Flush();
-            }
-            /*
+            //using (var writer = new StreamWriter("Output\\" + self + ".cs"))
+            //{
+            //    writer.Write(IndentDocument(Scraper.ScrapeToCSFile(scrape, self, parent)));
+            //    writer.Flush();
+            //}
+            
             using (var client = new HttpClient())
             {
                 var resp = client.GetStringAsync(scrape).Result;
@@ -91,7 +91,7 @@ namespace StubGen
                         writer.Flush();
                     }
                 }
-            }*/
+            }
             Console.WriteLine("Done!");
             Console.ReadLine();
         }
