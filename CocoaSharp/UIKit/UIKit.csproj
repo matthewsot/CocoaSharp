@@ -42,6 +42,7 @@
     <Compile Include="Additions\NSString.cs" />
     <Compile Include="Additions\NSValue.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DataTypes\UITextDirection.cs" />
     <Compile Include="DataTypes\UIAccelerationValue.cs" />
     <Compile Include="DataTypes\UIAccessibilityNotifications.cs" />
     <Compile Include="DataTypes\UIAccessibilityTraits.cs" />
