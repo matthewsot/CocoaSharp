@@ -73,6 +73,7 @@
     <Compile Include="Scrapers\ScrapedMember.cs" />
     <Compile Include="Scrapers\ScrapedMethod.cs" />
     <Compile Include="Scrapers\ScrapedParameter.cs" />
+    <Compile Include="Scrapers\ScrapedProperty.cs" />
     <Compile Include="Scrapers\Types.cs" />
   </ItemGroup>
   <ItemGroup>

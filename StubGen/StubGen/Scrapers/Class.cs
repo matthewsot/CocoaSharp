@@ -22,7 +22,7 @@ namespace StubGen
         static List<string> Signatures = new List<string>();
         private static string Differentiate(ScrapedMethod method)
         {
-            var methodSignature = method.Name + " " + method.ReturnType.CSharpType + " " +
+            var methodSignature = method.RawName + " " + method.ReturnType.CSharpType + " " +
                                   string.Join("", method.Parameters.Select(param => param.Type.CSharpType));
 
             if (Signatures.Any(sig => sig == methodSignature))
@@ -129,9 +129,9 @@ namespace StubGen
                     }
                     if (!method.IsConstructor)
                     {
-                        if (method.CSharpName != method.Name)
+                        if (method.CSharpName != method.RawName)
                         {
-                            output += "[Export(\"" + method.Name + "\")]" + NewLine;
+                            output += "[Export(\"" + method.RawName + "\")]" + NewLine;
                         }
                         output += method.Public ? "public " : "private ";
                         output += method.Static ? "static " : "";
@@ -154,6 +154,34 @@ namespace StubGen
                             method.Parameters.Select(param => param.Type.CSharpType + " " + param.Name));
                         output += differentiator + ") { }" + NewLine + NewLine;
                     }
+                }
+                else if (member is ScrapedProperty)
+                {
+                    var property = (ScrapedProperty) member;
+
+                    output += "/// <summary>" + NewLine + "/// " +
+                              ParseAsDescription(property.Description) + NewLine +
+                              "/// </summary>" + NewLine;
+
+                    if (property.iOSVersion.HasValue) //todo iosversion in scrapedmember
+                    {
+                        output += "[iOSVersion(" + property.iOSVersion + ")]" + NewLine;
+                    }
+                    if (property.Deprecated)
+                    {
+                        output += "[Obsolete]" + NewLine;
+                    }
+                    if (property.CSharpName != property.RawName)
+                    {
+                        output += "[Export(\"" + property.RawName + "\")]" + NewLine;
+                    }
+                    output += property.Public ? "public " : "private ";
+                    output += property.Static ? "static " : "";
+                    output += property.Type.CSharpType + " ";
+                    output += property.CSharpName + " { ";
+                    output += property.PublicGetter ? "get; " : "private get; ";
+                    output += property.PublicSetter ? "set; " : "private set; ";
+                    output += "}" + NewLine + NewLine;
                 }
             }
 
