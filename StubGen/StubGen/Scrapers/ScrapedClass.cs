@@ -38,7 +38,7 @@ namespace StubGen
 
         public string Inherits { get; set; }
         public IEnumerable<string> ConformsTo { get; set; }
-        public IEnumerable<ScrapedMember> Members { get; set; }
+        public List<ScrapedMember> Members { get; set; }
         public string Namespace { get; set; }
         public string Name { get; set; }
 

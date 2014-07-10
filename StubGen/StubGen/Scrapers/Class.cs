@@ -93,6 +93,22 @@ namespace StubGen
             output = output.TrimEnd(' ', ',');
             output += NewLine + "{" + NewLine;
 
+            var allProperties = parsed.Members.OfType<ScrapedProperty>().ToList();
+            for (var i = 0; i < allProperties.Count(); i++) //todo test this
+            {
+                var currProperty = allProperties[i];
+                var allWithSame = allProperties.Where(
+                    prop =>
+                        prop != currProperty && prop.RawName == currProperty.RawName &&
+                        prop.Type.RawSwift == currProperty.Type.RawSwift);
+
+                foreach (var withSame in allWithSame)
+                {
+                    allProperties.Remove(withSame);
+                    parsed.Members.Remove(withSame);
+                }
+            }
+
             foreach (var member in parsed.Members)
             {
                 if (member is ScrapedMethod)
