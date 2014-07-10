@@ -1,17 +1,88 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace StubGen
 {
-    class Scraper
+    partial class Scraper
     {
+        public static void ParseFrameworkClasses()
+        {
+            
+        }
+
+        public static void ParseFrameworkProtocols()
+        {
+            
+        }
+
+        public static void ParseFrameworkDataTypes()
+        {
+            
+        }
+
+        public static string ParseClass(string url, string @namespace, IEnumerable<string> extraUsings)
+        {
+            var output = SyntaxFactory.CompilationUnit()
+                .WithUsings(
+                    SyntaxFactory.List(new[]
+                    {
+                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"ObjectiveC")),
+                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"System")),
+                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"SwiftSharp.Attributes")),
+                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"Foundation")),
+                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"CoreGraphics")),
+                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"UIKit"))
+                    }).AddRange(
+                        extraUsings.Select(
+                            @using => SyntaxFactory.UsingDirective(
+                                SyntaxFactory.IdentifierName(@using)))));
+
+            var namespaceOutput = SyntaxFactory.NamespaceDeclaration(
+                SyntaxFactory.IdentifierName(@namespace));
+
+            var parsedInnards = Class(url);
+
+            output = output.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(namespaceOutput));
+            return output.NormalizeWhitespace().ToString();
+        }
+
+        /*
+            var output = "using ;\r\nusing ;\r\nusing ;\r\nusing ;\r\nusing ;\r\nusing UIKit;\r\n\r\n";
+            output += @namespace + " UIKit\r\n{\r\n";
+            output += "//" + url + "\r\n";
+            using (var client = new HttpClient())
+            {
+                var data = client.GetStringAsync(url).Result;
+                var doc = new HtmlDocument
+                {
+                    OptionFixNestedTags = true
+                };
+                doc.LoadHtml(data);
+                //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-class-description section']/p[@class='para']").InnerHtml).Trim();
+                var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='z-protocol-description section']/p[@class='para']").InnerHtml).Trim();
+                //var desc = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//section[@class='intro']/p[@class='para']").InnerHtml).Trim();
+                //var desc = "The UIKit framework defines data types that are used in multiple places throughout the framework.";
+                desc = desc.Replace("More...", "").Trim();
+                output += "/// <summary>\r\n/// " + desc + "\r\n/// </summary>\r\n";
+
+                var availability = RemoveHTMLTags(doc.DocumentNode.SelectSingleNode("/html/body//div[@class='z-reference-info-availability half']/span").InnerHtml).Trim();
+
+                output += "[iOSVersion(" + Regex.Split(availability, "in iOS ")[1].Split(' ')[0].Trim('.', '0') + ")]\r\n";
+                output += "public interface " + self + /*" : " + inherits +* "\r\n{\r\n";
+
+                output += ScrapeWithAgility(data).Replace("public ", "").Replace("private set; ", "");/*.Replace(" { get; private set; }", ";").Replace(" { get; set; }", ";").Replace("public ", "")*
+            }
+
+            return output.TrimEnd().Replace("`", "").Replace("  ", " ").Replace("YEStrue", "true").Replace("NOfalse", "false").Replace("public Self Init(", "public Self(").Replace("void Init(", "Self(").Replace("Self", self).Replace("COMMAHERE123", ",").Replace("Int", "int") + "\r\n}\r\n}";
+        }*/
+
         public static string ParseEnum(HtmlNode section, HtmlNode declarationPara, string summary)
         {
             var declaration = RemoveHTMLTags(declarationPara.InnerHtml.Trim()).Trim();
