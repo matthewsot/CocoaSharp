@@ -70,10 +70,7 @@ namespace StubGen
 
             output += NewLine + NewLine + "namespace " + parsed.Namespace + NewLine + "{" + NewLine;
 
-            output += "/// <summary>" + NewLine + "/// " +
-                      ParseAsDescription(parsed.Description) + NewLine +
-                      "/// </summary>" + NewLine;
-            output += "/// <see cref=\"" + url + "\"/>" + NewLine;
+            output += parsed.GetTrivia().Replace("/// </summary>" + NewLine, "/// </summary>" + NewLine + "/// <see cref=\"" + url + "\"/>" + NewLine);
 
             output += "public " + (isInterface ? "interface" : "class") + " " + parsed.Name;
 

@@ -84,13 +84,20 @@ namespace StubGen
                         .RealInnerText().Replace("More...", "").Trim();
 
                 Description = description ?? "";
+                if (Description == "")
+                {
+                   var desc =
+                   doc.DocumentNode.SelectSingleNode("//section[@class='z-protocol-description section']/p")
+                       .RealInnerText().Replace("More...", "").Trim();
+
+                    Description = desc ?? "";
+                }
 
                 var availability =
                     doc.DocumentNode.SelectSingleNode("//div[@class='z-reference-info-availability half']").RealInnerText();
 
                 iOSVersion = ParseAvailability(availability);
 
-                //TODO: this isn't finding the constants
                 var members = doc.DocumentNode.SelectNodes("//section[@class='section task-group-section']//ul[@class='task-group-list']/li[@class='item symbol']");
                 //var members = doc.DocumentNode.SelectNodes("//li[@class='item symbol']");
                 //Members = members.Select(member => ScrapedMember.ScrapeMember(member));
