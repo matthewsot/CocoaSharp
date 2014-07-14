@@ -199,9 +199,91 @@ namespace StubGen
                     output += property.PublicSetter ? "set; " : "private set; ";
                     output += "}" + NewLine + NewLine;
                 }
+                else if (member is ScrapedEnum)
+                {
+                    continue;
+                }
             }
 
-            return output.TrimEnd() + NewLine + "}" + NewLine + "}";
+            output = output.TrimEnd() + NewLine + "}" + NewLine + "}";
+
+            foreach (var scrapedEnum in parsed.Members.OfType<ScrapedEnum>())
+            {
+                output += "/// <summary>" + NewLine + "/// " +
+                          ParseAsDescription(scrapedEnum.Description) + NewLine +
+                          "/// </summary>" + NewLine;
+
+                if (scrapedEnum.iOSVersion.HasValue) //todo iosversion in scrapedmember
+                {
+                    output += "[iOSVersion(" + scrapedEnum.iOSVersion + ")]" + NewLine;
+                }
+                if (scrapedEnum.Deprecated)
+                {
+                    output += "[Obsolete]" + NewLine;
+                }
+                if (scrapedEnum.CSharpName != scrapedEnum.RawName)
+                {
+                    output += "[Export(\"" + scrapedEnum.RawName + "\")]" + NewLine;
+                }
+
+                output += "public enum " + scrapedEnum.CSharpName + NewLine + "{" + NewLine;
+                foreach (var member in scrapedEnum.Members)
+                {
+                    output += "/// <summary>" + NewLine + "/// " +
+                              ParseAsDescription(scrapedEnum.Description) + NewLine +
+                              "/// </summary>" + NewLine;
+
+                    if (scrapedEnum.iOSVersion.HasValue) //todo iosversion in scrapedmember
+                    {
+                        output += "[iOSVersion(" + scrapedEnum.iOSVersion + ")]" + NewLine;
+                    }
+                    if (scrapedEnum.Deprecated)
+                    {
+                        output += "[Obsolete]" + NewLine;
+                    }
+                    if (scrapedEnum.CSharpName != scrapedEnum.RawName)
+                    {
+                        output += "[Export(\"" + scrapedEnum.RawName + "\")]" + NewLine;
+                    }
+
+                    output += member.CSharpName + "," + NewLine;
+                }
+
+                output += "}" + NewLine;
+            }
+
+            foreach (var typeAlias in parsed.Members.OfType<ScrapedTypedef>())
+            {
+                output += "/// <summary>" + NewLine + "/// " +
+                          ParseAsDescription(typeAlias.Description) + NewLine +
+                          "/// </summary>" + NewLine;
+
+                if (typeAlias.iOSVersion.HasValue) //todo iosversion in scrapedmember
+                {
+                    output += "[iOSVersion(" + typeAlias.iOSVersion + ")]" + NewLine;
+                }
+                if (typeAlias.Deprecated)
+                {
+                    output += "[Obsolete]" + NewLine;
+                }
+                if (typeAlias.CSharpName != typeAlias.RawName)
+                {
+                    output += "[Export(\"" + typeAlias.RawName + "\")]" + NewLine;
+                }
+
+                output += "public struct " + typeAlias.Alias + NewLine + "{" + NewLine;
+                output +=
+                    "static public implicit operator " + typeAlias.Alias + "(" + typeAlias.RealType.CSharpType +
+                    " value)" +
+                    NewLine + "{" + NewLine +
+                    "return default(" + typeAlias.Alias + ");" + NewLine +
+                    "}";
+
+                output += "static public implicit operator " + typeAlias.RealType.CSharpType+ "(" + typeAlias.Alias + " value)" + NewLine+
+                    "{" + "return default(" + typeAlias.RealType.CSharpType + ");" + NewLine + "}" + NewLine;
+            }
+
+            return output.TrimEnd() + NewLine + "}";
         }
     }
 }

@@ -29,28 +29,7 @@ namespace StubGen
 
         public static string ParseClass(string url, string @namespace, IEnumerable<string> extraUsings)
         {
-            var output = SyntaxFactory.CompilationUnit()
-                .WithUsings(
-                    SyntaxFactory.List(new[]
-                    {
-                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"ObjectiveC")),
-                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"System")),
-                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"SwiftSharp.Attributes")),
-                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"Foundation")),
-                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"CoreGraphics")),
-                        SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(@"UIKit"))
-                    }).AddRange(
-                        extraUsings.Select(
-                            @using => SyntaxFactory.UsingDirective(
-                                SyntaxFactory.IdentifierName(@using)))));
-
-            var namespaceOutput = SyntaxFactory.NamespaceDeclaration(
-                SyntaxFactory.IdentifierName(@namespace));
-
-            var parsedInnards = Class(url);
-
-            output = output.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(namespaceOutput));
-            return output.NormalizeWhitespace().ToString();
+            return "";
         }
 
         /*

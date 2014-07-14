@@ -58,6 +58,14 @@ namespace StubGen
             {
                 return new ScrapedProperty(baseMember, realNode);
             }
+            if (baseMember.Declaration.Contains("typealias "))
+            {
+                return new ScrapedTypedef(baseMember, realNode);
+            }
+            if (baseMember.Declaration.Contains("struct "))
+            {
+                return new ScrapedEnum(baseMember, realNode);
+            }
 
             return baseMember;
         }
