@@ -37,7 +37,8 @@ namespace StubGen
 
         static void Main(string[] args)
         {
-            var m = Scraper.Class("https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSExtensionContext_Class/index.html#//apple_ref/occ/cl/NSExtensionContext",
+            var m = Scraper.Class("https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/NSKeyedArchiverDelegate_Protocol/index.html#//apple_ref/occ/intf/NSKeyedArchiverDelegate",
+                true,
                 new[]
                 {
                     "ObjectiveC",

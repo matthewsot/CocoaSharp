@@ -11,6 +11,10 @@ namespace StubGen
     {
         public static string RealInnerText(this HtmlNode node)
         {
+            if (node == null)
+            {
+                return "";
+            }
             return Regex.Replace(node.InnerText, "<.*?>", "").Replace("&gt;", ">").Replace("&lt;", "<").Replace("NOfalse", "false").Replace("YEStrue", "true").Trim();
         }
 

@@ -50,7 +50,7 @@ namespace StubGen
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string Class(string url, string[] usings = null)
+        public static string Class(string url, bool isInterface = false, string[] usings = null)
         {
             Signatures = new List<string>();
             var parsed = new ScrapedClass(url);
@@ -74,7 +74,9 @@ namespace StubGen
                       ParseAsDescription(parsed.Description) + NewLine +
                       "/// </summary>" + NewLine;
             output += "/// <see cref=\"" + url + "\"/>" + NewLine;
-            output += "public class " + parsed.Name;
+
+            output += "public " + (isInterface ? "interface" : "class") + " " + parsed.Name;
+
             if (parsed.Inherits != null && parsed.Inherits != "")
             {
                 output += " : " + parsed.Inherits + ", ";
@@ -102,86 +104,96 @@ namespace StubGen
                 }
             }
 
-            foreach (var member in parsed.Members)
+            foreach (var method in parsed.Members.OfType<ScrapedMethod>())
             {
-                if (member is ScrapedMethod)
-                {
-                    var method = (ScrapedMethod) member;
-                    output += "/// <summary>" + NewLine + "/// " +
-                              ParseAsDescription(method.Description) + NewLine +
-                              "/// </summary>" + NewLine;
-                    foreach (var param in method.Parameters)
-                    {
-                        if (param.Description == null)
-                        {
-                            param.Description = "";
-                        }
-                        output += "/// <param name=\"" + param.Name + "\">" + ParseAsDescription(param.Description) + "</param>" + NewLine;
-                    }
-                    var differentiator = Differentiate(method);
-                    if (differentiator != "")
-                    {
-                        output += "/// <param name=\"NAME_YOUR_PARAMS\">DO NOT USE THIS PARAMETER - Instead make sure to name the parameters you're using.</param>" + NewLine;
-                    }
-                    if (method.ReturnDescription != null)
-                    {
-                        output += "/// <returns>" + ParseAsDescription(method.ReturnDescription) + "</returns>" +
-                                  NewLine;
-                    }
-                    if (method.iOSVersion.HasValue)
-                    {
-                        output += "[iOSVersion(" + method.iOSVersion + ")]" + NewLine;
-                    }
-                    if (method.Deprecated)
-                    {
-                        output += "[Obsolete]" + NewLine;
-                    }
-                    if (!method.IsConstructor)
-                    {
-                        if (method.CSharpName != method.RawName)
-                        {
-                            output += "[Export(\"" + method.RawName + "\")]" + NewLine;
-                        }
-                        output += method.Public ? "public " : "private ";
-                        output += method.Static ? "static " : "";
+                var toOutput = method.GetTrivia();
 
-                        output += method.ReturnType.CSharpType + " ";
-                        output += method.CSharpName + "(";
-                        output += string.Join(", ",
-                            method.Parameters.Select(param => param.Type.CSharpType + " " + param.Name));
-                        output += differentiator + ") { ";
+                var toAddAfterSummary = NewLine;
+                foreach (var param in method.Parameters)
+                {
+                    if (param.Description == null)
+                    {
+                        param.Description = "";
+                    }
+                    toAddAfterSummary += "/// <param name=\"" + param.Name + "\">" + ParseAsDescription(param.Description) +
+                              "</param>" + NewLine;
+                }
+
+                var differentiator = Differentiate(method);
+                if (differentiator != "")
+                {
+                    toAddAfterSummary +=
+                        "/// <param name=\"NAME_YOUR_PARAMS\">DO NOT USE THIS PARAMETER - Instead make sure to name the parameters you're using.</param>" +
+                        NewLine;
+                }
+                if (method.ReturnDescription != null)
+                {
+                    toAddAfterSummary += "/// <returns>" + ParseAsDescription(method.ReturnDescription) + "</returns>" +
+                              NewLine;
+                }
+
+                if (differentiator != "")
+                {
+                    toOutput += "[IgnoreParameters(\"NAME_YOUR_PARAMS\")]" + NewLine;
+                }
+
+                if (isInterface && (method.Static || method.IsConstructor))
+                {
+                    //csharp doesn't allow static things in interfaces
+                    toOutput = toOutput.Replace("[", "//[");
+                }
+                output += toOutput.Replace("/// </summary>" + NewLine, "/// </summary>" + toAddAfterSummary);
+
+                if (isInterface && (method.Static || method.IsConstructor))
+                {
+                    output += "//";
+                }
+
+                if (!method.IsConstructor)
+                {
+                    output += method.Public ? "public " : "private ";
+                    output += method.Static ? "static " : "";
+
+                    output += method.ReturnType.CSharpType + " ";
+                    output += method.CSharpName + "(";
+                    output += string.Join(", ",
+                        method.Parameters.Select(param => param.Type.CSharpType + " " + param.Name));
+                    output += differentiator + ")";
+                    if (!isInterface)
+                    {
+                        output += " { ";
                         if (method.ReturnType.CSharpType != "void")
                         {
                             output += "return default(" + method.ReturnType.CSharpType + ");";
                         }
-                        output += " }" + NewLine + NewLine;
+                        output += " }";
                     }
-                    else if(method.IsConstructor)
+                    else
                     {
-                        output += "public " + parsed.Name + "(";
-                        output += string.Join(", ",
-                            method.Parameters.Select(param => param.Type.CSharpType + " " + param.Name));
-                        output += differentiator + ") { }" + NewLine + NewLine;
+                        output += ";";
                     }
+                    output += NewLine + NewLine;
                 }
-                else if (member is ScrapedProperty)
+                else if (method.IsConstructor)
                 {
-                    var property = (ScrapedProperty) member;
-
-                    output += property.GetTrivia();
-
-                    output += property.Public ? "public " : "private ";
-                    output += property.Static ? "static " : "";
-                    output += property.Type.CSharpType + " ";
-                    output += property.CSharpName + " { ";
-                    output += property.PublicGetter ? "get; " : "private get; ";
-                    output += property.PublicSetter ? "set; " : "private set; ";
-                    output += "}" + NewLine + NewLine;
+                    output += "public " + parsed.Name + "(";
+                    output += string.Join(", ",
+                        method.Parameters.Select(param => param.Type.CSharpType + " " + param.Name));
+                    output += differentiator + ") { }" + NewLine + NewLine;
                 }
-                else if (member is ScrapedEnum)
-                {
-                    continue;
-                }
+            }
+
+            foreach(var property in parsed.Members.OfType<ScrapedProperty>())
+            {
+                output += property.GetTrivia();
+
+                output += property.Public ? "public " : "private ";
+                output += property.Static ? "static " : "";
+                output += property.Type.CSharpType + " ";
+                output += property.CSharpName + " { ";
+                output += property.PublicGetter ? "get; " : "private get; ";
+                output += property.PublicSetter ? "set; " : "private set; ";
+                output += "}" + NewLine + NewLine;
             }
 
             output = output.TrimEnd() + NewLine + "}" + NewLine;
