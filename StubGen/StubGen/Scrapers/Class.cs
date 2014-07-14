@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace StubGen
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <see cref="http://google.com"/>
     partial class Scraper
     {
         public static string ParseAsDescription(string text)
@@ -175,22 +168,8 @@ namespace StubGen
                 {
                     var property = (ScrapedProperty) member;
 
-                    output += "/// <summary>" + NewLine + "/// " +
-                              ParseAsDescription(property.Description) + NewLine +
-                              "/// </summary>" + NewLine;
+                    output += property.GetTrivia();
 
-                    if (property.iOSVersion.HasValue) //todo iosversion in scrapedmember
-                    {
-                        output += "[iOSVersion(" + property.iOSVersion + ")]" + NewLine;
-                    }
-                    if (property.Deprecated)
-                    {
-                        output += "[Obsolete]" + NewLine;
-                    }
-                    if (property.CSharpName != property.RawName)
-                    {
-                        output += "[Export(\"" + property.RawName + "\")]" + NewLine;
-                    }
                     output += property.Public ? "public " : "private ";
                     output += property.Static ? "static " : "";
                     output += property.Type.CSharpType + " ";
@@ -205,46 +184,16 @@ namespace StubGen
                 }
             }
 
-            output = output.TrimEnd() + NewLine + "}" + NewLine + "}";
+            output = output.TrimEnd() + NewLine + "}" + NewLine;
 
             foreach (var scrapedEnum in parsed.Members.OfType<ScrapedEnum>())
             {
-                output += "/// <summary>" + NewLine + "/// " +
-                          ParseAsDescription(scrapedEnum.Description) + NewLine +
-                          "/// </summary>" + NewLine;
-
-                if (scrapedEnum.iOSVersion.HasValue) //todo iosversion in scrapedmember
-                {
-                    output += "[iOSVersion(" + scrapedEnum.iOSVersion + ")]" + NewLine;
-                }
-                if (scrapedEnum.Deprecated)
-                {
-                    output += "[Obsolete]" + NewLine;
-                }
-                if (scrapedEnum.CSharpName != scrapedEnum.RawName)
-                {
-                    output += "[Export(\"" + scrapedEnum.RawName + "\")]" + NewLine;
-                }
+                output += scrapedEnum.GetTrivia();
 
                 output += "public enum " + scrapedEnum.CSharpName + NewLine + "{" + NewLine;
                 foreach (var member in scrapedEnum.Members)
                 {
-                    output += "/// <summary>" + NewLine + "/// " +
-                              ParseAsDescription(scrapedEnum.Description) + NewLine +
-                              "/// </summary>" + NewLine;
-
-                    if (scrapedEnum.iOSVersion.HasValue) //todo iosversion in scrapedmember
-                    {
-                        output += "[iOSVersion(" + scrapedEnum.iOSVersion + ")]" + NewLine;
-                    }
-                    if (scrapedEnum.Deprecated)
-                    {
-                        output += "[Obsolete]" + NewLine;
-                    }
-                    if (scrapedEnum.CSharpName != scrapedEnum.RawName)
-                    {
-                        output += "[Export(\"" + scrapedEnum.RawName + "\")]" + NewLine;
-                    }
+                    output += member.GetTrivia();
 
                     output += member.CSharpName + "," + NewLine;
                 }
@@ -254,22 +203,7 @@ namespace StubGen
 
             foreach (var typeAlias in parsed.Members.OfType<ScrapedTypedef>())
             {
-                output += "/// <summary>" + NewLine + "/// " +
-                          ParseAsDescription(typeAlias.Description) + NewLine +
-                          "/// </summary>" + NewLine;
-
-                if (typeAlias.iOSVersion.HasValue) //todo iosversion in scrapedmember
-                {
-                    output += "[iOSVersion(" + typeAlias.iOSVersion + ")]" + NewLine;
-                }
-                if (typeAlias.Deprecated)
-                {
-                    output += "[Obsolete]" + NewLine;
-                }
-                if (typeAlias.CSharpName != typeAlias.RawName)
-                {
-                    output += "[Export(\"" + typeAlias.RawName + "\")]" + NewLine;
-                }
+                output += typeAlias.GetTrivia();
 
                 output += "public struct " + typeAlias.Alias + NewLine + "{" + NewLine;
                 output +=
@@ -277,13 +211,13 @@ namespace StubGen
                     " value)" +
                     NewLine + "{" + NewLine +
                     "return default(" + typeAlias.Alias + ");" + NewLine +
-                    "}";
+                    "}" + NewLine;
 
                 output += "static public implicit operator " + typeAlias.RealType.CSharpType+ "(" + typeAlias.Alias + " value)" + NewLine+
-                    "{" + "return default(" + typeAlias.RealType.CSharpType + ");" + NewLine + "}" + NewLine;
+                    "{" + NewLine + "return default(" + typeAlias.RealType.CSharpType + ");" + NewLine + "}" + NewLine;
             }
 
-            return output.TrimEnd() + NewLine + "}";
+            return output.TrimEnd() + NewLine + "}" + NewLine;
         }
     }
 }

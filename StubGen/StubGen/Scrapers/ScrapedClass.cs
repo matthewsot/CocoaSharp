@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace StubGen
 {
@@ -87,7 +86,9 @@ namespace StubGen
 
                 iOSVersion = ParseAvailability(availability);
 
+                //TODO: this isn't finding the constants
                 var members = doc.DocumentNode.SelectNodes("//section[@class='section task-group-section']//ul[@class='task-group-list']/li[@class='item symbol']");
+                //var members = doc.DocumentNode.SelectNodes("//li[@class='item symbol']");
                 //Members = members.Select(member => ScrapedMember.ScrapeMember(member));
                 Members = new List<ScrapedMember>();
                 foreach (var member in members)

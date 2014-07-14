@@ -30,6 +30,28 @@ namespace StubGen
             Deprecated = baseValues.Deprecated;
         }
 
+        public string GetTrivia()
+        {
+            var NewLine = Scraper.NewLine;
+            var output = "/// <summary>" + NewLine + "/// " +
+                      Scraper.ParseAsDescription(Description) + NewLine +
+                      "/// </summary>" + NewLine;
+
+            if (iOSVersion.HasValue) //todo iosversion in scrapedmember
+            {
+                output += "[iOSVersion(" + iOSVersion + ")]" + NewLine;
+            }
+            if (Deprecated)
+            {
+                output += "[Obsolete]" + NewLine;
+            }
+            if (CSharpName != RawName)
+            {
+                output += "[Export(\"" + RawName + "\")]" + NewLine;
+            }
+            return output;
+        }
+
         public static ScrapedMember ScrapeMember(HtmlNode node)
         {
             var baseMember = new ScrapedMember();
@@ -50,7 +72,11 @@ namespace StubGen
                 realNode.SelectSingleNode("./div[@class='declaration']/div[@class='Swift']/p[@class='para']");
 
             baseMember.Declaration = declarationNode.RealInnerText().Trim();
-            if (baseMember.Declaration.Contains("init(") || baseMember.Declaration.Contains("func "))
+            if (baseMember.Declaration.StartsWith("struct ") && baseMember.Declaration.Contains("Option"))
+            {
+                return new ScrapedEnum(baseMember, realNode);
+            }
+            if ((baseMember.Declaration.Contains("init(") || baseMember.Declaration.Contains("func ")))
             {
                 return new ScrapedMethod(baseMember, realNode);
             }
@@ -61,10 +87,6 @@ namespace StubGen
             if (baseMember.Declaration.Contains("typealias "))
             {
                 return new ScrapedTypedef(baseMember, realNode);
-            }
-            if (baseMember.Declaration.Contains("struct "))
-            {
-                return new ScrapedEnum(baseMember, realNode);
             }
 
             return baseMember;
