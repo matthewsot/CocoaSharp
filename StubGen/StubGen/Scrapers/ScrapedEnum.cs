@@ -10,8 +10,16 @@ namespace StubGen
     {
         public ScrapedEnumMember(string declaration)
         {
-            RawName = declaration.Split("static var ")[1].Split(':')[0].Trim();
-            CSharpName = RawName.ToUpper()[0] + RawName.Substring(1);
+            if (declaration.Contains("static var "))
+            {
+                RawName = declaration.Split("static var ")[1].Split(':')[0].Trim();
+                CSharpName = RawName.ToUpper()[0] + RawName.Substring(1);
+            }
+            else if (declaration.Contains("case "))
+            {
+                RawName = declaration.Split("case ")[1].Trim();
+                CSharpName = RawName.ToUpper()[0] + RawName.Substring(1);
+            }
         }
     }
 
@@ -25,18 +33,38 @@ namespace StubGen
             Deprecated = Description.ToLower().Contains("deprecat");
             iOSVersion = double.Parse(node.SelectSingleNode("./div[@class='availability']/p").RealInnerText().Split("in iOS ")[1].Split(' ')[0]);
 
-            var name = Declaration.Split("struct ")[1].Split(':')[0].Trim();
-
-            RawName = name;
-            CSharpName = name.ToUpper()[0] + name.Substring(1);
-
-            Members = new List<ScrapedEnumMember>();
-            var members = Declaration.Split('\n').Select(str => str.Trim());
-            foreach (var member in members)
+            if (Declaration.StartsWith("struct "))
             {
-                if (member.Contains("static var "))
+                var name = Declaration.Split("struct ")[1].Split(':')[0].Trim();
+
+                RawName = name;
+                CSharpName = name.ToUpper()[0] + name.Substring(1);
+
+                Members = new List<ScrapedEnumMember>();
+                var members = Declaration.Split('\n').Select(str => str.Trim());
+                foreach (var member in members)
                 {
-                    Members.Add(new ScrapedEnumMember(member));
+                    if (member.Contains("static var "))
+                    {
+                        Members.Add(new ScrapedEnumMember(member));
+                    }
+                }
+            }
+            else if (Declaration.StartsWith("enum "))
+            {
+                var name = Declaration.Split("enum ")[1].Split(':')[0].Trim();
+
+                RawName = name;
+                CSharpName = name.ToUpper()[0] + name.Substring(1);
+
+                Members = new List<ScrapedEnumMember>();
+                var members = Declaration.Split('\n').Select(str => str.Trim());
+                foreach (var member in members)
+                {
+                    if (member.Contains("case "))
+                    {
+                        Members.Add(new ScrapedEnumMember(member));
+                    }
                 }
             }
 
