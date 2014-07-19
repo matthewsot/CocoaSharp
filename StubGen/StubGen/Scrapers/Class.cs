@@ -9,6 +9,10 @@ namespace StubGen
     {
         public static string ParseAsDescription(string text)
         {
+            if (text == null)
+            {
+                return "";
+            }
             return Regex.Replace(Regex.Replace(text.Trim(), "(\r\n)|(\r)|(\n)", NewLine + "/// ").Replace("/// " + NewLine, ""), "\\/\\/\\/\\s*((\r\n)|(\r)|(\n))", "");
         }
 
@@ -76,7 +80,7 @@ namespace StubGen
 
             if (parsed.Inherits != null && parsed.Inherits != "")
             {
-                output += " : " + parsed.Inherits + ", ";
+                output += " : " + parsed.Inherits + "//, ";
             }
             if (parsed.ConformsTo != null && parsed.ConformsTo.Any())
             {
@@ -92,10 +96,11 @@ namespace StubGen
                 var allWithSame = allProperties.Where(
                     prop =>
                         prop != currProperty && prop.RawName == currProperty.RawName &&
-                        prop.Type.RawSwift == currProperty.Type.RawSwift);
+                        prop.Type.RawSwift == currProperty.Type.RawSwift).ToList();
 
-                foreach (var withSame in allWithSame)
+                for (var w = 0; w < allWithSame.Count(); w++)
                 {
+                    var withSame = allWithSame[w];
                     allProperties.Remove(withSame);
                     parsed.Members.Remove(withSame);
                 }

@@ -62,6 +62,7 @@
     <Compile Include="Scrapers\ScrapedMethod.cs" />
     <Compile Include="Scrapers\ScrapedParameter.cs" />
     <Compile Include="Scrapers\ScrapedEnum.cs" />
+    <Compile Include="Scrapers\ScrapedNotification.cs" />
     <Compile Include="Scrapers\ScrapedTypedef.cs" />
     <Compile Include="Scrapers\ScrapedProperty.cs" />
     <Compile Include="Scrapers\Types.cs" />

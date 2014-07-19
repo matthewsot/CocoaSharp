@@ -57,6 +57,7 @@ namespace StubGen
             type = type.Substring(1, type.Length - 2);
             KeyType = ScrapeType(type.Split(':')[0].Trim());
             ValueType = ScrapeType(type.Split(':')[1].Trim());
+            CSharpType = "Dictionary<" + KeyType.CSharpType + ", " + ValueType.CSharpType + ">";
         }
     }
 
@@ -123,10 +124,11 @@ namespace StubGen
         public static ScrapedType ScrapeType(string type)
         {
             type = Helpers.ParseType(type);
-            if (type == "" || type == ")")
+            if (type == "" || type == ")" || type == "(AnyObject!," || type == "([NSObject" || type == "(ConstUnsafePointer<()>" || (type.StartsWith("(") && type.Count(chr => chr == ')') == 0))
             {
-                return new ScrapedType("");
+                return new ScrapedType("WEIRD");
             }
+
             if (type.StartsWith("[") && type.EndsWith("]"))
             {
                 //This is an array or a dictionary!

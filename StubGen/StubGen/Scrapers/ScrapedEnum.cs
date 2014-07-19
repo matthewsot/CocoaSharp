@@ -31,7 +31,17 @@ namespace StubGen
         {
             Description = node.SelectSingleNode("./div[@class='abstract']/p").RealInnerText();
             Deprecated = Description.ToLower().Contains("deprecat");
-            iOSVersion = double.Parse(node.SelectSingleNode("./div[@class='availability']/p").RealInnerText().Split("in iOS ")[1].Split(' ')[0]);
+            try
+            {
+                iOSVersion =
+                    double.Parse(
+                        node.SelectSingleNode("./div[@class='availability']/p").RealInnerText().Split("in iOS ")[1]
+                            .Split(' ')[0]);
+            }
+            catch
+            {
+                iOSVersion = null;
+            }
 
             if (Declaration.StartsWith("struct "))
             {
@@ -69,26 +79,36 @@ namespace StubGen
             }
 
             var descriptions = node.SelectNodes("./ul[@class='list-bullet']/li");
-            foreach (var desc in descriptions)
+            if (descriptions != null)
             {
-                var optName = desc.SelectSingleNode("./p[@class='para Swift']").RealInnerText().Trim();
-
-                var definitionPs = desc.SelectNodes("./div[@class='definition']/p[@class='para']");
-                var availability = definitionPs.Last().RealInnerText().Trim();
-                double? availNum = null;
-                if (availability.Contains("in iOS "))
+                foreach (var desc in descriptions)
                 {
-                    availNum = double.Parse(availability.Trim().Split("in iOS ")[1].Split(' ')[0]);
-                    definitionPs.Remove(definitionPs.Last());
-                }
-                var def = string.Join(Environment.NewLine, definitionPs.Select(defi => defi.RealInnerText().Trim()));
+                    var optName = desc.SelectSingleNode("./p[@class='para Swift']").RealInnerText().Trim();
 
-                var memberWithName = Members.FirstOrDefault(mem => mem.RawName == optName);
-                if (memberWithName != null)
-                {
-                    memberWithName.iOSVersion = availNum;
-                    memberWithName.Description = def;
-                    memberWithName.Deprecated = def.ToLower().Contains("deprec");
+                    var definitionPs = desc.SelectNodes("./div[@class='definition']/p[@class='para']");
+                    var availability = definitionPs.Last().RealInnerText().Trim();
+                    double? availNum = null;
+                    if (availability.Contains("in iOS "))
+                    {
+                        try
+                        {
+                            availNum = double.Parse(availability.Trim().Split("in iOS ")[1].Split(' ')[0]);
+                            definitionPs.Remove(definitionPs.Last());
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    var def = string.Join(Environment.NewLine, definitionPs.Select(defi => defi.RealInnerText().Trim()));
+
+                    var memberWithName = Members.FirstOrDefault(mem => mem.RawName == optName);
+                    if (memberWithName != null)
+                    {
+                        memberWithName.iOSVersion = availNum;
+                        memberWithName.Description = def;
+                        memberWithName.Deprecated = def.ToLower().Contains("deprec");
+                    }
                 }
             }
 

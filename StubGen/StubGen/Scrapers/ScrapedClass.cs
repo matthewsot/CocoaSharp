@@ -22,6 +22,16 @@ namespace StubGen
         {
             return Regex.Split(str, Regex.Escape(splitAt));
         }
+
+        public static string[] SplitAtFirstOccurrence(this string str, string splitAt)
+        {
+            return new[] {str.Split(splitAt)[0], str.Substring(str.IndexOf(splitAt) + 1)};
+        }
+
+        public static string[] SplitAtFirstOccurrence(this string str, char splitAt)
+        {
+            return new[] { str.Split(splitAt)[0], str.Substring(str.IndexOf(splitAt) + 1) };
+        }
     }
 
     public class ScrapedClass : ScrapedMember
@@ -30,13 +40,20 @@ namespace StubGen
         {
             if (text == null) return null;
 
-            var number = Regex.Split(text, "in iOS ")[1].Split(' ')[0];
-            double version;
-            if (!double.TryParse(number, out version))
+            try
+            {
+                var number = Regex.Split(text, "in iOS ")[1].Split(' ')[0];
+                double version;
+                if (!double.TryParse(number, out version))
+                {
+                    return null;
+                }
+                return version;
+            }
+            catch
             {
                 return null;
             }
-            return version;
         }
 
         public string Inherits { get; set; }
@@ -102,10 +119,13 @@ namespace StubGen
                 //var members = doc.DocumentNode.SelectNodes("//li[@class='item symbol']");
                 //Members = members.Select(member => ScrapedMember.ScrapeMember(member));
                 Members = new List<ScrapedMember>();
-                foreach (var member in members)
+                if (members != null)
                 {
-                    var res = ScrapeMember(member);
-                    ((List<ScrapedMember>)Members).Add(res);
+                    foreach (var member in members)
+                    {
+                        var res = ScrapeMember(member);
+                        ((List<ScrapedMember>) Members).Add(res);
+                    }
                 }
 
                 var import =

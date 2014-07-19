@@ -55,8 +55,15 @@ namespace StubGen
                 Name = "@" + Name;
             }
 
-            var type = parameter.Split(':')[1].Trim();
-            Type = ScrapedType.ScrapeType(type);
+            try
+            {
+                var type = parameter.Substring(parameter.IndexOf(':') + 1).Trim();
+                Type = ScrapedType.ScrapeType(type);
+            }
+            catch
+            {
+                Type = ScrapedType.ScrapeType("WEIRD");
+            }
         }
 
         public static IEnumerable<string> ScrapeParameters(string parameters)

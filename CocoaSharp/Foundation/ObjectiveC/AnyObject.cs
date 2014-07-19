@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ObjectiveC
 {
-    public class AnyObject
+    public interface AnyObject
     {
     }
 }

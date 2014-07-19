@@ -39,7 +39,7 @@ namespace StubGen
 
             if (iOSVersion.HasValue) //todo iosversion in scrapedmember
             {
-                output += "[iOSVersion(" + iOSVersion + ")]" + NewLine;
+                output += "[iOSVersion(" + iOSVersion.ToString() + ")]" + NewLine;
             }
             if (Deprecated)
             {
@@ -87,6 +87,10 @@ namespace StubGen
             if (baseMember.Declaration.Contains("typealias "))
             {
                 return new ScrapedTypedef(baseMember, realNode);
+            }
+            if (baseMember.Declaration == "" && realNode.SelectSingleNode("./div[@class='api-description']") != null)
+            {
+                return new ScrapedNotification(baseMember, realNode);
             }
 
             return baseMember;
