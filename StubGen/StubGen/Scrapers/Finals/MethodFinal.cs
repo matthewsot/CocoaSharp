@@ -39,7 +39,7 @@ namespace StubGen.Scrapers.Finals
 
             if (differentiator != "")
             {
-                toOutput += "[IgnoreParameters(\"NAME_YOUR_PARAMS\")]" + NewLine;
+                toOutput += "[IgnoreParameter(\"NAME_YOUR_PARAMS\")]" + NewLine;
             }
 
             if (isInterface && (method.Static || method.IsConstructor))

@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B8FB6E7A-66B3-40A8-AF5D-34E8C9921787}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UIKit</RootNamespace>
+    <AssemblyName>UIKit</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile344</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Additions\NSAttributedString.cs" />
+    <Compile Include="Additions\NSBundle.cs" />
+    <Compile Include="Additions\NSCoder.cs" />
+    <Compile Include="Additions\NSIndexPath.cs" />
+    <Compile Include="Additions\NSObject.cs" />
+    <Compile Include="Additions\NSString.cs" />
+    <Compile Include="Additions\NSValue.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DataTypes\DataTypes.cs" />
+    <Compile Include="DataTypes\UITextDirection.cs" />
+    <Compile Include="DataTypes\UIAccessibilityNotifications.cs" />
+    <Compile Include="DataTypes\UIAccessibilityTraits.cs" />
+    <Compile Include="DataTypes\UIActivityViewControllerCompletionHandler.cs" />
+    <Compile Include="DataTypes\UIBackgroundTaskIdentifier.cs" />
+    <Compile Include="DataTypes\UICollectionViewLayoutinteractiveTransitionCompletion.cs" />
+    <Compile Include="DataTypes\UIFontDescriptorClass.cs" />
+    <Compile Include="DataTypes\UILayoutPriority.cs" />
+    <Compile Include="DataTypes\UIPrinterPickerCompletionHandler.cs" />
+    <Compile Include="DataTypes\UIPrintinteractionCompletionHandler.cs" />
+    <Compile Include="DataTypes\UIWindowLevel.cs" />
+    <Compile Include="NSFileProviderExtension.cs" />
+    <Compile Include="NSLayoutConstraint.cs" />
+    <Compile Include="NSLayoutManager.cs" />
+    <Compile Include="Additions\NSMutableAttributedString.cs" />
+    <Compile Include="NSMutableParagraphStyle.cs" />
+    <Compile Include="NSOperation.cs" />
+    <Compile Include="NSParagraphStyle.cs" />
+    <Compile Include="NSShadow.cs" />
+    <Compile Include="NSStringDrawingContext.cs" />
+    <Compile Include="NSTextAttachment.cs" />
+    <Compile Include="NSTextContainer.cs" />
+    <Compile Include="NSTextStorage.cs" />
+    <Compile Include="NSTextTab.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocols\Delegates\NSLayoutManagerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIAdaptivePresentationControllerDelegate.cs" />
+    <Compile Include="Protocols\NSTextAttachmentContainer.cs" />
+    <Compile Include="Protocols\NSTextLayoutOrientationProvider.cs" />
+    <Compile Include="Protocols\Delegates\NSTextStorageDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIAccelerometerDelegate.cs" />
+    <Compile Include="Protocols\UIAccessibility.cs" />
+    <Compile Include="Protocols\UIAccessibilityAction.cs" />
+    <Compile Include="Protocols\UIAccessibilityContainer.cs" />
+    <Compile Include="Protocols\UIAccessibilityFocus.cs" />
+    <Compile Include="Protocols\UIAccessibilityIdentification.cs" />
+    <Compile Include="Protocols\UIAccessibilityReadingContent.cs" />
+    <Compile Include="Protocols\Delegates\UIActionSheetDelegate.cs" />
+    <Compile Include="Protocols\UIActivityItemSource.cs" />
+    <Compile Include="Protocols\Delegates\UIAlertViewDelegate.cs" />
+    <Compile Include="Protocols\UIAppearance.cs" />
+    <Compile Include="Protocols\UIAppearanceContainer.cs" />
+    <Compile Include="Protocols\Delegates\UIApplicationDelegate.cs" />
+    <Compile Include="Protocols\UIBarPositioning.cs" />
+    <Compile Include="Protocols\Delegates\UIBarPositioningDelegate.cs" />
+    <Compile Include="Protocols\UICollectionViewDataSource.cs" />
+    <Compile Include="Protocols\Delegates\UICollectionViewDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UICollectionViewDelegateFlowLayout.cs" />
+    <Compile Include="Protocols\Delegates\UICollisionBehaviorDelegate.cs" />
+    <Compile Include="Protocols\UIContentContainer.cs" />
+    <Compile Include="Protocols\UIDataSourceModelAssociation.cs" />
+    <Compile Include="Protocols\Delegates\UIDocumentInteractionControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIDocumentMenuDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIDocumentPickerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIDynamicAnimatorDelegate.cs" />
+    <Compile Include="Protocols\UIDynamicItem.cs" />
+    <Compile Include="Protocols\Delegates\UIGestureRecognizerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIGuidedAccessRestrictionDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIImagePickerControllerDelegate.cs" />
+    <Compile Include="Protocols\UIInputViewAudioFeedback.cs" />
+    <Compile Include="Protocols\UIKeyInput.cs" />
+    <Compile Include="Protocols\UILayoutSupport.cs" />
+    <Compile Include="Protocols\Delegates\UINavigationBarDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UINavigationControllerDelegate.cs" />
+    <Compile Include="Protocols\UIObjectRestoration.cs" />
+    <Compile Include="Protocols\UIPageViewControllerDataSource.cs" />
+    <Compile Include="Protocols\Delegates\UIPageViewControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIPickerViewAccessibilityDelegate.cs" />
+    <Compile Include="Protocols\UIPickerViewDataSource.cs" />
+    <Compile Include="Protocols\Delegates\UIPickerViewDelegate.cs" />
+    <Compile Include="Protocols\UIPopoverBackgroundViewMethods.cs" />
+    <Compile Include="Protocols\Delegates\UIPopoverControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIPopoverPresentationControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIPrinterPickerControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIPrintInteractionControllerDelegate.cs" />
+    <Compile Include="Protocols\UIResponderStandardEditActions.cs" />
+    <Compile Include="Protocols\Delegates\UIScrollViewAccessibilityDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIScrollViewDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UISearchBarDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UISearchControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UISearchDisplayDelegate.cs" />
+    <Compile Include="Protocols\UISearchResultsUpdating.cs" />
+    <Compile Include="Protocols\Delegates\UISplitViewControllerDelegate.cs" />
+    <Compile Include="Protocols\UIStateRestoring.cs" />
+    <Compile Include="Protocols\Delegates\UITabBarControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UITabBarDelegate.cs" />
+    <Compile Include="Protocols\UITableViewDataSource.cs" />
+    <Compile Include="Protocols\Delegates\UITableViewDelegate.cs" />
+    <Compile Include="Protocols\UITextDocumentProxy.cs" />
+    <Compile Include="Protocols\Delegates\UITextFieldDelegate.cs" />
+    <Compile Include="Protocols\UITextInput.cs" />
+    <Compile Include="Protocols\Delegates\UITextInputDelegate.cs" />
+    <Compile Include="Protocols\UITextInputTokenizer.cs" />
+    <Compile Include="Protocols\UITextInputTraits.cs" />
+    <Compile Include="Protocols\Delegates\UITextViewDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIToolbarDelegate.cs" />
+    <Compile Include="Protocols\UITraitEnvironment.cs" />
+    <Compile Include="Protocols\Delegates\UIVideoEditorControllerDelegate.cs" />
+    <Compile Include="Protocols\UIViewControllerAnimatedTransitioning.cs" />
+    <Compile Include="Protocols\UIViewControllerContextTransitioning.cs" />
+    <Compile Include="Protocols\UIViewControllerInteractiveTransitioning.cs" />
+    <Compile Include="Protocols\UIViewControllerRestoration.cs" />
+    <Compile Include="Protocols\UIViewControllerTransitionCoordinator.cs" />
+    <Compile Include="Protocols\UIViewControllerTransitionCoordinatorContext.cs" />
+    <Compile Include="Protocols\Delegates\UIViewControllerTransitioningDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIWebViewDelegate.cs" />
+    <Compile Include="UIAcceleration.cs" />
+    <Compile Include="UIAccelerometer.cs" />
+    <Compile Include="UIAccessibilityElement.cs" />
+    <Compile Include="UIActionSheet.cs" />
+    <Compile Include="UIActivity.cs" />
+    <Compile Include="UIActivityIndicatorView.cs" />
+    <Compile Include="UIActivityItemProvider.cs" />
+    <Compile Include="UIActivityViewController.cs" />
+    <Compile Include="UIAlertAction.cs" />
+    <Compile Include="UIAlertController.cs" />
+    <Compile Include="UIAlertView.cs" />
+    <Compile Include="UIApplication.cs" />
+    <Compile Include="UIAttachmentBehavior.cs" />
+    <Compile Include="UIBarButtonItem.cs" />
+    <Compile Include="UIBarItem.cs" />
+    <Compile Include="UIBezierPath.cs" />
+    <Compile Include="UIBlurEffect.cs" />
+    <Compile Include="UIButton.cs" />
+    <Compile Include="UICollectionReusableView.cs" />
+    <Compile Include="UICollectionView.cs" />
+    <Compile Include="UICollectionViewCell.cs" />
+    <Compile Include="UICollectionViewController.cs" />
+    <Compile Include="UICollectionViewFlowLayout.cs" />
+    <Compile Include="UICollectionViewFlowLayoutInvalidationContext.cs" />
+    <Compile Include="UICollectionViewLayout.cs" />
+    <Compile Include="UICollectionViewLayoutAttributes.cs" />
+    <Compile Include="UICollectionViewLayoutInvalidationContext.cs" />
+    <Compile Include="UICollectionViewTransitionLayout.cs" />
+    <Compile Include="UICollectionViewUpdateItem.cs" />
+    <Compile Include="UICollisionBehavior.cs" />
+    <Compile Include="UIColor.cs" />
+    <Compile Include="UIControl.cs" />
+    <Compile Include="UIDatePicker.cs" />
+    <Compile Include="UIDevice.cs" />
+    <Compile Include="UIDictationPhrase.cs" />
+    <Compile Include="UIDocument.cs" />
+    <Compile Include="UIDocumentInteractionController.cs" />
+    <Compile Include="UIDocumentMenuViewController.cs" />
+    <Compile Include="UIDocumentPickerExtensionViewController.cs" />
+    <Compile Include="UIDocumentPickerViewController.cs" />
+    <Compile Include="UIDynamicAnimator.cs" />
+    <Compile Include="UIDynamicBehavior.cs" />
+    <Compile Include="UIDynamicItemBehavior.cs" />
+    <Compile Include="UIEvent.cs" />
+    <Compile Include="UIFont.cs" />
+    <Compile Include="UIFontDescriptor.cs" />
+    <Compile Include="UIGestureRecognizer.cs" />
+    <Compile Include="UIGravityBehavior.cs" />
+    <Compile Include="UIImage.cs" />
+    <Compile Include="UIImageAsset.cs" />
+    <Compile Include="UIImagePickerController.cs" />
+    <Compile Include="UIImageView.cs" />
+    <Compile Include="UIInputView.cs" />
+    <Compile Include="UIInputViewController.cs" />
+    <Compile Include="UIInterpolatingMotionEffect.cs" />
+    <Compile Include="UIKeyCommand.cs" />
+    <Compile Include="UILabel.cs" />
+    <Compile Include="UILexicon.cs" />
+    <Compile Include="UILexiconEntry.cs" />
+    <Compile Include="UILocalizedIndexedCollation.cs" />
+    <Compile Include="UILocalNotification.cs" />
+    <Compile Include="UILongPressGestureRecognizer.cs" />
+    <Compile Include="UIManagedDocument.cs" />
+    <Compile Include="UIMarkupTextPrintFormatter.cs" />
+    <Compile Include="UIMenuController.cs" />
+    <Compile Include="UIMenuItem.cs" />
+    <Compile Include="UIMotionEffect.cs" />
+    <Compile Include="UIMotionEffectGroup.cs" />
+    <Compile Include="UIMutableUserNotificationAction.cs" />
+    <Compile Include="UIMutableUserNotificationCategory.cs" />
+    <Compile Include="UINavigationBar.cs" />
+    <Compile Include="UINavigationController.cs" />
+    <Compile Include="UINavigationItem.cs" />
+    <Compile Include="UINib.cs" />
+    <Compile Include="UIPageControl.cs" />
+    <Compile Include="UIPageViewController.cs" />
+    <Compile Include="UIPanGestureRecognizer.cs" />
+    <Compile Include="UIPasteboard.cs" />
+    <Compile Include="UIPercentDrivenInteractiveTransition.cs" />
+    <Compile Include="UIPickerView.cs" />
+    <Compile Include="UIPinchGestureRecognizer.cs" />
+    <Compile Include="UIPopoverBackgroundView.cs" />
+    <Compile Include="UIPopoverController.cs" />
+    <Compile Include="UIPopoverPresentationController.cs" />
+    <Compile Include="UIPresentationController.cs" />
+    <Compile Include="UIPrinter.cs" />
+    <Compile Include="UIPrinterPickerController.cs" />
+    <Compile Include="UIPrintFormatter.cs" />
+    <Compile Include="UIPrintInfo.cs" />
+    <Compile Include="UIPrintInteractionController.cs" />
+    <Compile Include="UIPrintPageRenderer.cs" />
+    <Compile Include="UIPrintPaper.cs" />
+    <Compile Include="UIProgressView.cs" />
+    <Compile Include="UIPushBehavior.cs" />
+    <Compile Include="UIReferenceLibraryViewController.cs" />
+    <Compile Include="UIRefreshControl.cs" />
+    <Compile Include="UIResponder.cs" />
+    <Compile Include="UIRotationGestureRecognizer.cs" />
+    <Compile Include="UIScreen.cs" />
+    <Compile Include="UIScreenEdgePanGestureRecognizer.cs" />
+    <Compile Include="UIScreenMode.cs" />
+    <Compile Include="UIScrollView.cs" />
+    <Compile Include="UISearchBar.cs" />
+    <Compile Include="UISearchController.cs" />
+    <Compile Include="UISearchDisplayController.cs" />
+    <Compile Include="UISegmentedControl.cs" />
+    <Compile Include="UISimpleTextPrintFormatter.cs" />
+    <Compile Include="UISlider.cs" />
+    <Compile Include="UISnapBehavior.cs" />
+    <Compile Include="UISplitViewController.cs" />
+    <Compile Include="UIStepper.cs" />
+    <Compile Include="UIStoryboard.cs" />
+    <Compile Include="UIStoryboardPopoverSegue.cs" />
+    <Compile Include="UIStoryboardSegue.cs" />
+    <Compile Include="UISwipeGestureRecognizer.cs" />
+    <Compile Include="UISwitch.cs" />
+    <Compile Include="UITabBar.cs" />
+    <Compile Include="UITabBarController.cs" />
+    <Compile Include="UITabBarItem.cs" />
+    <Compile Include="UITableView.cs" />
+    <Compile Include="UITableViewCell.cs" />
+    <Compile Include="UITableViewController.cs" />
+    <Compile Include="UITableViewHeaderFooterView.cs" />
+    <Compile Include="UITableViewRowAction.cs" />
+    <Compile Include="UITapGestureRecognizer.cs" />
+    <Compile Include="UITextChecker.cs" />
+    <Compile Include="UITextField.cs" />
+    <Compile Include="UITextInputMode.cs" />
+    <Compile Include="UITextInputStringTokenizer.cs" />
+    <Compile Include="UITextPosition.cs" />
+    <Compile Include="UITextRange.cs" />
+    <Compile Include="UITextSelectionRect.cs" />
+    <Compile Include="UITextView.cs" />
+    <Compile Include="UIToolbar.cs" />
+    <Compile Include="UITouch.cs" />
+    <Compile Include="UITraitCollection.cs" />
+    <Compile Include="UIUserNotificationAction.cs" />
+    <Compile Include="UIUserNotificationCategory.cs" />
+    <Compile Include="UIUserNotificationSettings.cs" />
+    <Compile Include="UIVibrancyEffect.cs" />
+    <Compile Include="UIVideoEditorController.cs" />
+    <Compile Include="UIView.cs" />
+    <Compile Include="UIViewController.cs" />
+    <Compile Include="UIViewPrintFormatter.cs" />
+    <Compile Include="UIVisualEffect.cs" />
+    <Compile Include="UIVisualEffectView.cs" />
+    <Compile Include="UIWebView.cs" />
+    <Compile Include="UIWindow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreGraphics\CoreGraphics.csproj">
+      <Project>{c5f16b43-a040-4e1b-81f2-74a99196d319}</Project>
+      <Name>CoreGraphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foundation\Foundation.csproj">
+      <Project>{02cf305f-5260-4c6e-9d33-7ee7877dec20}</Project>
+      <Name>Foundation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

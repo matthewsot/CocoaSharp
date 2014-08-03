@@ -48,17 +48,7 @@ namespace StubGen
             {
                 writer.Write(Indenter.IndentDocument(
                     Finals.Class(link,
-                        type == RowType.Interface,
-                        new[]
-                        {
-                            "ObjectiveC",
-                            "System",
-                            "SwiftSharp.Attributes",
-                            "System.Collections.Generic",
-                            //"Foundation",
-                            //"CoreGraphics",
-                            //"UIKit"
-                        })));
+                        type == RowType.Interface, data.Usings)));
 
                 writer.Flush();
             }
