@@ -30,6 +30,8 @@ namespace StubGen
                     return "UInt64";
                 case "uint16":
                     return "UInt16";
+                case "float":
+                    return "float";
                 default:
                     return type;
             }

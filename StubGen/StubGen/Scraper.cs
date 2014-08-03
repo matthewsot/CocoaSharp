@@ -452,6 +452,8 @@ namespace StubGen
                 case "Int":
                 case "Int32":
                     return "int";
+                case "float":
+                    return "float";
                 default:
                     return type.Trim().Trim('_', '!').Trim();
             }
