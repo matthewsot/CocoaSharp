@@ -62,10 +62,15 @@ namespace StubGen.Scrapers.Finals
                     output += method.Static ? "static " : "";
                 }
 
+                if (method.ReturnType.CSharpType == "Self")
+                {
+                    method.ReturnType.CSharpType = parent.CSharpName;
+                }
+
                 output += method.ReturnType.CSharpType + " ";
                 output += method.CSharpName + "(";
                 output += string.Join(", ",
-                    method.Parameters.Select(param => param.Type.CSharpType + " " + param.Name));
+                    method.Parameters.Select(param => (param.Type.CSharpType == "Self" ? parent.CSharpName : param.Type.CSharpType) + " " + param.Name));
                 output += differentiator + ")";
                 if (!isInterface)
                 {
@@ -86,7 +91,7 @@ namespace StubGen.Scrapers.Finals
             {
                 output += "public " + parent.Name + "(";
                 output += string.Join(", ",
-                    method.Parameters.Select(param => param.Type.CSharpType + " " + param.Name));
+                    method.Parameters.Select(param => (param.Type.CSharpType == "Self" ? parent.CSharpName : param.Type.CSharpType) + " " + param.Name));
                 output += differentiator + ") { }" + NewLine + NewLine;
             }
             return output;

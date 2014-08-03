@@ -20,6 +20,10 @@ namespace StubGen.Scrapers.Finals
                 output += property.Public ? "public " : "private ";
                 output += property.Static ? "static " : "";
             }
+            if (property.Type.CSharpType == "Self")
+            {
+                property.Type.CSharpType = parent.Name;
+            }
             output += property.Type.CSharpType + " ";
             output += property.CSharpName + " { ";
             output += property.PublicGetter ? "get; " : "private get; ";

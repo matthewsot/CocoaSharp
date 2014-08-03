@@ -14,11 +14,14 @@ namespace StubGen.Scrapers.Finals
             output += scrapedEnum.GetTrivia();
 
             output += "public enum " + scrapedEnum.CSharpName + NewLine + "{" + NewLine;
-            foreach (var member in scrapedEnum.Members)
+            if (scrapedEnum.Members != null)
             {
-                output += member.GetTrivia();
+                foreach (var member in scrapedEnum.Members)
+                {
+                    output += member.GetTrivia();
 
-                output += member.CSharpName + "," + NewLine;
+                    output += member.CSharpName + "," + NewLine;
+                }
             }
 
             output += "}" + NewLine;

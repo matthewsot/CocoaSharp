@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
@@ -73,7 +74,7 @@ namespace StubGen
                 realNode.SelectSingleNode("./div[@class='declaration']/div[@class='Swift']/p[@class='para']");
 
             baseMember.Declaration = declarationNode.RealInnerText().Trim();
-            if (baseMember.Declaration.StartsWith("struct ") && baseMember.Declaration.Contains("Option"))
+            if ((baseMember.Declaration.StartsWith("struct ") && baseMember.Declaration.Contains("Option")) || (baseMember.Declaration.StartsWith("enum") && baseMember.Declaration.Contains("case")))
             {
                 return new ScrapedEnum(baseMember, realNode);
             }

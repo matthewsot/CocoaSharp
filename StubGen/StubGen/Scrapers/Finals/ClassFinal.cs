@@ -157,6 +157,11 @@ namespace StubGen.Scrapers.Finals
                 output += Finals.Typedef(typeAlias, parsed, isInterface);
             }
 
+            foreach (var notification in parsed.Members.OfType<ScrapedNotification>())
+            {
+                output += Finals.Notification(notification, parsed, isInterface);
+            }
+
 
             return output.TrimEnd() + NewLine + "}" + NewLine;
         }

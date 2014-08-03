@@ -20,7 +20,7 @@ namespace StubGen
                 {
                     try
                     {
-                        currIndent = currIndent.Substring(1);
+                        currIndent = currIndent.Substring(4);
                     }
                     catch
                     {
@@ -31,7 +31,7 @@ namespace StubGen
 
                 if (line.Contains("{") && !line.Contains("}"))
                 {
-                    currIndent += '\t';
+                    currIndent += "    ";
                 }
             }
 
