@@ -37,6 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CClasses\CFunctionPointer.cs" />
     <Compile Include="CClasses\CFRunLoop.cs" />
     <Compile Include="CClasses\CLong.cs" />
     <Compile Include="CClasses\CUnsignedChar.cs" />
@@ -56,12 +57,11 @@
     <Compile Include="CClasses\CUnsignedLongLong.cs" />
     <Compile Include="CClasses\CUnsignedShort.cs" />
     <Compile Include="CClasses\CVaListPointer.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DataTypes\DataTypes.cs" />
     <Compile Include="DataTypes\NSComparator.cs" />
     <Compile Include="DataTypes\NSExtensionBackgroundTaskIdentifier.cs" />
-    <Compile Include="DataTypes\NSHashTableOptions.cs" />
     <Compile Include="DataTypes\NSInteger.cs" />
-    <Compile Include="DataTypes\NSMapTableOptions.cs" />
-    <Compile Include="DataTypes\NSPointerFunctionsOptions.cs" />
     <Compile Include="DataTypes\NSRange.cs" />
     <Compile Include="DataTypes\NSRangePointer.cs" />
     <Compile Include="DataTypes\NSSocketNativeHandle.cs" />
@@ -69,7 +69,6 @@
     <Compile Include="DataTypes\NSSwappedFloat.cs" />
     <Compile Include="DataTypes\NSTimeInterval.cs" />
     <Compile Include="DataTypes\NSUInteger.cs" />
-    <Compile Include="DataTypes\NSURLBookmarkFileCreationOptions.cs" />
     <Compile Include="DataTypes\NSURLFileScheme.cs" />
     <Compile Include="NSArray.cs" />
     <Compile Include="NSAutoreleasePool.cs" />
@@ -124,21 +123,17 @@
     <Compile Include="Protocols\Delegates\NSURLSessionTaskDelegate.cs" />
     <Compile Include="Protocols\Delegates\NSUserActivityDelegate.cs" />
     <Compile Include="Protocols\Delegates\NSXMLParserDelegate.cs" />
-    <Compile Include="ObjectiveC\NSInvocation.cs" />
     <Compile Include="NSInvocationOperation.cs" />
     <Compile Include="NSItemProvider.cs" />
     <Compile Include="NSJSONSerialization.cs" />
     <Compile Include="NSLinguisticTagger.cs" />
     <Compile Include="NSMapTable.cs" />
-    <Compile Include="Unknown\NSMessagePort.cs" />
     <Compile Include="NSMutableOrderedSet.cs" />
-    <Compile Include="ObjectiveC\NSNull.cs" />
     <Compile Include="NSOperation.cs" />
     <Compile Include="NSOperationQueue.cs" />
     <Compile Include="NSOrderedSet.cs" />
     <Compile Include="NSOrthography.cs" />
     <Compile Include="NSProgress.cs" />
-    <Compile Include="Unknown\NSPurgeableData.cs" />
     <Compile Include="NSRegularExpression.cs" />
     <Compile Include="NSTextCheckingResult.cs" />
     <Compile Include="NSUbiquitousKeyValueStore.cs" />
@@ -193,7 +188,6 @@
     <Compile Include="NSNotification.cs" />
     <Compile Include="NSNotificationCenter.cs" />
     <Compile Include="NSNotificationQueue.cs" />
-    <Compile Include="CClasses\NSNumber.cs" />
     <Compile Include="NSNumberFormatter.cs" />
     <Compile Include="NSOutputStream.cs" />
     <Compile Include="NSPipe.cs" />
@@ -228,6 +222,8 @@
     <Compile Include="NSValue.cs" />
     <Compile Include="NSValueTransformer.cs" />
     <Compile Include="NSXMLParser.cs" />
+    <Compile Include="Unknown\NSCalendarOptions.cs" />
+    <Compile Include="Unknown\NSFormattingContext.cs" />
     <Compile Include="Unknown\OSType.cs" />
     <Compile Include="Properties\Attributes.cs" />
     <Compile Include="NSAssertionHandler.cs" />
@@ -262,6 +258,8 @@
     <Compile Include="Unknown\NSZone.cs" />
     <Compile Include="Unknown\SecIdentity.cs" />
     <Compile Include="Unknown\SecTrust.cs" />
+    <Compile Include="Unknown\UInt8.cs" />
+    <Compile Include="Unknown\unichar.cs" />
     <Compile Include="Unknown\UnsafePointer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
