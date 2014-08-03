@@ -23,12 +23,25 @@ namespace SwiftSharp.Attributes
         }
     }
 
-    public class IgnoreParametersAttribute : Attribute
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    public class IgnoreParameterAttribute : Attribute
     {
-        public string[] Ignore { get; set; }
-        public IgnoreParametersAttribute(params string[] toIgnore)
+        public string Ignore { get; set; }
+        public IgnoreParameterAttribute(string toIgnore)
         {
             Ignore = toIgnore;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+    public class RenameParameterAttribute : Attribute
+    {
+        public string From { get; set; }
+        public string To { get; set; }
+        public RenameParameterAttribute(string from, string to)
+        {
+            From = from;
+            To = to;
         }
     }
 
