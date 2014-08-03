@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using StubGen.Scrapers.Finals;
 
 
 namespace StubGen
@@ -13,10 +14,10 @@ namespace StubGen
 
 
 
-            RawName = name;
-            CSharpName = name.ToUpper()[0] + name.Substring(1);
+            //RawName = name;
+            //CSharpName = name.ToUpper()[0] + name.Substring(1);
 
-            var type = Declaration.Split('=')[1].Trim().Split(' ')[0].Trim();
+            //var type = Declaration.Split('=')[1].Trim().Split(' ')[0].Trim();
 
             Public = true;
             Static = true;

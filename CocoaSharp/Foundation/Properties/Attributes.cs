@@ -23,6 +23,15 @@ namespace SwiftSharp.Attributes
         }
     }
 
+    public class IgnoreParametersAttribute : Attribute
+    {
+        public string[] Ignore { get; set; }
+        public IgnoreParametersAttribute(params string[] toIgnore)
+        {
+            Ignore = toIgnore;
+        }
+    }
+
     public class OptionalAttribute : Attribute
     {
     }

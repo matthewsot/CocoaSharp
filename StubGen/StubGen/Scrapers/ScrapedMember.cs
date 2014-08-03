@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using StubGen.Scrapers.Finals;
 
 namespace StubGen
 {
@@ -32,9 +33,9 @@ namespace StubGen
 
         public string GetTrivia()
         {
-            var NewLine = Scraper.NewLine;
+            var NewLine = Finals.NewLine;
             var output = "/// <summary>" + NewLine + "/// " +
-                      Scraper.ParseAsDescription(Description) + NewLine +
+                      Finals.ParseAsDescription(Description) + NewLine +
                       "/// </summary>" + NewLine;
 
             if (iOSVersion.HasValue) //todo iosversion in scrapedmember

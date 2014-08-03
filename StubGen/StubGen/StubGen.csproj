@@ -53,11 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrameworkURLData.cs" />
+    <Compile Include="Indenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScrapeFramework.cs" />
+    <Compile Include="Scrapers\Finals\ClassFinal.cs" />
+    <Compile Include="Scrapers\Finals\TypeDefFinal.cs" />
+    <Compile Include="Scrapers\Finals\MethodFinal.cs" />
+    <Compile Include="Scrapers\Finals\EnumFinal.cs" />
+    <Compile Include="Scrapers\Finals\PropertyFinal.cs" />
     <Compile Include="Scrapers\ScrapedClass.cs" />
     <Compile Include="Scraper.cs" />
-    <Compile Include="Scrapers\Class.cs" />
     <Compile Include="Scrapers\ScrapedMember.cs" />
     <Compile Include="Scrapers\ScrapedMethod.cs" />
     <Compile Include="Scrapers\ScrapedParameter.cs" />
