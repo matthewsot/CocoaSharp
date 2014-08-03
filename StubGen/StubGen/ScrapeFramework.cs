@@ -92,17 +92,7 @@ namespace StubGen
                     {
                         writer.Write(Indenter.IndentDocument(
                             Finals.Class(extra.Value,
-                                false,
-                                new[]
-                        {
-                            "ObjectiveC",
-                            "System",
-                            "SwiftSharp.Attributes",
-                            "System.Collections.Generic",
-                            //"Foundation",
-                            //"CoreGraphics",
-                            //"UIKit"
-                        })));
+                                false, data.Usings)));
 
                         writer.Flush();
                     }

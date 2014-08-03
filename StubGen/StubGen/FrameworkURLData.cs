@@ -13,10 +13,25 @@ namespace StubGen
         string URL { get; }
         Dictionary<string, string> Extra { get; }
         Dictionary<string, string> LinkReplaces { get; }
+        string[] Usings { get; }
     }
 
     public class FoundationData : IFrameworkURLData
     {
+        public string[] Usings
+        {
+            get
+            {
+                return new[]
+                {
+                    "ObjectiveC",
+                    "System",
+                    "SwiftSharp.Attributes",
+                    "System.Collections.Generic",
+                };
+            }
+        }
+
         public string URL {
             get
             {
@@ -58,5 +73,89 @@ namespace StubGen
                 };
             }
         } 
+    }
+
+    public class UIKitData : IFrameworkURLData
+    {
+        public string[] Usings
+        {
+            get
+            {
+                return new[]
+                {
+                    "ObjectiveC",
+                    "System",
+                    "SwiftSharp.Attributes",
+                    "System.Collections.Generic",
+                    "Foundation",
+                    "CoreGraphics"
+                };
+            }
+        }
+
+        public string URL
+        {
+            get
+            {
+                return
+                    "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIKit_Framework/index.html#//apple_ref/doc/uid/TP40006955";
+            }
+        }
+
+        public Dictionary<string, string> Extra
+        {
+            get
+            {
+                return new Dictionary<string, string>
+                {
+                    {
+                        "Additions\\NSAttributedString", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSAttributedString_UIKit_Additions/index.html#//apple_ref/doc/uid/TP40011688"
+                    },
+                    {
+                        "Additions\\NSBundle", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSBundle_UIKitAdditions/index.html#//apple_ref/doc/uid/TP40007485"
+                    },
+                    {
+                        "Additions\\NSCoder", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSCoder_UIKit_Additions/index.html#//apple_ref/doc/uid/TP40007292"
+                    },
+                    {
+                        "Additions\\NSIndexPath", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSIndexPath_UIKitAdditions/index.html#//apple_ref/doc/uid/TP40007175"
+                    },
+                    {
+                        "Additions\\NSMutableAttributedString", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSMutableAttributedString_UIKit_Additions/index.html#//apple_ref/doc/uid/TP40013287"
+                    },
+                    {
+                        "Additions\\NSObject", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSObject_UIKitAdditions/index.html#//apple_ref/doc/uid/TP40007486"
+                    },
+                    {
+                        "Additions\\NSString", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSString_UIKit_Additions/index.html#//apple_ref/doc/uid/TP40006893"
+                    },
+                    {
+                        "Additions\\NSValue", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSValue_UIKit_Additions/index.html#//apple_ref/doc/uid/TP40007293"
+                    },
+                    {
+                        "DataTypes", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIKitDataTypesReference/index.html#//apple_ref/doc/uid/TP40007525"
+                    },
+                    {
+                        "Constants", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIKitConstantsReference/index.html#//apple_ref/doc/uid/TP40007526"
+                    }
+                };
+            }
+        }
+
+        public Dictionary<string, string> LinkReplaces
+        {
+            get
+            {
+                return new Dictionary<string, string>
+                {
+                    //https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/UIKit_Framework/index.html
+                    { "../../../../..", "https://developer.apple.com/library/prerelease" },
+                    { "../../../..", "https://developer.apple.com/library/prerelease/ios" },
+                    { "../../..", "https://developer.apple.com/library/prerelease/ios/documentation" },
+                    { "../..", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit" },
+                    { "..", "https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference" }
+                };
+            }
+        }
     }
 }
