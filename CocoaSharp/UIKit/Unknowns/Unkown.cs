@@ -41,4 +41,54 @@ namespace UIKit
     {
         
     }
+
+    public class CGVector
+    {
+        
+    }
+
+    public class CGImage
+    {
+        
+    }
+
+    public class CIImage
+    {
+        
+    }
+
+    public class CFTimeInterval
+    {
+        
+    }
+
+    public class CADisplayLink
+    {
+        
+    }
+
+    public class UICoordinateSpace
+    {
+        
+    }
+
+    public class CALayer
+    {
+        
+    }
+
+    public class CAInterAppAudioSwitcherView
+    {
+        
+    }
+
+    public class CABTMIDICentralViewController
+    {
+        
+    }
+
+    public class UIPrintinteractionController
+    {
+        
+    }
 }
