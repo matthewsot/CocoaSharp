@@ -5,7 +5,11 @@ using System.Text;
 
 namespace ObjectiveC
 {
-    public interface AnyObject
+    public class AnyObject //TODO: figure this out
     {
+        public class Type
+        {
+            
+        }
     }
 }
