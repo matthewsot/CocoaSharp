@@ -43,9 +43,6 @@
     <Compile Include="Additions\NSValue.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DataTypes\DataTypes.cs" />
-    <Compile Include="DataTypes\UITextDirection.cs" />
-    <Compile Include="DataTypes\UIAccessibilityNotifications.cs" />
-    <Compile Include="DataTypes\UIAccessibilityTraits.cs" />
     <Compile Include="DataTypes\UIActivityViewControllerCompletionHandler.cs" />
     <Compile Include="DataTypes\UIBackgroundTaskIdentifier.cs" />
     <Compile Include="DataTypes\UICollectionViewLayoutinteractiveTransitionCompletion.cs" />
@@ -297,6 +294,7 @@
     <Compile Include="UIVisualEffectView.cs" />
     <Compile Include="UIWebView.cs" />
     <Compile Include="UIWindow.cs" />
+    <Compile Include="Unknowns\Unkown.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreGraphics\CoreGraphics.csproj">

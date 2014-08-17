@@ -33,7 +33,7 @@ namespace SwiftSharp.Attributes
         }
     }
 
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public class RenameParameterAttribute : Attribute
     {
         public string From { get; set; }
