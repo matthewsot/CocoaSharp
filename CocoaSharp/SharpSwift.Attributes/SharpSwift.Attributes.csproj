@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExportAttribute.cs" />
+    <Compile Include="IBOutletAttribute.cs" />
     <Compile Include="IgnoreParameterAttribute.cs" />
     <Compile Include="iOSVersionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
