@@ -299,6 +299,10 @@
       <Project>{02cf305f-5260-4c6e-9d33-7ee7877dec20}</Project>
       <Name>Foundation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharpSwift.Attributes\SharpSwift.Attributes.csproj">
+      <Project>{58101aea-7251-4d1b-ab33-6a3bbf70b6db}</Project>
+      <Name>SharpSwift.Attributes</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

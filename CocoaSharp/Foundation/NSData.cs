@@ -1,6 +1,6 @@
 using ObjectiveC;
 using System;
-using SwiftSharp.Attributes;
+using SharpSwift.Attributes;
 using System.Collections.Generic;
 
 namespace Foundation

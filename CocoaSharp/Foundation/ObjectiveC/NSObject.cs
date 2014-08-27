@@ -1,6 +1,6 @@
 ﻿using System;
 using Foundation;
-using SwiftSharp.Attributes;
+using SharpSwift.Attributes;
 
 namespace ObjectiveC
 {

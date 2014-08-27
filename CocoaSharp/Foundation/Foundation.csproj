@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\SharpSwift.Attributes\SharpSwift.Attributes.csproj">
+      <Project>{58101aea-7251-4d1b-ab33-6a3bbf70b6db}</Project>
+      <Name>SharpSwift.Attributes</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CClasses\CFunctionPointer.cs" />
@@ -229,7 +233,6 @@
     <Compile Include="Unknown\NSQualityOfService.cs" />
     <Compile Include="Unknown\dispatch_queue_t.cs" />
     <Compile Include="Unknown\OSType.cs" />
-    <Compile Include="Properties\Attributes.cs" />
     <Compile Include="NSAssertionHandler.cs" />
     <Compile Include="NSAttributedString.cs" />
     <Compile Include="NSCoder.cs" />
