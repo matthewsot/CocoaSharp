@@ -68,7 +68,7 @@ namespace StubGen.Scrapers.Finals
                 {
                     "ObjectiveC",
                     "System",
-                    "SwiftSharp.Attributes",
+                    "SharpSwift.Attributes",
                     "Foundation",
                     "CoreGraphics",
                     "UIKit"

@@ -26,7 +26,7 @@ namespace StubGen
                 {
                     "ObjectiveC",
                     "System",
-                    "SwiftSharp.Attributes",
+                    "SharpSwift.Attributes",
                     "System.Collections.Generic",
                 };
             }
@@ -85,7 +85,7 @@ namespace StubGen
                 {
                     "ObjectiveC",
                     "System",
-                    "SwiftSharp.Attributes",
+                    "SharpSwift.Attributes",
                     "System.Collections.Generic",
                     "Foundation",
                     "CoreGraphics"

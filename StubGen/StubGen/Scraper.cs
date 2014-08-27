@@ -474,7 +474,7 @@ namespace StubGen
         public static string ScrapeToCSFile(string url, string self, string inherits)
         {
            // try {
-                var output = "using ObjectiveC;\r\nusing System;\r\nusing SwiftSharp.Attributes;\r\nusing Foundation;\r\n\r\n";
+                var output = "using ObjectiveC;\r\nusing System;\r\nusing SharpSwift.Attributes;\r\nusing Foundation;\r\n\r\n";
                 output += "namespace UIKit\r\n{\r\n";
                 output += "//" + url + "\r\n";
                 using (var client = new HttpClient())
