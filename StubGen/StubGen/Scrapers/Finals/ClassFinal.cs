@@ -128,6 +128,11 @@ namespace StubGen.Scrapers.Finals
             output = output.TrimEnd(' ', ',');
             output += NewLine + "{" + NewLine;
 
+            if (!isInterface)
+            {
+                //Add a parameterless constructor for everything
+                output += "public " + parsed.Name + "() { }" + NewLine;
+            }
 
             //Remove repeated properties
             var allProperties = parsed.Members.OfType<ScrapedProperty>().ToList();

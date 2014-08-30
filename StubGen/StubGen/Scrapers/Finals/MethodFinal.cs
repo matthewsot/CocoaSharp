@@ -39,7 +39,7 @@ namespace StubGen.Scrapers.Finals
             
             if (method.IsOptional)
             {
-                toOutput += "[Optional]";
+                toOutput += "[Optional]" + NewLine;
             }
 
             if (differentiator != "")

@@ -10,31 +10,43 @@ namespace StubGen
     {
         public static string ParseType(string type)
         {
-            type = type.Trim().Trim('_', '!', '?').Trim();
+            type = type.Trim().Trim('_', '!').Trim();
+            var optional = type.EndsWith("?");
+            type = type.Trim('?').Trim();
+
+            var finalType = type;
             switch (type.ToLower())
             {
                 case "void":
-                    return "void";
+                    finalType = "void";
+                    break;
                 case "nsstring":
                 case "string":
-                    return "string";
+                    finalType = "string";
+                    break;
                 case "bool":
-                    return "bool";
+                    finalType = "bool";
+                    break;
                 case "int":
                 case "int32":
-                    return "int";
+                    finalType = "int";
+                    break;
                 case "uint":
                 case "uint32":
-                    return "uint";
+                    finalType = "uint";
+                    break;
                 case "uint64":
-                    return "UInt64";
+                    finalType = "UInt64";
+                    break;
                 case "uint16":
-                    return "UInt16";
+                    finalType = "UInt16";
+                    break;
                 case "float":
-                    return "float";
-                default:
-                    return type;
+                    finalType = "float";
+                    break;
             }
+
+            return optional ? "Optional<" + finalType + ">" : finalType;
         }
     }
 
