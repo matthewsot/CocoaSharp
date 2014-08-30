@@ -10,13 +10,16 @@ namespace StubGen
         public string ReturnDescription { get; set; }
         public ScrapedType ReturnType { get; set; }
         public bool IsConstructor { get { return CSharpName == "init"; } }
+        public bool IsOptional { get; set; }
 
         public ScrapedMethod(ScrapedMember baseValues, HtmlNode node) : base(baseValues)
         {
             Description = node.SelectSingleNode("./div[@class='abstract']/p").RealInnerText();
             Deprecated = Description.ToLower().Contains("deprecat");
+            IsOptional = Declaration.Contains("optional ");
             RawName = Declaration.Split('(')[0].Split("func ").Last();
             CSharpName = RawName.ToUpper()[0] + RawName.Substring(1);
+
             if (Declaration.ToLower().Contains("init("))
             {
                 CSharpName = "init";

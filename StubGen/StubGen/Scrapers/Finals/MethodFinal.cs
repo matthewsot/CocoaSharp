@@ -36,13 +36,18 @@ namespace StubGen.Scrapers.Finals
                 toAddAfterSummary += "/// <returns>" + ParseAsDescription(method.ReturnDescription) + "</returns>" +
                           NewLine;
             }
+            
+            if (method.IsOptional)
+            {
+                toOutput += "[Optional]";
+            }
 
             if (differentiator != "")
             {
                 toOutput += "[IgnoreParameter(\"NAME_YOUR_PARAMS\")]" + NewLine;
             }
 
-            if (isInterface && (method.Static || method.IsConstructor))
+            if (isInterface && (method.Static || method.IsConstructor || method.IsOptional))
             {
                 //csharp doesn't allow static things in interfaces
                 toOutput = toOutput.Replace("[", "//[");
@@ -59,6 +64,7 @@ namespace StubGen.Scrapers.Finals
                 if (!isInterface) //TODO: comment out private/static methods
                 {
                     output += method.Public ? "public " : "private ";
+                    output += "virtual ";
                     output += method.Static ? "static " : "";
                 }
 

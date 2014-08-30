@@ -40,6 +40,21 @@ namespace StubGen.Scrapers.Finals
                     case 4:
                         Signatures.Add(methodSignature);
                         return ", double NAME_YOUR_PARAMS = 4.2";
+                    case 5:
+                        Signatures.Add(methodSignature);
+                        return ", uint NAME_YOUR_PARAMS = 4.2";
+                    case 6:
+                        Signatures.Add(methodSignature);
+                        return ", UInt16 NAME_YOUR_PARAMS = 4.2";
+                    case 7:
+                        Signatures.Add(methodSignature);
+                        return ", UInt64 NAME_YOUR_PARAMS = 4.2";
+                    case 8:
+                        Signatures.Add(methodSignature);
+                        return ", long NAME_YOUR_PARAMS = 4.2";
+                    case 9:
+                        Signatures.Add(methodSignature);
+                        return ", char NAME_YOUR_PARAMS = ' '";
                     default:
                         Signatures.Add(methodSignature);
                         return "";
