@@ -5,6 +5,15 @@ using System.Text;
 
 namespace UIKit
 {
+    public class UnsafeMutablePointer<T>
+    {
+        
+    }
+
+    public class UnsafeMutablePointer
+    {
+    }
+
     public class UIEdgeInsets
     {
     }

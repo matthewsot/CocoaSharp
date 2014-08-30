@@ -42,6 +42,7 @@
     <Compile Include="Additions\NSString.cs" />
     <Compile Include="Additions\NSValue.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DataTypes.cs" />
     <Compile Include="DataTypes\DataTypes.cs" />
     <Compile Include="DataTypes\UICollectionViewLayoutinteractiveTransitionCompletion.cs" />
     <Compile Include="DataTypes\UIPrintinteractionCompletionHandler.cs" />
@@ -71,9 +72,7 @@
     <Compile Include="Protocols\UIAccessibilityFocus.cs" />
     <Compile Include="Protocols\UIAccessibilityIdentification.cs" />
     <Compile Include="Protocols\UIAccessibilityReadingContent.cs" />
-    <Compile Include="Protocols\Delegates\UIActionSheetDelegate.cs" />
     <Compile Include="Protocols\UIActivityItemSource.cs" />
-    <Compile Include="Protocols\Delegates\UIAlertViewDelegate.cs" />
     <Compile Include="Protocols\UIAppearance.cs" />
     <Compile Include="Protocols\UIAppearanceContainer.cs" />
     <Compile Include="Protocols\Delegates\UIApplicationDelegate.cs" />
@@ -84,6 +83,7 @@
     <Compile Include="Protocols\Delegates\UICollectionViewDelegateFlowLayout.cs" />
     <Compile Include="Protocols\Delegates\UICollisionBehaviorDelegate.cs" />
     <Compile Include="Protocols\UIContentContainer.cs" />
+    <Compile Include="Protocols\UICoordinateSpace.cs" />
     <Compile Include="Protocols\UIDataSourceModelAssociation.cs" />
     <Compile Include="Protocols\Delegates\UIDocumentInteractionControllerDelegate.cs" />
     <Compile Include="Protocols\Delegates\UIDocumentMenuDelegate.cs" />
@@ -143,14 +143,12 @@
     <Compile Include="UIAcceleration.cs" />
     <Compile Include="UIAccelerometer.cs" />
     <Compile Include="UIAccessibilityElement.cs" />
-    <Compile Include="UIActionSheet.cs" />
     <Compile Include="UIActivity.cs" />
     <Compile Include="UIActivityIndicatorView.cs" />
     <Compile Include="UIActivityItemProvider.cs" />
     <Compile Include="UIActivityViewController.cs" />
     <Compile Include="UIAlertAction.cs" />
     <Compile Include="UIAlertController.cs" />
-    <Compile Include="UIAlertView.cs" />
     <Compile Include="UIApplication.cs" />
     <Compile Include="UIAttachmentBehavior.cs" />
     <Compile Include="UIBarButtonItem.cs" />

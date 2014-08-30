@@ -54,7 +54,7 @@ namespace StubGen.Scrapers.Finals
             }
             output += toOutput.Replace("/// </summary>" + NewLine, "/// </summary>" + toAddAfterSummary);
 
-            if (isInterface && (method.Static || method.IsConstructor))
+            if (isInterface && (method.Static || method.IsConstructor || method.IsOptional))
             {
                 output += "//";
             }
@@ -64,8 +64,7 @@ namespace StubGen.Scrapers.Finals
                 if (!isInterface) //TODO: comment out private/static methods
                 {
                     output += method.Public ? "public " : "private ";
-                    output += "virtual ";
-                    output += method.Static ? "static " : "";
+                    output += method.Static ? "static " : "virtual ";
                 }
 
                 if (method.ReturnType.CSharpType == "Self")
