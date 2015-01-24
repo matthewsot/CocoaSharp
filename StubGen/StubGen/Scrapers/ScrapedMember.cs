@@ -30,6 +30,10 @@ namespace StubGen
             Description = baseValues.Description;
             iOSVersion = baseValues.iOSVersion;
             Deprecated = baseValues.Deprecated;
+            Public = baseValues.Public;
+            Static = baseValues.Static;
+            RawName = baseValues.RawName;
+            CSharpName = baseValues.CSharpName;
         }
 
         public string GetTrivia()
@@ -62,6 +66,13 @@ namespace StubGen
             if (!double.TryParse(availabilityNode, out availability))
             {
                 baseMember.iOSVersion = null;
+
+                if (double.TryParse(
+                        node.SelectSingleNode("./div[@class='availability']/p").RealInnerText().Split("in iOS ")[1]
+                            .Split(' ')[0], out availability))
+                {
+                    baseMember.iOSVersion = availability;
+                }
             }
             else
             {
@@ -74,6 +85,7 @@ namespace StubGen
                 realNode.SelectSingleNode("./div[@class='declaration']/div[@class='Swift']/p[@class='para']");
 
             baseMember.Declaration = declarationNode.RealInnerText().Trim();
+
             if ((baseMember.Declaration.StartsWith("struct ") && baseMember.Declaration.Contains("Option")) || (baseMember.Declaration.StartsWith("enum") && baseMember.Declaration.Contains("case")))
             {
                 return new ScrapedEnum(baseMember, realNode);

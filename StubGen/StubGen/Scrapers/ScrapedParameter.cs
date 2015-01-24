@@ -6,50 +6,6 @@ using System.Threading.Tasks;
 
 namespace StubGen
 {
-    public class Helpers
-    {
-        public static string ParseType(string type)
-        {
-            type = type.Trim().Trim('_', '!').Trim();
-            var optional = type.EndsWith("?");
-            type = type.Trim('?').Trim();
-
-            var finalType = type;
-            switch (type.ToLower())
-            {
-                case "void":
-                    finalType = "void";
-                    break;
-                case "nsstring":
-                case "string":
-                    finalType = "string";
-                    break;
-                case "bool":
-                    finalType = "bool";
-                    break;
-                case "int":
-                case "int32":
-                    finalType = "int";
-                    break;
-                case "uint":
-                case "uint32":
-                    finalType = "uint";
-                    break;
-                case "uint64":
-                    finalType = "UInt64";
-                    break;
-                case "uint16":
-                    finalType = "UInt16";
-                    break;
-                case "float":
-                    finalType = "float";
-                    break;
-            }
-
-            return optional ? "Optional<" + finalType + ">" : finalType;
-        }
-    }
-
     public class ScrapedParameter
     {
         public string Description { get; set; }

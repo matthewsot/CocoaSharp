@@ -65,7 +65,6 @@
     <Compile Include="Scrapers\Finals\EnumFinal.cs" />
     <Compile Include="Scrapers\Finals\PropertyFinal.cs" />
     <Compile Include="Scrapers\ScrapedClass.cs" />
-    <Compile Include="Scraper.cs" />
     <Compile Include="Scrapers\ScrapedMember.cs" />
     <Compile Include="Scrapers\ScrapedMethod.cs" />
     <Compile Include="Scrapers\ScrapedParameter.cs" />

@@ -56,6 +56,9 @@ namespace StubGen
 
         public static void ScrapeFramework(IFrameworkURLData data)
         {
+            Directory.Delete(@"Output\");
+            Directory.CreateDirectory(@"Output\");
+
             using (var client = new HttpClient())
             {
                 var resp = client.GetStringAsync(data.URL).Result;

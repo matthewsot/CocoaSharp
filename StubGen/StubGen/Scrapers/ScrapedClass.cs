@@ -7,37 +7,12 @@ using HtmlAgilityPack;
 
 namespace StubGen
 {
-    public static class Extensions
-    {
-        public static string RealInnerText(this HtmlNode node)
-        {
-            if (node == null)
-            {
-                return "";
-            }
-            return Regex.Replace(node.InnerText, "<.*?>", "").Replace("&gt;", ">").Replace("&lt;", "<").Replace("NOfalse", "false").Replace("YEStrue", "true").Trim();
-        }
-
-        public static string[] Split(this string str, string splitAt)
-        {
-            return Regex.Split(str, Regex.Escape(splitAt));
-        }
-
-        public static string[] SplitAtFirstOccurrence(this string str, string splitAt)
-        {
-            return new[] {str.Split(splitAt)[0], str.Substring(str.IndexOf(splitAt) + 1)};
-        }
-
-        public static string[] SplitAtFirstOccurrence(this string str, char splitAt)
-        {
-            return new[] { str.Split(splitAt)[0], str.Substring(str.IndexOf(splitAt) + 1) };
-        }
-    }
-
     public class ScrapedClass : ScrapedMember
     {
-        public static double? ParseAvailability(string text)
+        public static double? ParseAvailability(HtmlDocument doc)
         {
+            var text = doc.DocumentNode.SelectSingleNode("//div[@class='z-reference-info-availability half']").RealInnerText();
+            
             if (text == null) return null;
 
             try
@@ -69,12 +44,10 @@ namespace StubGen
             using (var client = new HttpClient())
             {
                 var data = client.GetStringAsync(url).Result;
-                var doc = new HtmlDocument
-                {
-                    OptionFixNestedTags = true
-                };
+                var doc = new HtmlDocument { OptionFixNestedTags = true };
                 doc.LoadHtml(data);
-
+                
+                //Parses the inheritance tree
                 var inheritanceTree = doc.DocumentNode.SelectNodes("//div[@class='inheritance']/ul[@class='Swift']/li/code");
                 if (inheritanceTree != null)
                 {
@@ -92,10 +65,24 @@ namespace StubGen
                     Inherits = null;
                 }
 
+                //Parses the conformance
                 var conformsTo =
                     doc.DocumentNode.SelectNodes("//div[@class='conforms-to']/ul/li[@class='Swift']/code");
                 ConformsTo = conformsTo == null ? new string[0] : conformsTo.Select(node => node.RealInnerText().Trim());
 
+                //Parses the name
+                Name = doc.DocumentNode.SelectSingleNode("//h1[@class='chapter-name']").RealInnerText();
+
+                //Parses the namespace from the "Import Statement" section
+                var importStatement =
+                    doc.DocumentNode.SelectSingleNode(
+                        "//div[@class='z-module-import half']/code[@class='code-voice Swift']");
+                if (importStatement != null)
+                {
+                    Namespace = importStatement.RealInnerText().Split("import ")[1].Split(' ')[0].Trim();
+                }
+
+                //Parses the description
                 var description =
                     doc.DocumentNode.SelectSingleNode("//section[@class='z-class-description section']/p")
                         .RealInnerText().Replace("More...", "").Trim();
@@ -110,33 +97,19 @@ namespace StubGen
                     Description = desc ?? "";
                 }
 
-                var availability =
-                    doc.DocumentNode.SelectSingleNode("//div[@class='z-reference-info-availability half']").RealInnerText();
+                //Parses the iOSVersion
+                iOSVersion = ParseAvailability(doc);
 
-                iOSVersion = ParseAvailability(availability);
-
+                //Parses the members within the class
                 var members = doc.DocumentNode.SelectNodes("//section[@class='section task-group-section']//ul[@class='task-group-list']/li[@class='item symbol']");
-                //var members = doc.DocumentNode.SelectNodes("//li[@class='item symbol']");
-                //Members = members.Select(member => ScrapedMember.ScrapeMember(member));
                 Members = new List<ScrapedMember>();
                 if (members != null)
                 {
                     foreach (var member in members)
                     {
-                        var res = ScrapeMember(member);
-                        ((List<ScrapedMember>) Members).Add(res);
+                        Members.Add(ScrapeMember(member));
                     }
                 }
-
-                var import =
-                    doc.DocumentNode.SelectSingleNode(
-                        "//div[@class='z-module-import half']/code[@class='code-voice Swift']");
-                if (import != null)
-                {
-                    Namespace = import.RealInnerText().Split("import ")[1].Split(' ')[0].Trim();
-                }
-
-                Name = doc.DocumentNode.SelectSingleNode("//h1[@class='chapter-name']").RealInnerText();
             }
         }
     }

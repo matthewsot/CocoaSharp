@@ -31,17 +31,6 @@ namespace StubGen
         {
             Description = node.SelectSingleNode("./div[@class='abstract']/p").RealInnerText();
             Deprecated = Description.ToLower().Contains("deprecat");
-            try
-            {
-                iOSVersion =
-                    double.Parse(
-                        node.SelectSingleNode("./div[@class='availability']/p").RealInnerText().Split("in iOS ")[1]
-                            .Split(' ')[0]);
-            }
-            catch
-            {
-                iOSVersion = null;
-            }
 
             if (Declaration.StartsWith("struct "))
             {

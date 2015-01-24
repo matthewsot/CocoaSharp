@@ -10,7 +10,6 @@ namespace StubGen
         {
             Description = node.SelectSingleNode("./div[@class='api-description']/p[@class='para']").RealInnerText();
             Deprecated = Description.ToLower().Contains("deprecat");
-            iOSVersion = double.Parse(node.SelectSingleNode("./div[@class='availability']/p").RealInnerText().Split("in iOS ")[1].Split(' ')[0]);
             Declaration =
                 node.ParentNode.ParentNode.SelectSingleNode(
                     "./div[@class='task-group-term']/code/a[@class='notification Swift']").RealInnerText();
