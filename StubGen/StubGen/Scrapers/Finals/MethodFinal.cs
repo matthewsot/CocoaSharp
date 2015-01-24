@@ -42,6 +42,29 @@ namespace StubGen.Scrapers.Finals
                 toOutput += "[Optional]" + NewLine;
             }
 
+            //Deal with optional/unwrapped return values using attributes
+            if (method.ReturnType.Optional)
+            {
+                toOutput += "[ValueOptional]" + NewLine;
+            }
+            if (method.ReturnType.Unwrapped)
+            {
+                toOutput += "[ValueUnwrapped]" + NewLine;
+            }
+
+            //Deal with optional/unwrapped parameters using attributes
+            foreach (var param in method.Parameters)
+            {
+                if (param.Type.Optional)
+                {
+                    toOutput += "[ParameterOptional(\"" + param.Name + "\")]" + NewLine;
+                }
+                if (param.Type.Unwrapped)
+                {
+                    toOutput += "[ParameterUnwrapped(\"" + param.Name + "\")]" + NewLine;
+                }
+            }
+
             if (differentiator != "")
             {
                 toOutput += "[IgnoreParameter(\"NAME_YOUR_PARAMS\")]" + NewLine;

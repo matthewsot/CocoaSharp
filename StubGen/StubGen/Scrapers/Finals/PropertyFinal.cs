@@ -15,6 +15,15 @@ namespace StubGen.Scrapers.Finals
 
             output += property.GetTrivia();
 
+            if (property.Type.Optional)
+            {
+                output += "[ValueOptional]" + NewLine;
+            }
+            if (property.Type.Unwrapped)
+            {
+                output += "[ValueUnwrapped]" + NewLine;
+            }
+
             if (!isInterface) //todo: comment out private/static properties in interfaces
             {
                 output += property.Public ? "public " : "private ";

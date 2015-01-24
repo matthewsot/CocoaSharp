@@ -25,11 +25,8 @@ namespace StubGen
             var type = Declaration.SplitAtFirstOccurrence(':')[1].Trim().Split('{')[0].Split(';')[0].Trim();
             Type = ScrapedType.ScrapeType(type);
 
-            var objCDeclaration =
-                node.SelectSingleNode("./div[@class='declaration']/div[@class='Objective-C']/p[@class='para']").RealInnerText().Trim();
-
             PublicGetter = true;
-            PublicSetter = !(objCDeclaration.Contains("@property") && objCDeclaration.Contains("readonly"));
+            PublicSetter = !(Declaration.Contains("{ get }"));
             Public = true;
 
             Static = Declaration.Contains("class var ");

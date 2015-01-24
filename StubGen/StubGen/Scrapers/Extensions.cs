@@ -12,9 +12,7 @@ namespace StubGen
     {
         public static string ParseType(string type)
         {
-            type = type.Trim().Trim('_', '!').Trim();
-            var optional = type.EndsWith("?");
-            type = type.Trim('?').Trim();
+            type = type.Trim().Trim('?', '_', '!').Trim();
 
             var finalType = type;
             switch (type.ToLower())
@@ -48,7 +46,7 @@ namespace StubGen
                     break;
             }
 
-            return optional ? "Optional<" + finalType + ">" : finalType;
+            return finalType;
         }
     }
 

@@ -111,6 +111,8 @@ namespace StubGen
     {
         public string CSharpType { get; set; }
         public string RawSwift { get; set; }
+        public bool Unwrapped { get; set; }
+        public bool Optional { get; set; }
 
         public ScrapedType() { }
 
@@ -119,6 +121,9 @@ namespace StubGen
             RawSwift = type;
 
             CSharpType = Helpers.ParseType(type);
+
+            Unwrapped = type.EndsWith("!");
+            Optional = type.EndsWith("?");
         }
 
         public static ScrapedType ScrapeType(string type)

@@ -43,9 +43,9 @@ namespace StubGen
                       Finals.ParseAsDescription(Description) + NewLine +
                       "/// </summary>" + NewLine;
 
-            if (iOSVersion.HasValue) //todo iosversion in scrapedmember
+            if (iOSVersion.HasValue)
             {
-                output += "[iOSVersion(" + iOSVersion.ToString() + ")]" + NewLine;
+                output += "[iOSVersion(" + iOSVersion + ")]" + NewLine;
             }
             if (Deprecated)
             {
@@ -86,7 +86,9 @@ namespace StubGen
 
             baseMember.Declaration = declarationNode.RealInnerText().Trim();
 
-            if ((baseMember.Declaration.StartsWith("struct ") && baseMember.Declaration.Contains("Option")) || (baseMember.Declaration.StartsWith("enum") && baseMember.Declaration.Contains("case")))
+            //Enums
+            if ((baseMember.Declaration.StartsWith("struct ") && baseMember.Declaration.Contains("Option"))
+                || (baseMember.Declaration.StartsWith("enum") && baseMember.Declaration.Contains("case")))
             {
                 return new ScrapedEnum(baseMember, realNode);
             }
