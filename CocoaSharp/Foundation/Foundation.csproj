@@ -47,10 +47,6 @@
       <Project>{58101aea-7251-4d1b-ab33-6a3bbf70b6db}</Project>
       <Name>SharpSwift.Attributes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UIKit\UIKit.csproj">
-      <Project>{b8fb6e7a-66b3-40a8-af5d-34e8c9921787}</Project>
-      <Name>UIKit</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CClasses\CFunctionPointer.cs" />
@@ -106,6 +102,7 @@
     <Compile Include="NSMutableArray.cs" />
     <Compile Include="NSMutableData.cs" />
     <Compile Include="NSMutableDictionary.cs" />
+    <Compile Include="NSNotification.cs" />
     <Compile Include="NSNull.cs" />
     <Compile Include="NSNumber.cs" />
     <Compile Include="NSObject.cs" />
@@ -206,7 +203,6 @@
     <Compile Include="NSMutableURLRequest.cs" />
     <Compile Include="NSNetService.cs" />
     <Compile Include="NSNetServiceBrowser.cs" />
-    <Compile Include="NSNotification.cs" />
     <Compile Include="NSNotificationCenter.cs" />
     <Compile Include="NSNotificationQueue.cs" />
     <Compile Include="NSNumberFormatter.cs" />
@@ -243,20 +239,6 @@
     <Compile Include="NSValue.cs" />
     <Compile Include="NSValueTransformer.cs" />
     <Compile Include="NSXMLParser.cs" />
-    <Compile Include="Unknown\AutoreleasingUnsafeMutablePointer.cs" />
-    <Compile Include="Unknown\CLLocationCoordinate2D.cs" />
-    <Compile Include="Unknown\MKCoordinateSpan.cs" />
-    <Compile Include="Unknown\SCNMatrixes.cs" />
-    <Compile Include="Unknown\SCNVectors.cs" />
-    <Compile Include="Unknown\CMTimeRange.cs" />
-    <Compile Include="Unknown\CMTimeMapping.cs" />
-    <Compile Include="Unknown\CMTime.cs" />
-    <Compile Include="Unknown\IMP.cs" />
-    <Compile Include="Unknown\NSCalendarOptions.cs" />
-    <Compile Include="Unknown\SSLProtocol.cs" />
-    <Compile Include="Unknown\NSQualityOfService.cs" />
-    <Compile Include="Unknown\dispatch_queue_t.cs" />
-    <Compile Include="Unknown\OSType.cs" />
     <Compile Include="NSAssertionHandler.cs" />
     <Compile Include="NSAttributedString.cs" />
     <Compile Include="NSCoder.cs" />
@@ -276,13 +258,30 @@
     <Compile Include="NSDataDetector.cs" />
     <Compile Include="NSExtensionContext.cs" />
     <Compile Include="Protocols\NSCoding.cs" />
+    <Compile Include="Unknown\CATransform3D.cs" />
+    <Compile Include="UIKitPins\UIOffset.cs" />
+    <Compile Include="UIKitPins\UIEdgeInsets.cs" />
+    <Compile Include="Unknown\AutoreleasingUnsafeMutablePointer.cs" />
     <Compile Include="Unknown\AutoreleasingUnsafePointer.cs" />
+    <Compile Include="Unknown\CLLocationCoordinate2D.cs" />
+    <Compile Include="Unknown\CMTime.cs" />
+    <Compile Include="Unknown\CMTimeMapping.cs" />
+    <Compile Include="Unknown\CMTimeRange.cs" />
+    <Compile Include="Unknown\dispatch_queue_t.cs" />
+    <Compile Include="Unknown\IMP.cs" />
+    <Compile Include="Unknown\Int8.cs" />
+    <Compile Include="Unknown\MKCoordinateSpan.cs" />
+    <Compile Include="Unknown\NSCalendarOptions.cs" />
     <Compile Include="Unknown\NSErrorPointer.cs" />
+    <Compile Include="Unknown\NSPropertyListWriteOptions.cs" />
+    <Compile Include="Unknown\NSQualityOfService.cs" />
     <Compile Include="Unknown\NSZone.cs" />
+    <Compile Include="Unknown\OSType.cs" />
+    <Compile Include="Unknown\SCNMatrixes.cs" />
+    <Compile Include="Unknown\SCNVectors.cs" />
     <Compile Include="Unknown\SecIdentity.cs" />
     <Compile Include="Unknown\SecTrust.cs" />
-    <Compile Include="Unknown\Int8.cs" />
-    <Compile Include="Unknown\NSPropertyListWriteOptions.cs" />
+    <Compile Include="Unknown\SSLProtocol.cs" />
     <Compile Include="Unknown\UInt8.cs" />
     <Compile Include="Unknown\unichar.cs" />
     <Compile Include="Unknown\UnsafeMutablePointer.cs" />

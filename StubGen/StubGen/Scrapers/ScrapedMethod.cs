@@ -20,7 +20,7 @@ namespace StubGen
             RawName = Declaration.Split('(')[0].Split("func ").Last().Trim().Trim('`').Trim();
             CSharpName = RawName.ToUpper()[0] + RawName.Substring(1);
 
-            if (new[] { "object", "string", "delegate", "int", "uint", "float", "class", "this", "new" }.Contains(CSharpName))
+            if (new[] { "object", "string", "delegate", "int", "uint", "float", "class", "this", "new","event" }.Contains(CSharpName))
             {
                 CSharpName = "@" + CSharpName;
             }

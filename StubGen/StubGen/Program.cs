@@ -10,7 +10,7 @@ namespace StubGen
     {
         static void Main(string[] args)
         {
-            ScrapeFramework(new FoundationData());
+            ScrapeFramework(new UIKitData());
 
             Console.WriteLine("Done!");
             Console.ReadLine();

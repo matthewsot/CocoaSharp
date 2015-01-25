@@ -50,9 +50,21 @@ namespace StubGen
 
             using (var writer = new StreamWriter(outputPath + name + ".cs"))
             {
-                writer.Write(Indenter.IndentDocument(
-                    Finals.Class(link, data.Namespace,
-                        type == RowType.Interface, data.Usings)));
+                try
+                {
+                    writer.Write(Indenter.IndentDocument(
+                        Finals.Class(link, data.Namespace,
+                            type == RowType.Interface, data.Usings)));
+                }
+                catch
+                {
+                    using (var wr = new StreamWriter(@"Output\Missing.txt", true))
+                    {
+                        wr.WriteLine(name);
+                    }
+                    Console.WriteLine("404 for " + name);
+                    return;
+                }
 
                 writer.Flush();
             }
@@ -65,6 +77,8 @@ namespace StubGen
                 Directory.Delete(@"Output\", true);
             }
             Directory.CreateDirectory(@"Output\");
+            Directory.CreateDirectory(@"Output\Additions");
+            Directory.CreateDirectory(@"Output\Protocols");
 
             using (var client = new HttpClient())
             {
@@ -90,9 +104,15 @@ namespace StubGen
                 {
                     using (var writer = new StreamWriter("Output\\" + extra.Key + ".cs"))
                     {
-                        writer.Write(Indenter.IndentDocument(
-                            Finals.Class(extra.Value, data.Namespace,
-                                false, data.Usings)));
+                        try
+                        {
+                            writer.Write(Indenter.IndentDocument(
+                                Finals.Class(extra.Value, data.Namespace,
+                                    false, data.Usings)));
+                        }
+                        catch
+                        {
+                        }
 
                         writer.Flush();
                     }

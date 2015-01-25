@@ -50,6 +50,7 @@
     <Compile Include="NSLayoutConstraint.cs" />
     <Compile Include="NSLayoutManager.cs" />
     <Compile Include="Additions\NSMutableAttributedString.cs" />
+    <Compile Include="NSMutableAttributedString.cs" />
     <Compile Include="NSMutableParagraphStyle.cs" />
     <Compile Include="NSOperation.cs" />
     <Compile Include="NSParagraphStyle.cs" />
@@ -61,7 +62,9 @@
     <Compile Include="NSTextTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocols\Delegates\NSLayoutManagerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIActionSheetDelegate.cs" />
     <Compile Include="Protocols\Delegates\UIAdaptivePresentationControllerDelegate.cs" />
+    <Compile Include="Protocols\Delegates\UIAlertViewDelegate.cs" />
     <Compile Include="Protocols\NSTextAttachmentContainer.cs" />
     <Compile Include="Protocols\NSTextLayoutOrientationProvider.cs" />
     <Compile Include="Protocols\Delegates\NSTextStorageDelegate.cs" />
@@ -142,13 +145,16 @@
     <Compile Include="Protocols\Delegates\UIWebViewDelegate.cs" />
     <Compile Include="UIAcceleration.cs" />
     <Compile Include="UIAccelerometer.cs" />
+    <Compile Include="UIAccessibilityCustomAction.cs" />
     <Compile Include="UIAccessibilityElement.cs" />
+    <Compile Include="UIActionSheet.cs" />
     <Compile Include="UIActivity.cs" />
     <Compile Include="UIActivityIndicatorView.cs" />
     <Compile Include="UIActivityItemProvider.cs" />
     <Compile Include="UIActivityViewController.cs" />
     <Compile Include="UIAlertAction.cs" />
     <Compile Include="UIAlertController.cs" />
+    <Compile Include="UIAlertView.cs" />
     <Compile Include="UIApplication.cs" />
     <Compile Include="UIAttachmentBehavior.cs" />
     <Compile Include="UIBarButtonItem.cs" />
@@ -292,6 +298,10 @@
     <ProjectReference Include="..\CoreGraphics\CoreGraphics.csproj">
       <Project>{c5f16b43-a040-4e1b-81f2-74a99196d319}</Project>
       <Name>CoreGraphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foundation\Foundation.csproj">
+      <Project>{02cf305f-5260-4c6e-9d33-7ee7877dec20}</Project>
+      <Name>Foundation</Name>
     </ProjectReference>
     <ProjectReference Include="..\ObjectiveC\ObjectiveC.csproj">
       <Project>{01e1b613-3ddb-4233-ba6e-1df4b05307e7}</Project>

@@ -17,7 +17,19 @@ namespace UIKit
     public class UIEdgeInsets
     {
     }
+    public class CLRegion
+    {
+    }
     public class UIOffset
+    {
+    }
+    public class NSManagedObjectModel
+    {
+    }
+    public class NSManagedObjectContext
+    {
+    }
+    public class SKNode
     {
     }
 
@@ -72,11 +84,6 @@ namespace UIKit
     }
 
     public class CADisplayLink
-    {
-        
-    }
-
-    public class UICoordinateSpace
     {
         
     }

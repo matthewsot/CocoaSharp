@@ -1,19 +1,1 @@
-using ObjectiveC;
-using System;
-using SharpSwift.Attributes;
-using System.Collections.Generic;
-using Foundation;
-using CoreGraphics;
-
-namespace UIKit //TODO: check this
-{
-    /// <summary>
-    /// This category adds methods to the Foundation framework’s NSObject class. The method in this category provides support for loading nib files into your application.
-    /// </summary>
-    /// <see cref="https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSObject_UIKitAdditions/index.html#//apple_ref/doc/uid/TP40007486"/>
-    [iOSVersion(2)]
-    public class NSObject//:
-    {
-        public NSObject() { }
-    }
-}
+using ObjectiveC;using System;using SharpSwift.Attributes;using System.Collections.Generic;using Foundation;using CoreGraphics;namespace UIKit{    /// <summary>    /// This category adds methods to the Foundation framework’s NSObject class. The method in this category provides support for loading nib files into your application.    /// </summary>    /// <see cref="https://developer.apple.com/library/prerelease/ios/documentation/UIKit/Reference/NSObject_UIKitAdditions/index.html#//apple_ref/doc/uid/TP40007486"/>    [iOSVersion(2)]    [Export("")]    public class NSObject//:    {        public NSObject() { }        /// <summary>        /// Prepares the receiver for service after it has been loaded from an Interface Builder archive, or nib file.        /// </summary>        [iOSVersion(2)]        [Export("awakeFromNib")]        public virtual void AwakeFromNib() {  }                /// <summary>        /// Asks the object to increase the size of an item.        /// </summary>        /// <param name="sender"></param>        [iOSVersion(7)]        [Export("increaseSize")]        public virtual void IncreaseSize([Optional] AnyObject sender) {  }                /// <summary>        /// Asks the object to decrease the size of an item.        /// </summary>        /// <param name="sender"></param>        [iOSVersion(7)]        [Export("decreaseSize")]        public virtual void DecreaseSize([Optional] AnyObject sender) {  }    }}
