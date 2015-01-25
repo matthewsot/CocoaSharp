@@ -67,11 +67,18 @@ namespace StubGen
             {
                 baseMember.iOSVersion = null;
 
-                if (double.TryParse(
+                try
+                {
+                    if (double.TryParse(
                         node.SelectSingleNode("./div[@class='availability']/p").RealInnerText().Split("in iOS ")[1]
                             .Split(' ')[0], out availability))
+                    {
+                        baseMember.iOSVersion = availability;
+                    }
+                }
+                catch
                 {
-                    baseMember.iOSVersion = availability;
+                    // ignored
                 }
             }
             else
@@ -91,6 +98,10 @@ namespace StubGen
                 || (baseMember.Declaration.StartsWith("enum") && baseMember.Declaration.Contains("case")))
             {
                 return new ScrapedEnum(baseMember, realNode);
+            }
+            if (baseMember.Declaration.Contains("struct ") && baseMember.Declaration.Contains("var "))
+            {
+                return new ScrapedStruct(baseMember, realNode);
             }
             if ((baseMember.Declaration.Contains("init(") || baseMember.Declaration.Contains("func ")))
             {

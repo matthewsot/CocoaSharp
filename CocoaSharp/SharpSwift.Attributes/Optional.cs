@@ -5,8 +5,8 @@ using System.Text;
 
 namespace SharpSwift.Attributes
 {
-    public class Optional<T>
+    [AttributeUsage(AttributeTargets.All)]
+    public class OptionalAttribute : Attribute
     {
-
     }
 }

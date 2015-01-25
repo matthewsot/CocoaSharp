@@ -19,8 +19,8 @@ namespace StubGen
             var names = parameter.Split(':')[0].Trim().Split(' ');
             Name = names[0].Trim() == "_" ? names.Last() : names[0];
             InternalName = names.Last();
-            Name = Name.Trim();
-            if (new[] {"object", "string", "delegate"}.Contains(Name))
+            Name = Name.Trim().Trim('`');
+            if (new[] {"object", "string", "delegate","int","uint","float","class", "this", "new","bool","char","double","short","long"}.Contains(Name))
             {
                 Name = "@" + Name;
             }

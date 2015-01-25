@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StubGen
 {
@@ -20,7 +21,12 @@ namespace StubGen
             var name = Declaration.Split("var ")[1].Split(':')[0].Trim();
 
             RawName = name;
-            CSharpName = name.ToUpper()[0] + name.Substring(1);
+            CSharpName = (name.ToUpper()[0] + name.Substring(1)).Trim('`');
+
+            if (new[] { "object", "string", "delegate", "int", "uint", "float", "class", "this", "new" }.Contains(CSharpName))
+            {
+                CSharpName = "@" + CSharpName;
+            }
 
             var type = Declaration.SplitAtFirstOccurrence(':')[1].Trim().Split('{')[0].Split(';')[0].Trim();
             Type = ScrapedType.ScrapeType(type);

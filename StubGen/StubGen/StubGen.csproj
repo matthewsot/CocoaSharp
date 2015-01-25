@@ -58,13 +58,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScrapeFramework.cs" />
+    <Compile Include="Scrapers\Extensions.cs" />
     <Compile Include="Scrapers\Finals\ClassFinal.cs" />
+    <Compile Include="Scrapers\Finals\StructFinal.cs" />
     <Compile Include="Scrapers\Finals\Notification.cs" />
     <Compile Include="Scrapers\Finals\TypeDefFinal.cs" />
     <Compile Include="Scrapers\Finals\MethodFinal.cs" />
     <Compile Include="Scrapers\Finals\EnumFinal.cs" />
     <Compile Include="Scrapers\Finals\PropertyFinal.cs" />
     <Compile Include="Scrapers\ScrapedClass.cs" />
+    <Compile Include="Scrapers\ScrapedStruct.cs" />
     <Compile Include="Scrapers\ScrapedMember.cs" />
     <Compile Include="Scrapers\ScrapedMethod.cs" />
     <Compile Include="Scrapers\ScrapedParameter.cs" />

@@ -17,8 +17,13 @@ namespace StubGen
             Description = node.SelectSingleNode("./div[@class='abstract']/p").RealInnerText();
             Deprecated = Description.ToLower().Contains("deprecat");
             IsOptional = Declaration.Contains("optional ");
-            RawName = Declaration.Split('(')[0].Split("func ").Last();
+            RawName = Declaration.Split('(')[0].Split("func ").Last().Trim().Trim('`').Trim();
             CSharpName = RawName.ToUpper()[0] + RawName.Substring(1);
+
+            if (new[] { "object", "string", "delegate", "int", "uint", "float", "class", "this", "new" }.Contains(CSharpName))
+            {
+                CSharpName = "@" + CSharpName;
+            }
 
             if (Declaration.ToLower().Contains("init("))
             {
@@ -64,6 +69,11 @@ namespace StubGen
                 ReturnDescription = null;
             }
 
+            if (Declaration.ToLower().Contains("allocwithzone"))
+            {
+                var m = 1;
+            }
+
             if (Declaration.Contains("->"))
             {
                 var returnType = Declaration.Split("->").Last();
@@ -72,7 +82,7 @@ namespace StubGen
                     ReturnType = ScrapedType.ScrapeType(returnType);
                 }
             }
-            if (ReturnType == null)
+            if (ReturnType == null || ReturnType.CSharpType.Trim() == "")
             {
                 ReturnType = ScrapedType.ScrapeType("void");
             }

@@ -40,11 +40,12 @@
     <Compile Include="ExportAttribute.cs" />
     <Compile Include="IBOutletAttribute.cs" />
     <Compile Include="IgnoreParameterAttribute.cs" />
+    <Compile Include="InheritOptional.cs" />
+    <Compile Include="Optional.cs" />
     <Compile Include="iOSVersionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenameParameterAttribute.cs" />
     <Compile Include="UIApplicationMainAttribute.cs" />
-    <Compile Include="Optional.cs" />
     <Compile Include="AmbiguousWrapping.cs" />
     <Compile Include="Unwrapped.cs" />
   </ItemGroup>

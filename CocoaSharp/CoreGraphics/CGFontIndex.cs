@@ -1,8 +1,12 @@
-﻿using Foundation;
-using SharpSwift.Attributes;
+﻿using SharpSwift.Attributes;
 
 namespace CoreGraphics
 {
+    public class CUnsignedShort
+    {
+        
+    }
+
     /// <summary>
     /// The amount of acceleration in a single linear direction.
     /// </summary>

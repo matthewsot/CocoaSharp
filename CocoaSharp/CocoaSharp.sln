@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation", "Foundation\Foundation.csproj", "{02CF305F-5260-4C6E-9D33-7EE7877DEC20}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreGraphics", "CoreGraphics\CoreGraphics.csproj", "{C5F16B43-A040-4E1B-81F2-74A99196D319}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpSwift.Attributes", "SharpSwift.Attributes\SharpSwift.Attributes.csproj", "{58101AEA-7251-4D1B-AB33-6A3BBF70B6DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveC", "ObjectiveC\ObjectiveC.csproj", "{01E1B613-3DDB-4233-BA6E-1DF4B05307E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{58101AEA-7251-4D1B-AB33-6A3BBF70B6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58101AEA-7251-4D1B-AB33-6A3BBF70B6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58101AEA-7251-4D1B-AB33-6A3BBF70B6DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E1B613-3DDB-4233-BA6E-1DF4B05307E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E1B613-3DDB-4233-BA6E-1DF4B05307E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E1B613-3DDB-4233-BA6E-1DF4B05307E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E1B613-3DDB-4233-BA6E-1DF4B05307E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

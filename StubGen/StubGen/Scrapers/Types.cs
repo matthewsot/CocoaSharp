@@ -28,6 +28,7 @@ namespace StubGen
             }
 
             CSharpType = Name.CSharpType + "<" + string.Join(", ", Types.Select(genType => genType.CSharpType)) + ">";
+            CSharpType = CSharpType.Replace("<void>", "");
         }
     }
 
@@ -121,14 +122,15 @@ namespace StubGen
             RawSwift = type;
 
             CSharpType = Helpers.ParseType(type);
-
-            Unwrapped = type.EndsWith("!");
-            Optional = type.EndsWith("?");
         }
 
         public static ScrapedType ScrapeType(string type)
         {
+            type = type.Trim().Trim('`').Trim();
+            var endOfString = (type.Length > 2) ? type.Substring(type.Length - 2) : "";
+
             type = Helpers.ParseType(type);
+
             if (type == "" || type == ")" || type == "(AnyObject!," || type == "([NSObject" || type == "(ConstUnsafePointer<()>" || (type.StartsWith("(") && type.Count(chr => chr == ')') == 0))
             {
                 return new ScrapedType("WEIRD");
@@ -158,7 +160,7 @@ namespace StubGen
                 return new ScrapedGeneric(type);
             }
 
-            return new ScrapedType(type);
+            return new ScrapedType(type) { Unwrapped = endOfString.Contains("!"), Optional = endOfString.Contains("?") };
         }
     }
 }

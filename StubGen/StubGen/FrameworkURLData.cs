@@ -14,6 +14,7 @@ namespace StubGen
         Dictionary<string, string> Extra { get; }
         Dictionary<string, string> LinkReplaces { get; }
         string[] Usings { get; }
+        string Namespace { get; }
     }
 
     public class FoundationData : IFrameworkURLData
@@ -30,6 +31,11 @@ namespace StubGen
                     "System.Collections.Generic",
                 };
             }
+        }
+
+        public string Namespace
+        {
+            get { return "Foundation"; }
         }
 
         public string URL {
@@ -91,6 +97,11 @@ namespace StubGen
                     "CoreGraphics"
                 };
             }
+        }
+
+        public string Namespace
+        {
+            get { return "UIKit"; }
         }
 
         public string URL

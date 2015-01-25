@@ -72,7 +72,7 @@ namespace StubGen.Scrapers.Finals
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string Class(string url, bool isInterface = false, string[] usings = null)
+        public static string Class(string url, string defaultNamespace, bool isInterface = false, string[] usings = null)
         {
             Signatures = new List<string>();
             var parsed = new ScrapedClass(url);
@@ -95,7 +95,7 @@ namespace StubGen.Scrapers.Finals
 
 
             //namespace xyz {
-            output += NewLine + NewLine + "namespace " + parsed.Namespace + NewLine + "{" + NewLine;
+            output += NewLine + NewLine + "namespace " + (!string.IsNullOrWhiteSpace(parsed.Namespace) ? parsed.Namespace : defaultNamespace) + NewLine + "{" + NewLine;
 
 
             //trivia, add the <see cref> tag
@@ -130,8 +130,13 @@ namespace StubGen.Scrapers.Finals
 
             if (!isInterface)
             {
-                //Add a parameterless constructor for everything
-                output += "public " + parsed.Name + "() { }" + NewLine;
+                if (
+                    !parsed.Members.OfType<ScrapedMethod>()
+                        .Any(method => method.IsConstructor && method.Parameters.Count == 0))
+                {
+                    //Add a parameterless constructor for everything
+                    output += "public " + parsed.Name + "() { }" + NewLine;
+                }
             }
 
             //Remove repeated properties
@@ -182,6 +187,12 @@ namespace StubGen.Scrapers.Finals
                 output += Finals.Notification(notification, parsed, isInterface);
             }
 
+            output = output.TrimEnd() + NewLine + NewLine;
+
+            foreach (var strct in parsed.Members.OfType<ScrapedStruct>())
+            {
+                output += Finals.Struct(strct, parsed, isInterface);
+            }
 
             return output.TrimEnd() + NewLine + "}" + NewLine;
         }

@@ -17,11 +17,11 @@ namespace StubGen.Scrapers.Finals
 
             if (property.Type.Optional)
             {
-                output += "[ValueOptional]" + NewLine;
+                output += "[Optional]" + NewLine;
             }
             if (property.Type.Unwrapped)
             {
-                output += "[ValueUnwrapped]" + NewLine;
+                output += "[Unwrapped]" + NewLine;
             }
 
             if (!isInterface) //todo: comment out private/static properties in interfaces

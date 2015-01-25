@@ -39,30 +39,17 @@ namespace StubGen.Scrapers.Finals
             
             if (method.IsOptional)
             {
-                toOutput += "[Optional]" + NewLine;
+                toOutput += "[InheritOptional]" + NewLine;
             }
 
             //Deal with optional/unwrapped return values using attributes
             if (method.ReturnType.Optional)
             {
-                toOutput += "[ValueOptional]" + NewLine;
+                toOutput += "[return:Optional]" + NewLine;
             }
             if (method.ReturnType.Unwrapped)
             {
-                toOutput += "[ValueUnwrapped]" + NewLine;
-            }
-
-            //Deal with optional/unwrapped parameters using attributes
-            foreach (var param in method.Parameters)
-            {
-                if (param.Type.Optional)
-                {
-                    toOutput += "[ParameterOptional(\"" + param.Name + "\")]" + NewLine;
-                }
-                if (param.Type.Unwrapped)
-                {
-                    toOutput += "[ParameterUnwrapped(\"" + param.Name + "\")]" + NewLine;
-                }
+                toOutput += "[return:Unwrapped]" + NewLine;
             }
 
             if (differentiator != "")
@@ -97,8 +84,12 @@ namespace StubGen.Scrapers.Finals
 
                 output += method.ReturnType.CSharpType + " ";
                 output += method.CSharpName + "(";
+
                 output += string.Join(", ",
-                    method.Parameters.Select(param => (param.Type.CSharpType == "Self" ? parent.CSharpName : param.Type.CSharpType) + " " + param.Name));
+                    method.Parameters.Select(param => 
+                    (param.Type.Optional ? "[Optional] " : "") + (param.Type.Unwrapped ? "[Unwrapped] " : "") +
+                    (param.Type.CSharpType == "Self" ? parent.CSharpName : param.Type.CSharpType) + " " + param.Name));
+
                 output += differentiator + ")";
                 if (!isInterface)
                 {
@@ -119,7 +110,9 @@ namespace StubGen.Scrapers.Finals
             {
                 output += "public " + parent.Name + "(";
                 output += string.Join(", ",
-                    method.Parameters.Select(param => (param.Type.CSharpType == "Self" ? parent.CSharpName : param.Type.CSharpType) + " " + param.Name));
+                    method.Parameters.Select(param =>
+                    (param.Type.Optional ? "[Optional] " : "") + (param.Type.Unwrapped ? "[Unwrapped] " : "") +
+                    (param.Type.CSharpType == "Self" ? parent.CSharpName : param.Type.CSharpType) + " " + param.Name));
                 output += differentiator + ") { }" + NewLine + NewLine;
             }
             return output;

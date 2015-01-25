@@ -27,6 +27,10 @@ namespace StubGen
             }
             catch
             {
+                using (var writer = new StreamWriter(@"Output\Missing.txt", true))
+                {
+                    writer.WriteLine(name);
+                }
                 Console.WriteLine("No link for " + name);
                 return;
             }
@@ -47,7 +51,7 @@ namespace StubGen
             using (var writer = new StreamWriter(outputPath + name + ".cs"))
             {
                 writer.Write(Indenter.IndentDocument(
-                    Finals.Class(link,
+                    Finals.Class(link, data.Namespace,
                         type == RowType.Interface, data.Usings)));
 
                 writer.Flush();
@@ -56,7 +60,10 @@ namespace StubGen
 
         public static void ScrapeFramework(IFrameworkURLData data)
         {
-            Directory.Delete(@"Output\");
+            if(Directory.Exists(@"Output\"))
+            {
+                Directory.Delete(@"Output\", true);
+            }
             Directory.CreateDirectory(@"Output\");
 
             using (var client = new HttpClient())
@@ -84,7 +91,7 @@ namespace StubGen
                     using (var writer = new StreamWriter("Output\\" + extra.Key + ".cs"))
                     {
                         writer.Write(Indenter.IndentDocument(
-                            Finals.Class(extra.Value,
+                            Finals.Class(extra.Value, data.Namespace,
                                 false, data.Usings)));
 
                         writer.Flush();

@@ -8,4 +8,7 @@ namespace Foundation
     public class UnsafePointer<T>
     {
     }
+    public class UnsafePointer
+    {
+    }
 }

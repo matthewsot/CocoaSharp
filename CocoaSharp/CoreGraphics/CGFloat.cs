@@ -1,8 +1,12 @@
-﻿using Foundation;
-using SharpSwift.Attributes;
+﻿using SharpSwift.Attributes;
 
 namespace CoreGraphics
 {
+    public class CFloat
+    {
+        
+    }
+
     /// <summary>
     /// The basic type for all floating-point values. 
     /// </summary>

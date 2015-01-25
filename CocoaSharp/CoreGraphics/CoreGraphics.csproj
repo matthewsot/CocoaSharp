@@ -35,9 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\Foundation\Foundation.csproj">
-      <Project>{02cf305f-5260-4c6e-9d33-7ee7877dec20}</Project>
-      <Name>Foundation</Name>
+    <ProjectReference Include="..\ObjectiveC\ObjectiveC.csproj">
+      <Project>{01e1b613-3ddb-4233-ba6e-1df4b05307e7}</Project>
+      <Name>ObjectiveC</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpSwift.Attributes\SharpSwift.Attributes.csproj">
       <Project>{58101aea-7251-4d1b-ab33-6a3bbf70b6db}</Project>
@@ -50,6 +50,7 @@
     <Compile Include="CGFloat.cs" />
     <Compile Include="CGFontIndex.cs" />
     <Compile Include="CGGlyph.cs" />
+    <Compile Include="CGVector.cs" />
     <Compile Include="CGPath.cs" />
     <Compile Include="CGPoint.cs" />
     <Compile Include="CGRect.cs" />

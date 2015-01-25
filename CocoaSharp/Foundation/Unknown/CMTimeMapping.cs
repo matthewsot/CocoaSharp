@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foundation
 {
-    public class NSFormattingContext
+    public class CMTimeMapping
     {
     }
 }

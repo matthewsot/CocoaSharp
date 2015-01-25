@@ -1,5 +1,4 @@
-﻿using Foundation;
-using SharpSwift.Attributes;
+﻿using SharpSwift.Attributes;
 
 namespace CoreGraphics
 {

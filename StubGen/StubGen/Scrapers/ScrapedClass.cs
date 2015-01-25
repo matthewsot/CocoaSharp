@@ -71,7 +71,8 @@ namespace StubGen
                 ConformsTo = conformsTo == null ? new string[0] : conformsTo.Select(node => node.RealInnerText().Trim());
 
                 //Parses the name
-                Name = doc.DocumentNode.SelectSingleNode("//h1[@class='chapter-name']").RealInnerText();
+                Name = doc.DocumentNode.SelectSingleNode("//h1[@class='chapter-name']").RealInnerText().Replace(" ", "").Trim().Replace("Reference", "");
+                CSharpName = Name;
 
                 //Parses the namespace from the "Import Statement" section
                 var importStatement =
@@ -79,7 +80,19 @@ namespace StubGen
                         "//div[@class='z-module-import half']/code[@class='code-voice Swift']");
                 if (importStatement != null)
                 {
-                    Namespace = importStatement.RealInnerText().Split("import ")[1].Split(' ')[0].Trim();
+                    try
+                    {
+                        Namespace = importStatement.RealInnerText().Split("import ")[1].Split(' ')[0].Trim()
+                            .Replace(" ", "");
+                        if (Namespace.EndsWith("Reference"))
+                        {
+                            Namespace = Namespace.Replace("Reference", "");
+                        }
+                    }
+                    catch
+                    {
+                        Namespace = "";
+                    }
                 }
 
                 //Parses the description

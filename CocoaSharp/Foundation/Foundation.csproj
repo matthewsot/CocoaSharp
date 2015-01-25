@@ -35,9 +35,21 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\CoreGraphics\CoreGraphics.csproj">
+      <Project>{c5f16b43-a040-4e1b-81f2-74a99196d319}</Project>
+      <Name>CoreGraphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectiveC\ObjectiveC.csproj">
+      <Project>{01e1b613-3ddb-4233-ba6e-1df4b05307e7}</Project>
+      <Name>ObjectiveC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpSwift.Attributes\SharpSwift.Attributes.csproj">
       <Project>{58101aea-7251-4d1b-ab33-6a3bbf70b6db}</Project>
       <Name>SharpSwift.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UIKit\UIKit.csproj">
+      <Project>{b8fb6e7a-66b3-40a8-af5d-34e8c9921787}</Project>
+      <Name>UIKit</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +74,7 @@
     <Compile Include="CClasses\CUnsignedShort.cs" />
     <Compile Include="CClasses\CVaListPointer.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DataTypes.cs" />
     <Compile Include="DataTypes\DataTypes.cs" />
     <Compile Include="DataTypes\NSComparator.cs" />
     <Compile Include="DataTypes\NSExtensionBackgroundTaskIdentifier.cs" />
@@ -78,6 +91,7 @@
     <Compile Include="NSAutoreleasePool.cs" />
     <Compile Include="NSData.cs" />
     <Compile Include="NSDictionary.cs" />
+    <Compile Include="NSEnergyFormatter.cs" />
     <Compile Include="NSExtensionItem.cs" />
     <Compile Include="NSFileAccessIntent.cs" />
     <Compile Include="NSFileCoordinator.cs" />
@@ -86,14 +100,18 @@
     <Compile Include="NSFileWrapper.cs" />
     <Compile Include="NSHashTable.cs" />
     <Compile Include="NSInvocation.cs" />
+    <Compile Include="NSLengthFormatter.cs" />
+    <Compile Include="NSMassFormatter.cs" />
     <Compile Include="NSMessagePort.cs" />
     <Compile Include="NSMutableArray.cs" />
     <Compile Include="NSMutableData.cs" />
     <Compile Include="NSMutableDictionary.cs" />
     <Compile Include="NSNull.cs" />
     <Compile Include="NSNumber.cs" />
+    <Compile Include="NSObject.cs" />
+    <Compile Include="NSObjectProtocol.cs" />
     <Compile Include="NSPurgeableData.cs" />
-    <Compile Include="ObjectiveC\ConstUnsafePointer.cs" />
+    <Compile Include="NSURLQueryItem.cs" />
     <Compile Include="Protocols\Delegates\NSCacheDelegate.cs" />
     <Compile Include="Protocols\NSCopying.cs" />
     <Compile Include="Protocols\NSDecimalNumberBehaviors.cs" />
@@ -150,7 +168,6 @@
     <Compile Include="NSURLSessionUploadTask.cs" />
     <Compile Include="NSUserActivity.cs" />
     <Compile Include="NSUUID.cs" />
-    <Compile Include="ObjectiveC\NSAutoreleasePool.cs" />
     <Compile Include="NSBundle.cs" />
     <Compile Include="NSCachedURLResponse.cs" />
     <Compile Include="NSCalendar.cs" />
@@ -226,10 +243,17 @@
     <Compile Include="NSValue.cs" />
     <Compile Include="NSValueTransformer.cs" />
     <Compile Include="NSXMLParser.cs" />
+    <Compile Include="Unknown\AutoreleasingUnsafeMutablePointer.cs" />
+    <Compile Include="Unknown\CLLocationCoordinate2D.cs" />
+    <Compile Include="Unknown\MKCoordinateSpan.cs" />
+    <Compile Include="Unknown\SCNMatrixes.cs" />
+    <Compile Include="Unknown\SCNVectors.cs" />
+    <Compile Include="Unknown\CMTimeRange.cs" />
+    <Compile Include="Unknown\CMTimeMapping.cs" />
+    <Compile Include="Unknown\CMTime.cs" />
+    <Compile Include="Unknown\IMP.cs" />
     <Compile Include="Unknown\NSCalendarOptions.cs" />
     <Compile Include="Unknown\SSLProtocol.cs" />
-    <Compile Include="Unknown\NSFormattingContext.cs" />
-    <Compile Include="Unknown\NSLengthFormatter.cs" />
     <Compile Include="Unknown\NSQualityOfService.cs" />
     <Compile Include="Unknown\dispatch_queue_t.cs" />
     <Compile Include="Unknown\OSType.cs" />
@@ -243,15 +267,7 @@
     <Compile Include="NSKeyedUnarchiver.cs" />
     <Compile Include="NSMutableAttributedString.cs" />
     <Compile Include="NSURL.cs" />
-    <Compile Include="ObjectiveC\ObjCBool.cs" />
-    <Compile Include="ObjectiveC\AnyClass.cs" />
-    <Compile Include="ObjectiveC\AnyObject.cs" />
-    <Compile Include="ObjectiveC\COpaquePointer.cs" />
-    <Compile Include="ObjectiveC\NSMessageSignature.cs" />
     <Compile Include="NSMethodSignature.cs" />
-    <Compile Include="ObjectiveC\NSObject.cs" />
-    <Compile Include="ObjectiveC\Protocol.cs" />
-    <Compile Include="ObjectiveC\Selector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NSBlockOperation.cs" />
     <Compile Include="NSByteCountFormatter.cs" />
@@ -269,8 +285,12 @@
     <Compile Include="Unknown\NSPropertyListWriteOptions.cs" />
     <Compile Include="Unknown\UInt8.cs" />
     <Compile Include="Unknown\unichar.cs" />
+    <Compile Include="Unknown\UnsafeMutablePointer.cs" />
     <Compile Include="Unknown\UnsafePointer.cs" />
     <Compile Include="Unknown\UTF32Char.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Missing.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
